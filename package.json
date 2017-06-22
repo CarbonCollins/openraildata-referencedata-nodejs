@@ -1,0 +1,22 @@
+{
+    "name": "openraildata-referencedata",
+    "version": "1.0.0",
+    "description": "A package for accessing the the UK National Rails reference data FTP server aswell as some helper functions to process and use the reference data",
+    "main": "index.js",
+    "author": "Steven Collins",
+    "license": "MIT",
+    "dependencies": {
+        "fs-extra": "^3.0.1",
+        "ftp": "^0.3.10",
+        "xml-objects": "^1.0.1",
+        "xml2js": "^0.4.17",
+        "xml2json": "^0.11.0"
+    },
+    "repository": {
+      "type": "github",
+      "url": "https://github.com/CarbonCollins/openraildata-referencedata-nodejs"
+    },
+    "bugs": {
+      "url": "https://github.com/CarbonCollins/openraildata-referencedata-nodejs/issues"
+    }
+}
