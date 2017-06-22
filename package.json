@@ -1,6 +1,6 @@
 {
     "name": "openraildata-referencedata",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A package for accessing the the UK National Rails reference data FTP server aswell as some helper functions to process and use the reference data",
     "main": "index.js",
     "author": "Steven Collins",
