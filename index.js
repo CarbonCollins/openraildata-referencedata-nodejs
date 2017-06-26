@@ -233,13 +233,3 @@ class ReferenceData {
 }
 
 module.exports = new ReferenceData();
-
-module.exports.connect('A!t4398htw4ho4jy');
-module.exports.on('ready', () => {
-  console.log('ready');
-  module.exports.getCurrentV8().then((v8) => {
-    console.log(v8);
-  }).catch((err) => {
-    console.log(err);
-  });
-});
