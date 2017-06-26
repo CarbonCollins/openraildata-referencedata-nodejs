@@ -70,16 +70,11 @@ class ReferenceData {
   }
 
   connect(pass) {
-    return new Promise((resolve, reject) => {
-      this._intendedClose = false;
-      this._ftpClient.connect({
-        host: 'datafeeds.nationalrail.co.uk',
-        user: 'ftpuser',
-        password: pass
-      });
-      this._ftpClient.once('ready', (() => { resolve(); }).bind(this));
-      this._ftpClient.once('close', (() => { reject(); }).bind(this));
-      this._ftpClient.once('end', (() => { reject(); }).bind(this));
+    this._intendedClose = false;
+    this._ftpClient.connect({
+      host: 'datafeeds.nationalrail.co.uk',
+      user: 'ftpuser',
+      password: pass
     });
   }
 
@@ -89,7 +84,7 @@ class ReferenceData {
     })
   }
 
-_listDirFTP(dir) {
+  _listDirFTP(dir) {
     return new Promise((resolve, reject) => {
       this._ftpClient.list(dir, (err, files) => {
         (err) ? reject(err) : resolve(files);
@@ -109,6 +104,17 @@ _listDirFTP(dir) {
     });
   }
 
+  getLocalV8Json() {
+    return new Promise((resolve, reject) => {
+      fs.pathExists(this.v8Loc).then((exists) => {
+        return (exists) ? fs.readJson(this.v8Loc) : null;
+      }).then((v8Json) => {
+        resolve(v8Json);
+      }).catch((err) => {
+        reject(err);
+      })
+    });
+  }
   getRemoteV3Json() {
     return new Promise((resolve, reject) => {
       this.isFTPConnected().then(() => {
@@ -128,6 +134,25 @@ _listDirFTP(dir) {
     });
   }
 
+  getRemoteV8Json() {
+    return new Promise((resolve, reject) => {
+      this.isFTPConnected().then(() => {
+        return this._listDirFTP('/');
+      }).then((files) => {
+        const v8File = files.find(o => o.name.includes('v8.xml.gz'));
+        if (v8File) {
+          this._ftpClient.get(v8File.name, (err, stream) => {
+            (err) ? reject(err) : getRemoteStream(stream, resolve, reject);
+          });
+        } else {
+          reject(new Error('Unable to find v8 reference data in ftp share'));
+        }
+      }).catch((err) => {
+        reject(err);
+      })
+    });
+  }
+
   getRemoteV3TimetableId() {
     return new Promise((resolve, reject) => {
       this._ftpClient.list('/', (err, files) => {
@@ -138,6 +163,21 @@ _listDirFTP(dir) {
           (v3File)
           ? resolve(v3File.name.split('_', 1)[0] || '')
           : reject(new Error('Unable to find v3 reference data in ftp share'));
+        }
+      });
+    });
+  }
+
+  getRemoteV8TimetableId() {
+    return new Promise((resolve, reject) => {
+      this._ftpClient.list('/', (err, files) => {
+        if (err) {
+          reject(err);
+        } else {
+          const v8File = files.find(o => o.name.includes('v8.xml.gz'));
+          (v8File)
+          ? resolve(v8File.name.split('_', 1)[0] || '')
+          : reject(new Error('Unable to find v8 reference data in ftp share'));
         }
       });
     });
@@ -161,6 +201,30 @@ _listDirFTP(dir) {
         return (timetableIdInfo.isSynced) ? this.getLocalV3Json() : this.getRemoteV3Json();
       }).then((currentV3) => {
         resolve(currentV3);
+      }).catch((err) => {
+        reject(err);
+      })
+    });
+  }
+
+  getCurrentV8() {
+    return new Promise((resolve, reject) => {
+      this.getLocalV8Json().then((v8File) => {
+        return (v8File && v8File.PportTimetableRef && v8File.PportTimetableRef.timetableId)
+        ? `${v8File.PportTimetableRef.timetableId}`
+        : 'local not valid'; // used to prevent empty string/null matching
+      }).then((localTimetableId) => {
+        return this.getRemoteV8TimetableId().then((remoteTimetableId) => {
+          return { 
+            local: localTimetableId,
+            remote: remoteTimetableId,
+            isSynced: (`${remoteTimetableId}` === `${localTimetableId}`)
+          };
+        });
+      }).then((timetableIdInfo) => {
+        return (timetableIdInfo.isSynced) ? this.getLocalV8Json() : this.getRemoteV8Json();
+      }).then((currentV8) => {
+        resolve(currentV8);
       }).catch((err) => {
         reject(err);
       })
