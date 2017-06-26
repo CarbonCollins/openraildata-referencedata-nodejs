@@ -6,6 +6,32 @@ const fs = require('fs-extra');
 const zlib = require('zlib');
 const parser = require('xml2json');
 
+function getRemoteStream(stream, resolve, reject) {
+  const buffer = [];
+  let finalObj;
+  const gz = zlib.createGunzip().setEncoding('utf8');
+
+  gz.on('data', (data) => { buffer.push(data); });
+
+  gz.on('end', () => {
+    finalObj = parser.toJson(buffer.join(''), {
+      object: true,
+      coerce: true,
+      reversible: false
+    });
+    fs.writeFile(this.v3Loc, JSON.stringify(finalObj));
+    resolve(finalObj);
+  });
+
+  gz.on('error', (err) => {
+    reject(err);
+  });
+
+  stream.on('error', (err) => { reject(err); })
+  .pipe(gz);
+}
+
+
 class ReferenceData {
   constructor() {
     this._ftpClient = new FTPClient();
@@ -46,11 +72,13 @@ class ReferenceData {
       this._ftpClient.once('end', (() => { reject(); }).bind(this));
     });
   }
+
   isFTPConnected() {
     return new Promise((resolve, reject) => {
       (this._ftpConnected) ? resolve() : reject(new Error('FTP Client not connected'));
     })
   }
+
 _listDirFTP(dir) {
     return new Promise((resolve, reject) => {
       this._ftpClient.list(dir, (err, files) => {
@@ -79,29 +107,7 @@ _listDirFTP(dir) {
         const v3File = files.find(o => o.name.includes('v3.xml.gz'));
         if (v3File) {
           this._ftpClient.get(v3File.name, (err, stream) => {
-            if (err) { 
-              reject(err);
-            } else {
-              const buffer = [];
-              let finalObj;
-              const gz = zlib.createGunzip().setEncoding('utf8');
-              gz.on('data', (data) => { buffer.push(data); });
-              gz.on('end', () => {
-                finalObj = parser.toJson(buffer.join(''), {
-                  object: true,
-                  coerce: true,
-                  reversible: false
-                });
-                fs.writeFile(this.v3Loc, JSON.stringify(finalObj));
-                resolve(finalObj);
-              });
-              gz.on('error', (err) => {
-                reject(err);
-              });
-
-              stream.on('error', (err) => { reject(err); })
-              .pipe(gz);
-            }
+            (err) ? reject(err) : getRemoteStream(stream, resolve, reject);
           });
         } else {
           reject(new Error('Unable to find v3 reference data in ftp share'));
@@ -130,11 +136,9 @@ _listDirFTP(dir) {
   getCurrentV3() {
     return new Promise((resolve, reject) => {
       this.getLocalV3Json().then((v3File) => {
-        if (v3File && v3File.PportTimetableRef && v3File.PportTimetableRef.timetableId) {
-          return `${v3File.PportTimetableRef.timetableId}`;
-        } else {
-          return 'local not valid'; // used to prevent empty string/null matching
-        }
+        return (v3File && v3File.PportTimetableRef && v3File.PportTimetableRef.timetableId)
+        ? `${v3File.PportTimetableRef.timetableId}`
+        : 'local not valid'; // used to prevent empty string/null matching
       }).then((localTimetableId) => {
         return this.getRemoteV3TimetableId().then((remoteTimetableId) => {
           return { 
@@ -144,11 +148,7 @@ _listDirFTP(dir) {
           };
         });
       }).then((timetableIdInfo) => {
-        if (timetableIdInfo.isSynced) {
-          return this.getLocalV3Json();
-        } else {
-          return this.getRemoteV3Json();
-        }
+        return (timetableIdInfo.isSynced) ? this.getLocalV3Json() : this.getRemoteV3Json();
       }).then((currentV3) => {
         resolve(currentV3);
       }).catch((err) => {
