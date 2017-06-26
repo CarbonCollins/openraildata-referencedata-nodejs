@@ -6,7 +6,7 @@ const fs = require('fs-extra');
 const zlib = require('zlib');
 const parser = require('xml2json');
 
-function getRemoteStream(stream, resolve, reject) {
+function getRemoteStream(filePath, stream, resolve, reject) {
   const buffer = [];
   let finalObj;
   const gz = zlib.createGunzip().setEncoding('utf8');
@@ -19,7 +19,7 @@ function getRemoteStream(stream, resolve, reject) {
       coerce: true,
       reversible: false
     });
-    fs.writeFile(this.v3Loc, JSON.stringify(finalObj));
+    fs.writeFile(filePath, JSON.stringify(finalObj));
     resolve(finalObj);
   });
 
@@ -123,7 +123,7 @@ class ReferenceData {
         const v3File = files.find(o => o.name.includes('v3.xml.gz'));
         if (v3File) {
           this._ftpClient.get(v3File.name, (err, stream) => {
-            (err) ? reject(err) : getRemoteStream(stream, resolve, reject);
+            (err) ? reject(err) : getRemoteStream(this.v3Loc, stream, resolve, reject);
           });
         } else {
           reject(new Error('Unable to find v3 reference data in ftp share'));
@@ -142,7 +142,7 @@ class ReferenceData {
         const v8File = files.find(o => o.name.includes('v8.xml.gz'));
         if (v8File) {
           this._ftpClient.get(v8File.name, (err, stream) => {
-            (err) ? reject(err) : getRemoteStream(stream, resolve, reject);
+            (err) ? reject(err) : getRemoteStream(this.v8Loc, stream, resolve, reject);
           });
         } else {
           reject(new Error('Unable to find v8 reference data in ftp share'));
@@ -233,3 +233,13 @@ class ReferenceData {
 }
 
 module.exports = new ReferenceData();
+
+module.exports.connect('A!t4398htw4ho4jy');
+module.exports.on('ready', () => {
+  console.log('ready');
+  module.exports.getCurrentV8().then((v8) => {
+    console.log(v8);
+  }).catch((err) => {
+    console.log(err);
+  });
+});
