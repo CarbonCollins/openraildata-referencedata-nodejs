@@ -55,6 +55,16 @@ class ReferenceData {
   get v3Loc() { return this._v3Loc; }
   get v8Loc() { return this._v8Loc; }
 
+  get timetableId() { return (this._v3 && this._v3.PportTimetableRef) ? this._v3.PportTimetableRef.timetableId : ''; }
+  get locationRefs() { return (this._v3 && this._v3.PportTimetableRef) ? this._v3.PportTimetableRef.LocationRef : []; }
+  get TocRefs() { return (this._v3 && this._v3.PportTimetableRef) ? this._v3.PportTimetableRef.TocRef : []; }
+  get lateRunningReasons() { return (this._v3 && this._v3.PportTimetableRef) ? this._v3.PportTimetableRef.LateRunningReasons.Reason : []; }
+  get cancellationReasons() { return (this._v3 && this._v3.PportTimetableRef) ? this._v3.PportTimetableRef.CancellationReasons.Reason : []; }
+  get vias() { return (this._v3 && this._v3.PportTimetableRef) ? this._v3.PportTimetableRef.Via : []; }
+  get CISSources() { return (this._v3 && this._v3.PportTimetableRef) ? this._v3.PportTimetableRef.CISSource : []; }
+
+  get trainOperatingCompanies() { return this.TocRefs; }
+
   on(message, callback) {
     this._ftpClient.on(message, callback);
   }
