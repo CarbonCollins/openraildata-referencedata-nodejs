@@ -5,12 +5,12 @@ refData.connect('A!t4398htw4ho4jy');
 
 refData.on('ready', () => {
   console.log('ready');
-  refData.getCurrentV3().then((file) => {
+  refData.getCurrentV3().then(() => {
     console.log('v3 done');
     return refData.getCurrentV8();
-  }).then((v8) => {
+  }).then(() => {
     console.log('v8 done');
-    refData.v8.getSchedule('201706278021032')
+    console.log(refData.v8.getTrainsOriginatingFrom('EUSTON'));
   }).catch((err) => {
     console.error(err);
   });

@@ -42,3 +42,10 @@ refData.on('ready', () => {
 ## api functions
 
 #### connection
+
+
+## Dev Notes
+
+Hi :D
+
+this package is being coded while im experimenting so feel free to use it however it may change at any moment. I'm publishing it as i go so not all features will be there.
