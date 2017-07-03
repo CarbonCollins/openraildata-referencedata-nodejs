@@ -10,7 +10,7 @@ refData.on('ready', () => {
     return refData.getCurrentV8();
   }).then(() => {
     console.log('v8 done');
-    console.log(refData.v8.getTrainsOriginatingFrom('EUSTON'));
+    console.log(JSON.stringify(refData.v8.runSearch().origin('EUSTON').intermediateStop('MKNSCEN'), null, 2));
   }).catch((err) => {
     console.error(err);
   });
