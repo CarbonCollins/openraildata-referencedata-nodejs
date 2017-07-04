@@ -15,7 +15,13 @@ const V8 = require('../lib/models/v8');
   }).then((curV8) => {
     refData._v8 = new V8(curV8);
     console.log('v8 done');
-    console.log(refData.v8.runSearch().origin('EUSTON').departsAt('16.43').intermediateStop('MKNSCEN'));
+    const results = refData.v8.runSearch().origin('MARYLBN').departsOriginBetween('16:45', '17:15').stopsAt('AYLSBRY').today()._jurneys;
+    console.log(`There are ${results.length} results`);
+
+    console.log(JSON.stringify(results, null, 2));
+    for (let i = 0, iLength = results.length; i < iLength; i += 1) {
+      console.log(`${refData.v3.getLocation(results[i].OR.tpl).locname} (${results[i].OR.ptd}) - ${refData.v3.getLocation(results[i].DT.tpl).locname} (${results[i].DT.pta}) operated by ${refData.v3.getToc(results[i].toc).tocname}`);
+    }
   }).catch((err) => {
     console.error(err);
   });
