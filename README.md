@@ -10,7 +10,8 @@ this is a work in progress so stuff may change without warning
 
 ## table of contents
 - [getting started](#getting-started)
-- [api functions](#api-functions)
+- [package docs](#package-docs)
+- [dev notes](#dev-notes)
 
 ## getting started
 
@@ -39,13 +40,13 @@ refData.on('ready', () => {
 });
 ```
 
-## api functions
-
-#### connection
+## package docs
 
 
-## Dev Notes
+## dev notes
 
 Hi :D
 
 this package is being coded while im experimenting so feel free to use it however it may change at any moment. I'm publishing it as i go so not all features will be there.
+
+I'm generaly only working on this while im sat on the train too and from my day job so this may take a while

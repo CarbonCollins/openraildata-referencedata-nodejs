@@ -19,5 +19,11 @@
     },
     "bugs": {
         "url": "https://github.com/CarbonCollins/openraildata-referencedata-nodejs/issues"
+    },
+    "devDependencies": {
+        "gulp": "^3.9.1",
+        "gulp-jsdoc-to-markdown": "^1.2.2",
+        "gulp-rename": "^1.2.2",
+        "gulp-util": "^3.0.8"
     }
 }
