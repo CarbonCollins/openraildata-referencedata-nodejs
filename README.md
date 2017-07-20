@@ -49,6 +49,7 @@ refData.on('ready', () => {
 
 ## package docs
 
+<a href="./docs/refData.md">code docs found here</a>
 
 ## dev notes
 

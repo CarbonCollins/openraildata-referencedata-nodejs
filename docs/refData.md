@@ -61,6 +61,7 @@ gets the current v3 reference data
 
 **Kind**: instance property of <code>[ReferenceData](#ReferenceData)</code>  
 **Read only**: true  
+**See**: [V3 docs](./models/v3.md)  
 <a name="ReferenceData+v8"></a>
 
 ### referenceData.v8
@@ -68,6 +69,7 @@ gets the current v8 reference data
 
 **Kind**: instance property of <code>[ReferenceData](#ReferenceData)</code>  
 **Read only**: true  
+**See**: [V8 docs](./models/v8.md)  
 <a name="ReferenceData+v3Loc"></a>
 
 ### referenceData.v3Loc
@@ -180,6 +182,7 @@ gets the most up-to-date copy of the v3 reference data from either local or remo
 
 **Kind**: inner method of <code>[ReferenceData](#ReferenceData)</code>  
 **Returns**: <code>Proimise</code> - resolves with the most up-to-date copy o the v3 ref data or rejects with an error  
+**Emits**: <code>ReferenceData#event:v3Updating</code>, <code>ReferenceData#event:v3Updated</code>  
 <a name="ReferenceData..getCurrentV8"></a>
 
 ### ReferenceData~getCurrentV8() ⇒ <code>Proimise</code>
@@ -187,6 +190,7 @@ gets the most up-to-date copy of the v8 reference data from either local or remo
 
 **Kind**: inner method of <code>[ReferenceData](#ReferenceData)</code>  
 **Returns**: <code>Proimise</code> - resolves with the most up-to-date copy o the v8 ref data or rejects with an error  
+**Emits**: <code>ReferenceData#event:v8Updating</code>, <code>ReferenceData#event:v8Updated</code>  
 <a name="getLocalTimetableIds"></a>
 
 ## getLocalTimetableIds() ⇒ <code>Promise</code>
