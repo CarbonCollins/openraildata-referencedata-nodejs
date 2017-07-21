@@ -17,9 +17,6 @@
 <dt><a href="#writeRefFile">writeRefFile(filePath, file, resolve, reject)</a></dt>
 <dd><p>writes a reference file to the local system</p>
 </dd>
-<dt><a href="#getRemoteStream">getRemoteStream(filePath, stream, size, resolve, reject)</a></dt>
-<dd><p>gets and downloads a file from the remote FTP server with progress bar</p>
-</dd>
 </dl>
 
 <a name="ReferenceData"></a>
@@ -34,8 +31,13 @@
         * [.v8](#ReferenceData+v8)
         * [.v3Loc](#ReferenceData+v3Loc)
         * [.v8Loc](#ReferenceData+v8Loc)
+        * ["ready"](#ReferenceData+event_ready)
+        * ["remoteDownload"](#ReferenceData+event_remoteDownload)
+        * ["remoteChunk"](#ReferenceData+event_remoteChunk)
+        * ["remoteEnd"](#ReferenceData+event_remoteEnd)
+        * ["remoteError"](#ReferenceData+event_remoteError)
     * _inner_
-        * [~on(message, callback)](#ReferenceData..on)
+        * [~_getRemoteStream(filePath, stream, size, resolve, reject)](#ReferenceData.._getRemoteStream)
         * [~connect(pass)](#ReferenceData..connect)
         * [~disconnect()](#ReferenceData..disconnect)
         * [~isFTPConnected()](#ReferenceData..isFTPConnected) ⇒ <code>Promise</code>
@@ -84,17 +86,72 @@ gets the local v3 reference data path
 
 **Kind**: instance property of <code>[ReferenceData](#ReferenceData)</code>  
 **Read only**: true  
-<a name="ReferenceData..on"></a>
+<a name="ReferenceData+event_ready"></a>
 
-### ReferenceData~on(message, callback)
-attaches an event to the FTP client
+### "ready"
+fired when the ftp client has connected
+
+**Kind**: event emitted by <code>[ReferenceData](#ReferenceData)</code>  
+<a name="ReferenceData+event_remoteDownload"></a>
+
+### "remoteDownload"
+fired when a remote download is about to commense
+
+**Kind**: event emitted by <code>[ReferenceData](#ReferenceData)</code>  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| totalSize | <code>number</code> | total download size |
+| path | <code>string</code> | where the data will be saved |
+
+<a name="ReferenceData+event_remoteChunk"></a>
+
+### "remoteChunk"
+fired when a chunk of data has been downloaded
+
+**Kind**: event emitted by <code>[ReferenceData](#ReferenceData)</code>  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| totalSize | <code>number</code> | total download size |
+| path | <code>string</code> | where the data will be saved |
+| chunkSize | <code>number</code> | the size of the chunk |
+
+<a name="ReferenceData+event_remoteEnd"></a>
+
+### "remoteEnd"
+fired when a download has completed
+
+**Kind**: event emitted by <code>[ReferenceData](#ReferenceData)</code>  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| path | <code>string</code> | where the data will be saved |
+
+<a name="ReferenceData+event_remoteError"></a>
+
+### "remoteError"
+fired when a download error has occured
+
+**Kind**: event emitted by <code>[ReferenceData](#ReferenceData)</code>  
+<a name="ReferenceData.._getRemoteStream"></a>
+
+### ReferenceData~_getRemoteStream(filePath, stream, size, resolve, reject)
+gets and downloads a file from the remote FTP server with progress bar
 
 **Kind**: inner method of <code>[ReferenceData](#ReferenceData)</code>  
+**Emits**: <code>[remoteDownload](#ReferenceData+event_remoteDownload)</code>, <code>[remoteChunk](#ReferenceData+event_remoteChunk)</code>, <code>[remoteEnd](#ReferenceData+event_remoteEnd)</code>, <code>[remoteError](#ReferenceData+event_remoteError)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| message | <code>String</code> | an event name to trigger on |
-| callback | <code>function</code> | a callback to be called when the event is triggered |
+| filePath | <code>String</code> | the filepath of the remote FTP file |
+| stream | <code>Stream</code> | the stream for the remote file |
+| size | <code>Number</code> | the size (in bytes) of the remote file |
+| resolve | <code>function</code> | a promise resolve callback |
+| reject | <code>function</code> | a promise reject callback |
 
 <a name="ReferenceData..connect"></a>
 
@@ -222,21 +279,6 @@ writes a reference file to the local system
 | --- | --- | --- |
 | filePath | <code>String</code> | the file path of where the data will be written to |
 | file | <code>\*</code> | the file data to write |
-| resolve | <code>function</code> | a promise resolve callback |
-| reject | <code>function</code> | a promise reject callback |
-
-<a name="getRemoteStream"></a>
-
-## getRemoteStream(filePath, stream, size, resolve, reject)
-gets and downloads a file from the remote FTP server with progress bar
-
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| filePath | <code>String</code> | the filepath of the remote FTP file |
-| stream | <code>Stream</code> | the stream for the remote file |
-| size | <code>Number</code> | the size (in bytes) of the remote file |
 | resolve | <code>function</code> | a promise resolve callback |
 | reject | <code>function</code> | a promise reject callback |
 

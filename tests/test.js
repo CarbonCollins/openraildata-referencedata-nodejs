@@ -5,6 +5,10 @@ const V8 = require('../lib/models/v8');
 
 refData.connect('A!t4398htw4ho4jy');
 
+refData.on('remoteDownload', (payload) => {
+  console.log(payload);
+});
+
 refData.on('ready', () => {
   console.log('ready');
   refData.getCurrentV3().then((curV3) => {
