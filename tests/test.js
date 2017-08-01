@@ -6,7 +6,7 @@ const V8 = require('../lib/models/v8');
 refData.connect('A!t4398htw4ho4jy');
 
 refData.on('remoteDownload', (payload) => {
-  console.log(payload);
+  console.log('remote download');
 });
 
 refData.on('ready', () => {
