@@ -42,14 +42,10 @@
         * [~disconnect()](#ReferenceData..disconnect)
         * [~isFTPConnected()](#ReferenceData..isFTPConnected) ⇒ <code>Promise</code>
         * [~_listDirFTP(dir)](#ReferenceData.._listDirFTP) ⇒ <code>Promise</code>
-        * [~getLocalV3Json()](#ReferenceData..getLocalV3Json) ⇒ <code>Promise</code>
-        * [~getLocalV8Json()](#ReferenceData..getLocalV8Json) ⇒ <code>Promise</code>
-        * [~getRemoteV3Json()](#ReferenceData..getRemoteV3Json) ⇒ <code>Promise</code>
-        * [~getRemoteV8Json()](#ReferenceData..getRemoteV8Json) ⇒ <code>Promise</code>
-        * [~getRemoteV3TimetableId()](#ReferenceData..getRemoteV3TimetableId) ⇒ <code>Promise</code>
-        * [~getRemoteV8TimetableId()](#ReferenceData..getRemoteV8TimetableId) ⇒ <code>Promise</code>
-        * [~getCurrentV3()](#ReferenceData..getCurrentV3) ⇒ <code>Proimise</code>
-        * [~getCurrentV8()](#ReferenceData..getCurrentV8) ⇒ <code>Proimise</code>
+        * [~getLocalJson()](#ReferenceData..getLocalJson) ⇒ <code>Promise</code>
+        * [~getRemoteJson(type)](#ReferenceData..getRemoteJson) ⇒ <code>Promise</code>
+        * [~getRemoteTimetableId(type)](#ReferenceData..getRemoteTimetableId) ⇒ <code>Promise</code>
+        * [~getCurrent(type)](#ReferenceData..getCurrent) ⇒ <code>Proimise</code>
 
 <a name="new_ReferenceData_new"></a>
 
@@ -190,64 +186,50 @@ lists all of the files and directorys within the specified FTP path
 | --- | --- | --- |
 | dir | <code>String</code> | the parent FTP path to list |
 
-<a name="ReferenceData..getLocalV3Json"></a>
+<a name="ReferenceData..getLocalJson"></a>
 
-### ReferenceData~getLocalV3Json() ⇒ <code>Promise</code>
-gets the local copy (if it exists) of the v3 ref data in json format
-
-**Kind**: inner method of <code>[ReferenceData](#ReferenceData)</code>  
-**Returns**: <code>Promise</code> - resolves with local v3 ref data or rejects with an error  
-<a name="ReferenceData..getLocalV8Json"></a>
-
-### ReferenceData~getLocalV8Json() ⇒ <code>Promise</code>
+### ReferenceData~getLocalJson() ⇒ <code>Promise</code>
 gets the local copy (if it exists) of the v8 ref data in json format
 
 **Kind**: inner method of <code>[ReferenceData](#ReferenceData)</code>  
 **Returns**: <code>Promise</code> - resolves with local v8 ref data or rejects with an error  
-<a name="ReferenceData..getRemoteV3Json"></a>
+<a name="ReferenceData..getRemoteJson"></a>
 
-### ReferenceData~getRemoteV3Json() ⇒ <code>Promise</code>
-gets a copy of the v3 ref data from the FTP server
-
-**Kind**: inner method of <code>[ReferenceData](#ReferenceData)</code>  
-**Returns**: <code>Promise</code> - resolves with the remote FTP v3 data or rejects with an error  
-<a name="ReferenceData..getRemoteV8Json"></a>
-
-### ReferenceData~getRemoteV8Json() ⇒ <code>Promise</code>
+### ReferenceData~getRemoteJson(type) ⇒ <code>Promise</code>
 gets a copy of the v8 ref data from the FTP server
 
 **Kind**: inner method of <code>[ReferenceData](#ReferenceData)</code>  
 **Returns**: <code>Promise</code> - resolves with the remote FTP v8 data or rejects with an error  
-<a name="ReferenceData..getRemoteV3TimetableId"></a>
 
-### ReferenceData~getRemoteV3TimetableId() ⇒ <code>Promise</code>
-gets the Timetable ID of the remote FTP v3 refData
+| Param | Type | Description |
+| --- | --- | --- |
+| type | <code>string</code> | either 'v3' or 'v8' |
 
-**Kind**: inner method of <code>[ReferenceData](#ReferenceData)</code>  
-**Returns**: <code>Promise</code> - resolves with the remote FTP v3 timetableID or rejects with an error  
-<a name="ReferenceData..getRemoteV8TimetableId"></a>
+<a name="ReferenceData..getRemoteTimetableId"></a>
 
-### ReferenceData~getRemoteV8TimetableId() ⇒ <code>Promise</code>
+### ReferenceData~getRemoteTimetableId(type) ⇒ <code>Promise</code>
 gets the Timetable ID of the remote FTP v8 refData
 
 **Kind**: inner method of <code>[ReferenceData](#ReferenceData)</code>  
 **Returns**: <code>Promise</code> - resolves with the remote FTP v8 timetableID or rejects with an error  
-<a name="ReferenceData..getCurrentV3"></a>
 
-### ReferenceData~getCurrentV3() ⇒ <code>Proimise</code>
-gets the most up-to-date copy of the v3 reference data from either local or remote FTP
+| Param | Type | Description |
+| --- | --- | --- |
+| type | <code>string</code> | either 'v3' or 'v8' |
 
-**Kind**: inner method of <code>[ReferenceData](#ReferenceData)</code>  
-**Returns**: <code>Proimise</code> - resolves with the most up-to-date copy o the v3 ref data or rejects with an error  
-**Emits**: <code>ReferenceData#event:v3Updating</code>, <code>ReferenceData#event:v3Updated</code>  
-<a name="ReferenceData..getCurrentV8"></a>
+<a name="ReferenceData..getCurrent"></a>
 
-### ReferenceData~getCurrentV8() ⇒ <code>Proimise</code>
+### ReferenceData~getCurrent(type) ⇒ <code>Proimise</code>
 gets the most up-to-date copy of the v8 reference data from either local or remote FTP
 
 **Kind**: inner method of <code>[ReferenceData](#ReferenceData)</code>  
 **Returns**: <code>Proimise</code> - resolves with the most up-to-date copy o the v8 ref data or rejects with an error  
-**Emits**: <code>ReferenceData#event:v8Updating</code>, <code>ReferenceData#event:v8Updated</code>  
+**Emits**: <code>ReferenceData#event:vUpdating</code>, <code>ReferenceData#event:vUpdated</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| type | <code>string</code> | either 'v3' or 'v8' |
+
 <a name="getLocalTimetableIds"></a>
 
 ## getLocalTimetableIds() ⇒ <code>Promise</code>
