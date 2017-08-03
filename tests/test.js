@@ -11,10 +11,10 @@ refData.on('remoteDownload', (payload) => {
 
 refData.on('ready', () => {
   console.log('ready');
-  refData.getCurrentV3().then((curV3) => {
+  refData.getCurrent('v3').then((curV3) => {
     //refData._v3 = new V3(curV3);
     console.log('v3 done');
-    return refData.getCurrentV8();
+    return refData.getCurrent('v8');
   }).then((curV8) => {
     //refData._v8 = new V8(curV8);
     console.log('v8 done');
