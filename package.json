@@ -6,10 +6,10 @@
     "author": "Steven Collins",
     "license": "MIT",
     "dependencies": {
-        "fs-extra": "^3.0.1",
+        "fs-extra": "^5.0.0",
         "ftp": "^0.3.10",
         "moment": "^2.18.1",
-        "openraildata-common": "^1.7.0",
+        "openraildata-common": "^2.0.1",
         "progress": "^2.0.0",
         "progress-stream": "^2.0.0",
         "xml2json": "^0.11.0"
