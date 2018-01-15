@@ -1,18 +1,20 @@
 'use strict'
 
+const path = require('path');
+const fs = require('fs-extra');
 const gulp = require('gulp');
-const gutil = require('gulp-util');
-const gulpJsdoc2md = require('gulp-jsdoc-to-markdown');
-const rename = require('gulp-rename');
- 
-gulp.task('documentation', function () {
-  return gulp.src('lib/**/*.js')
-    .pipe(gulpJsdoc2md())
-    .on('error', function (err) {
-      gutil.log(gutil.colors.red('jsdoc2md failed'), err.message)
+const jsdoc2md = require('jsdoc-to-markdown');
+
+gulp.task('generateDocs', () => {
+  return fs.ensureDir(path.join(__dirname, './docs'))
+    .then(() => {
+      return jsdoc2md.render({
+        'no-cache': true,
+        separators: true,
+        files: ['./index.js', './lib/*.js']
+      });
     })
-    .pipe(rename(function (path) {
-      path.extname = '.md'
-    }))
-    .pipe(gulp.dest('docs'))
-})
+    .then((output) => {
+      return fs.writeFile('docs/api.md', output);
+    });
+});
