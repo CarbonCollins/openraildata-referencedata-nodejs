@@ -6,6 +6,8 @@
 [![David](https://img.shields.io/david/CarbonCollins/openraildata-referencedata-nodejs.svg)]()
 [![David](https://img.shields.io/david/dev/CarbonCollins/openraildata-referencedata-nodejs.svg)]()
 [![sheilds](https://img.shields.io/badge/status-WIP-yellow.svg)](https://img.shields.io/badge/status-WIP-yellow.svg)
+[![Known Vulnerabilities](https://snyk.io/test/github/carboncollins/openraildata-referencedata-nodejs/badge.svg)](https://snyk.io/test/github/carboncollins/openraildata-referencedata-nodejs)
+[![Maintainability](https://api.codeclimate.com/v1/badges/4b55aebafb11269451ca/maintainability)](https://codeclimate.com/github/CarbonCollins/openraildata-referencedata-nodejs/maintainability)
 
 A package for accessing the the UK National Rails reference data FTP server aswell as some helper functions to process and use the reference data
 
