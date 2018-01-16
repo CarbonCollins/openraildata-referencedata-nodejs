@@ -1,6 +1,7 @@
 'use strict';
 
 const ReferenceData = require('./lib/refData');
+const Manifest = require('./lib/manifest');
 
 /**
  * @module openraildata/referencedata
@@ -14,3 +15,6 @@ const ReferenceData = require('./lib/refData');
  * @see {@link https://github.com/CarbonCollins/openraildata-common-nodejs/blob/master/docs/api.md}
  */
 module.exports = new ReferenceData();
+
+module.exports.ReferenceData = ReferenceData;
+module.exports.Manifest = Manifest;
