@@ -3,26 +3,16 @@ const refData = require('../index');
 console.log(refData);
 
 refData
-  .on('error', (err) => {
-    console.error(err);
-  })
-  .on('connected', (data) => {
-    console.info(data);
-  })
-  .on('disconnected', (data) => {
-    console.error(data)
-  })
-  .on('reconnecting', (data) => {
-    console.info(data)
-  })
-  .on('reconnection attempt', (data) => {
-    console.info(data)
-  })
+  .on('error', data => console.log(data))
+  .on('connected', data => console.log(data))
+  .on('disconnected', data => console.log(data))
+  .on('reconnecting', data => console.log(data))
+  .on('reconnection attempt', data => console.log(data))
   .on('download', data => console.log(data))
   .on('downloadChunk', data => console.log(data))
   .on('downloadError', data => console.error(data))
   .on('downloadEnd', data => console.log(data))
-  .on('referenceDataUpdate', data => { console.log('update'); console.log(data) });
+  .on('manifestUpdate', data => console.log(data));
 
 
 refData.connect({

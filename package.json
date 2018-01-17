@@ -12,6 +12,7 @@
         "openraildata-common": "^2.0.1",
         "progress": "^2.0.0",
         "progress-stream": "^2.0.0",
+        "uuid": "^3.2.1",
         "xml2js": "^0.4.19",
         "zlib": "^1.0.5"
     },
