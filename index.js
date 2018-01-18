@@ -3,6 +3,8 @@
 const ReferenceData = require('./lib/refData');
 const Manifest = require('./lib/manifest');
 
+const TOC = require('./lib/models/toc');
+
 /**
  * @module openraildata/referencedata
  * @description the openraildata/referencedata module is used to obtain reference data regarding
@@ -18,3 +20,5 @@ module.exports = new ReferenceData();
 
 module.exports.ReferenceData = ReferenceData;
 module.exports.Manifest = Manifest;
+
+module.exports.TOC = TOC;
