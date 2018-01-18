@@ -8,7 +8,7 @@
     "dependencies": {
         "fs-extra": "^5.0.0",
         "ftp": "^0.3.10",
-        "moment": "^2.18.1",
+        "moment": "^2.20.1",
         "openraildata-common": "^2.0.1",
         "progress": "^2.0.0",
         "progress-stream": "^2.0.0",
@@ -25,6 +25,6 @@
     },
     "devDependencies": {
         "gulp": "^3.9.1",
-        "jsdoc-to-markdown": "^3.0.3"
+        "jsdoc-to-markdown": "^3.0.4"
     }
 }
