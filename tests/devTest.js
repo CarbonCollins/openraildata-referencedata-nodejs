@@ -12,7 +12,7 @@ refData
   .on('downloadChunk', data => console.log(data))
   .on('downloadError', data => console.error(data))
   .on('downloadEnd', data => console.log(data))
-  .on('manifestUpdate', data => console.log(data));
+  .on('update', data => { console.log(data); console.log(refData.v3); } );
 
 
 refData.connect({
