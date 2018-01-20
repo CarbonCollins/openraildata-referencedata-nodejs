@@ -11,13 +11,8 @@ operated through an ftp server located at datafeeds.nationalrail.co.uk.</p>
 ## Classes
 
 <dl>
-<dt><a href="#ReferenceData">ReferenceData</a></dt>
-<dd></dd>
 <dt><a href="#JurneySearch">JurneySearch</a></dt>
 <dd><p>A class for filtering and searching through schedule data</p>
-</dd>
-<dt><a href="#V3RefData">V3RefData</a></dt>
-<dd><p>a class to hold all of the v3 reference data aswell as functions for accessing and manipulating the data</p>
 </dd>
 <dt><a href="#V8RefData">V8RefData</a></dt>
 <dd><p>A class for storing V8 reference data and for attaching usefull functions for data manipulation</p>
@@ -80,9 +75,227 @@ operated through an ftp server located at datafeeds.nationalrail.co.uk.
 
 
 * [openraildata/referencedata](#module_openraildata/referencedata)
-    * [.TOC](#module_openraildata/referencedata.TOC) ⇐ [<code>TOC</code>](#module_openraildata/referencedata.TOC)
-        * [new TOC(payload)](#new_module_openraildata/referencedata.TOC_new)
+    * _instance_
+        * ["connected"](#module_openraildata/referencedata+event_connected)
+        * ["reconnecting"](#module_openraildata/referencedata+event_reconnecting)
+        * ["reconnectionAttempt"](#module_openraildata/referencedata+event_reconnectionAttempt)
+        * ["disconnected"](#module_openraildata/referencedata+event_disconnected)
+        * ["download"](#module_openraildata/referencedata+event_download)
+        * ["downloadChunk"](#module_openraildata/referencedata+event_downloadChunk)
+        * ["downloadEnd"](#module_openraildata/referencedata+event_downloadEnd)
+        * ["downloadError"](#module_openraildata/referencedata+event_downloadError)
+        * ["error"](#module_openraildata/referencedata+event_error)
+        * ["update"](#module_openraildata/referencedata+event_update)
+    * _static_
+        * [.ReferenceData](#module_openraildata/referencedata.ReferenceData) ⇐ [<code>ReferenceData</code>](#module_openraildata/referencedata.ReferenceData)
+            * [new ReferenceData(options)](#new_module_openraildata/referencedata.ReferenceData_new)
+            * [~connect()](#module_openraildata/referencedata.ReferenceData..connect)
+            * [~checkForReferenceDataUpdate()](#module_openraildata/referencedata.ReferenceData..checkForReferenceDataUpdate)
+        * [.TOC](#module_openraildata/referencedata.TOC) ⇐ [<code>TOC</code>](#module_openraildata/referencedata.TOC)
+            * [new TOC(payload)](#new_module_openraildata/referencedata.TOC_new)
+            * [.code](#module_openraildata/referencedata.TOC+code) : <code>String</code>
+            * [.name](#module_openraildata/referencedata.TOC+name) : <code>String</code>
+            * [.url](#module_openraildata/referencedata.TOC+url) : <code>String</code>
+        * [.V3RefData](#module_openraildata/referencedata.V3RefData) ⇐ [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)
+            * [new V3RefData(refData)](#new_module_openraildata/referencedata.V3RefData_new)
+            * [.timetableId](#module_openraildata/referencedata.V3RefData+timetableId) : <code>String</code>
+            * [.locations](#module_openraildata/referencedata.V3RefData+locations) : <code>Array.&lt;Object&gt;</code>
+            * [.trainOperatorCompanies](#module_openraildata/referencedata.V3RefData+trainOperatorCompanies) : <code>Array.&lt;Object&gt;</code>
 
+
+* * *
+
+<a name="module_openraildata/referencedata+event_connected"></a>
+
+### "connected"
+fired when connected to FTP server
+
+**Kind**: event emitted by [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> | the options which were used to connect |
+
+
+* * *
+
+<a name="module_openraildata/referencedata+event_reconnecting"></a>
+
+### "reconnecting"
+fired when a recconection request is made
+
+**Kind**: event emitted by [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| keepAlive | <code>Boolean</code> | determins if the app should keep the ftp connection alive |
+| reconnectDelay | <code>Number</code> \| <code>String</code> | the amount of time to wait before the next reconnection attempt |
+
+
+* * *
+
+<a name="module_openraildata/referencedata+event_reconnectionAttempt"></a>
+
+### "reconnectionAttempt"
+fired when recconnection is requested
+
+**Kind**: event emitted by [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
+
+* * *
+
+<a name="module_openraildata/referencedata+event_disconnected"></a>
+
+### "disconnected"
+fired when ftpClient is disconnected
+
+**Kind**: event emitted by [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| keepAlive | <code>Boolean</code> | determins if the app should keep the ftp connection alive |
+
+
+* * *
+
+<a name="module_openraildata/referencedata+event_download"></a>
+
+### "download"
+fired when a new download is started
+
+**Kind**: event emitted by [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| size | <code>Number</code> | the size of the download in bytes |
+| name | <code>String</code> | the ftp name for the download file |
+| filePath | <code>String</code> | the path to where the file will be downloaded too |
+| fileName | <code>String</code> | the name of the saved file on the local system as it will be different than the ftp name (conversion from xml to json) |
+
+
+* * *
+
+<a name="module_openraildata/referencedata+event_downloadChunk"></a>
+
+### "downloadChunk"
+fired when a chunk of data is downloaded (usefull if you want to make a progress
+bar)
+
+**Kind**: event emitted by [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| size | <code>Number</code> | the size of the download in bytes |
+| name | <code>String</code> | the ftp name for the download file |
+| filePath | <code>String</code> | the path to where the file will be downloaded too |
+| fileName | <code>String</code> | the name of the saved file on the local system as it will be different than the ftp name (conversion from xml to json) |
+| chunkSize | <code>Number</code> | lists the size of the current chunk of data downloaded |
+
+
+* * *
+
+<a name="module_openraildata/referencedata+event_downloadEnd"></a>
+
+### "downloadEnd"
+fired when a download has completed
+
+**Kind**: event emitted by [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| size | <code>Number</code> | the size of the download in bytes |
+| name | <code>String</code> | the ftp name for the download file |
+| filePath | <code>String</code> | the path to where the file will be downloaded too |
+| fileName | <code>String</code> | the name of the saved file on the local system as it will be different than the ftp name (conversion from xml to json) |
+
+
+* * *
+
+<a name="module_openraildata/referencedata+event_downloadError"></a>
+
+### "downloadError"
+fired if there was a download error
+
+**Kind**: event emitted by [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
+
+* * *
+
+<a name="module_openraildata/referencedata+event_error"></a>
+
+### "error"
+fired when an error occurs
+
+**Kind**: event emitted by [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
+
+* * *
+
+<a name="module_openraildata/referencedata+event_update"></a>
+
+### "update"
+fired when the manifest changes or when the reference files have been updated
+
+**Kind**: event emitted by [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| type | <code>String</code> | the source of the update. Currently can be: `manifest` or `reference` |
+
+
+* * *
+
+<a name="module_openraildata/referencedata.ReferenceData"></a>
+
+### openraildata/referencedata.ReferenceData ⇐ [<code>ReferenceData</code>](#module_openraildata/referencedata.ReferenceData)
+the main code base which maintains the connection to the ftp server and manages which
+reference data files to download. it also exposes all of the events and functions.
+
+**Kind**: static class of [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
+**Extends**: [<code>ReferenceData</code>](#module_openraildata/referencedata.ReferenceData)  
+
+* [.ReferenceData](#module_openraildata/referencedata.ReferenceData) ⇐ [<code>ReferenceData</code>](#module_openraildata/referencedata.ReferenceData)
+    * [new ReferenceData(options)](#new_module_openraildata/referencedata.ReferenceData_new)
+    * [~connect()](#module_openraildata/referencedata.ReferenceData..connect)
+    * [~checkForReferenceDataUpdate()](#module_openraildata/referencedata.ReferenceData..checkForReferenceDataUpdate)
+
+
+* * *
+
+<a name="new_module_openraildata/referencedata.ReferenceData_new"></a>
+
+#### new ReferenceData(options)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> | optional data to configure the reference data with |
+
+
+* * *
+
+<a name="module_openraildata/referencedata.ReferenceData..connect"></a>
+
+#### ReferenceData~connect()
+connects to the openrail data FTP server
+
+**Kind**: inner method of [<code>ReferenceData</code>](#module_openraildata/referencedata.ReferenceData)  
+**Emits**: [<code>connected</code>](#module_openraildata/referencedata+event_connected), [<code>error</code>](#module_openraildata/referencedata+event_error)  
+**Access**: public  
+
+* * *
+
+<a name="module_openraildata/referencedata.ReferenceData..checkForReferenceDataUpdate"></a>
+
+#### ReferenceData~checkForReferenceDataUpdate()
+checks to see if the local refdata needs to be updated
+
+**Kind**: inner method of [<code>ReferenceData</code>](#module_openraildata/referencedata.ReferenceData)  
+**Emits**: [<code>error</code>](#module_openraildata/referencedata+event_error)  
+**Access**: public  
 
 * * *
 
@@ -93,6 +306,13 @@ A train operating companys information
 
 **Kind**: static class of [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
 **Extends**: [<code>TOC</code>](#module_openraildata/referencedata.TOC)  
+
+* [.TOC](#module_openraildata/referencedata.TOC) ⇐ [<code>TOC</code>](#module_openraildata/referencedata.TOC)
+    * [new TOC(payload)](#new_module_openraildata/referencedata.TOC_new)
+    * [.code](#module_openraildata/referencedata.TOC+code) : <code>String</code>
+    * [.name](#module_openraildata/referencedata.TOC+name) : <code>String</code>
+    * [.url](#module_openraildata/referencedata.TOC+url) : <code>String</code>
+
 
 * * *
 
@@ -107,21 +327,97 @@ A train operating companys information
 
 * * *
 
-<a name="ReferenceData"></a>
+<a name="module_openraildata/referencedata.TOC+code"></a>
 
-## ReferenceData
-**Kind**: global class  
+#### toC.code : <code>String</code>
+the train operating company 2 letter code
+
+**Kind**: instance property of [<code>TOC</code>](#module_openraildata/referencedata.TOC)  
+**Overrides**: [<code>code</code>](#module_openraildata/referencedata.TOC+code)  
+**Access**: public  
 
 * * *
 
-<a name="new_ReferenceData_new"></a>
+<a name="module_openraildata/referencedata.TOC+name"></a>
 
-### new ReferenceData(options)
+#### toC.name : <code>String</code>
+the train operating company human readable name
+
+**Kind**: instance property of [<code>TOC</code>](#module_openraildata/referencedata.TOC)  
+**Overrides**: [<code>name</code>](#module_openraildata/referencedata.TOC+name)  
+**Access**: public  
+
+* * *
+
+<a name="module_openraildata/referencedata.TOC+url"></a>
+
+#### toC.url : <code>String</code>
+the train operating companys information page which contains extra information
+including: phone numbers, fax, addresses, emails, network maps ect (Might make a parser for
+this in the future... If you want it then raise a feature request for it :)
+
+**Kind**: instance property of [<code>TOC</code>](#module_openraildata/referencedata.TOC)  
+**Overrides**: [<code>url</code>](#module_openraildata/referencedata.TOC+url)  
+**Access**: public  
+
+* * *
+
+<a name="module_openraildata/referencedata.V3RefData"></a>
+
+### openraildata/referencedata.V3RefData ⇐ [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)
+a class to hold all of the v3 reference data aswell as functions for accessing and manipulating the data
+
+**Kind**: static class of [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
+**Extends**: [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
+
+* [.V3RefData](#module_openraildata/referencedata.V3RefData) ⇐ [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)
+    * [new V3RefData(refData)](#new_module_openraildata/referencedata.V3RefData_new)
+    * [.timetableId](#module_openraildata/referencedata.V3RefData+timetableId) : <code>String</code>
+    * [.locations](#module_openraildata/referencedata.V3RefData+locations) : <code>Array.&lt;Object&gt;</code>
+    * [.trainOperatorCompanies](#module_openraildata/referencedata.V3RefData+trainOperatorCompanies) : <code>Array.&lt;Object&gt;</code>
+
+
+* * *
+
+<a name="new_module_openraildata/referencedata.V3RefData_new"></a>
+
+#### new V3RefData(refData)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| options | <code>Object</code> | optional data to configure the reference data with |
+| refData | <code>Object</code> | the raw object contaiting the v3 data |
 
+
+* * *
+
+<a name="module_openraildata/referencedata.V3RefData+timetableId"></a>
+
+#### v3RefData.timetableId : <code>String</code>
+gets the v3 timetable Id
+
+**Kind**: instance property of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
+**Overrides**: [<code>timetableId</code>](#module_openraildata/referencedata.V3RefData+timetableId)  
+**Read only**: true  
+
+* * *
+
+<a name="module_openraildata/referencedata.V3RefData+locations"></a>
+
+#### v3RefData.locations : <code>Array.&lt;Object&gt;</code>
+an array of locations
+
+**Kind**: instance property of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
+**Overrides**: [<code>locations</code>](#module_openraildata/referencedata.V3RefData+locations)  
+
+* * *
+
+<a name="module_openraildata/referencedata.V3RefData+trainOperatorCompanies"></a>
+
+#### v3RefData.trainOperatorCompanies : <code>Array.&lt;Object&gt;</code>
+an array of train operator companies
+
+**Kind**: instance property of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
+**Overrides**: [<code>trainOperatorCompanies</code>](#module_openraildata/referencedata.V3RefData+trainOperatorCompanies)  
 
 * * *
 
@@ -285,26 +581,6 @@ applys a filter to find results which stop at any intermediate points or the des
 applys a filter to find results which start today only
 
 **Kind**: inner method of [<code>JurneySearch</code>](#JurneySearch)  
-
-* * *
-
-<a name="V3RefData"></a>
-
-## V3RefData
-a class to hold all of the v3 reference data aswell as functions for accessing and manipulating the data
-
-**Kind**: global class  
-
-* * *
-
-<a name="new_V3RefData_new"></a>
-
-### new V3RefData(refData)
-
-| Param | Type | Description |
-| --- | --- | --- |
-| refData | <code>Object</code> | the raw object contaiting the v3 data |
-
 
 * * *
 
