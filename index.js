@@ -3,7 +3,9 @@
 const ReferenceData = require('./lib/refData');
 const Manifest = require('./lib/manifest');
 
-const TOC = require('./lib/models/toc');
+const TrainOperatingCompany = require('./lib/models/trainOperatingCompany');
+const LateRunningReason = require('./lib/models/lateRunningReason');
+const CancellationReason = require('./lib/models/cancellationReason');
 
 /**
  * @module openraildata/referencedata
@@ -21,4 +23,6 @@ module.exports = new ReferenceData();
 module.exports.ReferenceData = ReferenceData;
 module.exports.Manifest = Manifest;
 
-module.exports.TOC = TOC;
+module.exports.TrainOperatingCompany = TrainOperatingCompany;
+module.exports.LateRunningReason = LateRunningReason;
+module.exports.CancellationReason = CancellationReason;
