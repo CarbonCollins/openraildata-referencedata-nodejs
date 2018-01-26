@@ -50,6 +50,9 @@ operated through an ftp server located at datafeeds.nationalrail.co.uk.</p>
 ## External
 
 <dl>
+<dt><a href="#external_Location">Location</a></dt>
+<dd><p>The built in string object.</p>
+</dd>
 <dt><a href="#external_Schedule">Schedule</a></dt>
 <dd><p>a class for schedule information and functions</p>
 </dd>
@@ -762,7 +765,7 @@ a human readable via text to be displayed
 
 ### openraildata/referencedata.LocationMix ⇐ <code>module:openraildata/referencedata.Location</code>
 **Kind**: static mixin of [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
-**Extends**: <code>module:openraildata/referencedata.Location</code>, <code>module:openraildata/common.Location</code>  
+**Extends**: <code>module:openraildata/referencedata.Location</code>, [<code>Location</code>](#external_Location)  
 
 * * *
 
@@ -1043,6 +1046,16 @@ gets the stations name from the reference data
 **Kind**: global variable  
 **Returns**: <code>String</code> - the location name  
 **Read only**: true  
+
+* * *
+
+<a name="external_Location"></a>
+
+## Location
+The built in string object.
+
+**Kind**: global external  
+**See**: [Location](https://github.com/CarbonCollins/openraildata-common-nodejs/blob/master/docs/api.md#module_openraildata/common+Location)  
 
 * * *
 
