@@ -108,18 +108,18 @@ operated through an ftp server located at datafeeds.nationalrail.co.uk.
             * [new V3RefData(refData)](#new_module_openraildata/referencedata.V3RefData_new)
             * _instance_
                 * [.timetableId](#module_openraildata/referencedata.V3RefData+timetableId) : <code>String</code>
-                * [.locations](#module_openraildata/referencedata.V3RefData+locations) : <code>Array.&lt;Location&gt;</code>
-                * [.trainOperatorCompanies](#module_openraildata/referencedata.V3RefData+trainOperatorCompanies) : <code>Array.&lt;TrainOperatingCompany&gt;</code>
-                * [.lateRunningReasons](#module_openraildata/referencedata.V3RefData+lateRunningReasons) : <code>Array.&lt;LateRunningReason&gt;</code>
-                * [.cancellationReason](#module_openraildata/referencedata.V3RefData+cancellationReason) : <code>Array.&lt;CancellationReason&gt;</code>
-                * [.vias](#module_openraildata/referencedata.V3RefData+vias) : <code>Array.&lt;Via&gt;</code>
-                * [.CustomerInformationSystemSources](#module_openraildata/referencedata.V3RefData+CustomerInformationSystemSources) : <code>Array.&lt;CustomerInformationSystem&gt;</code>
+                * [.locations](#module_openraildata/referencedata.V3RefData+locations) : <code>Array.&lt;module:openraildata/referencedata.Location&gt;</code>
+                * [.trainOperatorCompanies](#module_openraildata/referencedata.V3RefData+trainOperatorCompanies) : [<code>Array.&lt;TrainOperatingCompany&gt;</code>](#module_openraildata/referencedata.TrainOperatingCompany)
+                * [.lateRunningReasons](#module_openraildata/referencedata.V3RefData+lateRunningReasons) : [<code>Array.&lt;LateRunningReason&gt;</code>](#module_openraildata/referencedata.LateRunningReason)
+                * [.cancellationReason](#module_openraildata/referencedata.V3RefData+cancellationReason) : [<code>Array.&lt;CancellationReason&gt;</code>](#module_openraildata/referencedata.CancellationReason)
+                * [.vias](#module_openraildata/referencedata.V3RefData+vias) : [<code>Array.&lt;Via&gt;</code>](#module_openraildata/referencedata.Via)
+                * [.CustomerInformationSystemSources](#module_openraildata/referencedata.V3RefData+CustomerInformationSystemSources) : [<code>Array.&lt;CustomerInformationSystem&gt;</code>](#module_openraildata/referencedata.CustomerInformationSystem)
             * _inner_
-                * [~findLocation(input)](#module_openraildata/referencedata.V3RefData..findLocation) ⇒ <code>module:openraildata/common.Location</code>
-                * [~findTrainOperatorCompany(input)](#module_openraildata/referencedata.V3RefData..findTrainOperatorCompany) ⇒ <code>TrainOperatorCompany</code>
-                * [~findLateRunningReason(input)](#module_openraildata/referencedata.V3RefData..findLateRunningReason) ⇒ <code>LateRunningReason</code>
+                * [~findLocation(input)](#module_openraildata/referencedata.V3RefData..findLocation) ⇒ <code>module:openraildata/referencedata.Location</code>
+                * [~findTrainOperatorCompany(input)](#module_openraildata/referencedata.V3RefData..findTrainOperatorCompany) ⇒ <code>module:openraildata/referencedata.TrainOperatorCompany</code>
+                * [~findLateRunningReason(input)](#module_openraildata/referencedata.V3RefData..findLateRunningReason) ⇒ [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason)
                 * [~findVias(...input)](#module_openraildata/referencedata.V3RefData..findVias) ⇒ [<code>Array.&lt;Via&gt;</code>](#module_openraildata/referencedata.Via)
-                * [~findCustomerInformationSystem(input)](#module_openraildata/referencedata.V3RefData..findCustomerInformationSystem) ⇒ <code>CustomerInformationSystem</code>
+                * [~findCustomerInformationSystem(input)](#module_openraildata/referencedata.V3RefData..findCustomerInformationSystem) ⇒ [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem)
         * [.Via](#module_openraildata/referencedata.Via) ⇐ [<code>Via</code>](#module_openraildata/referencedata.Via)
             * [new Via(payload, locations)](#new_module_openraildata/referencedata.Via_new)
             * [.at](#module_openraildata/referencedata.Via+at) : <code>String</code>
@@ -500,18 +500,18 @@ a class to hold all of the v3 reference data aswell as functions for accessing a
     * [new V3RefData(refData)](#new_module_openraildata/referencedata.V3RefData_new)
     * _instance_
         * [.timetableId](#module_openraildata/referencedata.V3RefData+timetableId) : <code>String</code>
-        * [.locations](#module_openraildata/referencedata.V3RefData+locations) : <code>Array.&lt;Location&gt;</code>
-        * [.trainOperatorCompanies](#module_openraildata/referencedata.V3RefData+trainOperatorCompanies) : <code>Array.&lt;TrainOperatingCompany&gt;</code>
-        * [.lateRunningReasons](#module_openraildata/referencedata.V3RefData+lateRunningReasons) : <code>Array.&lt;LateRunningReason&gt;</code>
-        * [.cancellationReason](#module_openraildata/referencedata.V3RefData+cancellationReason) : <code>Array.&lt;CancellationReason&gt;</code>
-        * [.vias](#module_openraildata/referencedata.V3RefData+vias) : <code>Array.&lt;Via&gt;</code>
-        * [.CustomerInformationSystemSources](#module_openraildata/referencedata.V3RefData+CustomerInformationSystemSources) : <code>Array.&lt;CustomerInformationSystem&gt;</code>
+        * [.locations](#module_openraildata/referencedata.V3RefData+locations) : <code>Array.&lt;module:openraildata/referencedata.Location&gt;</code>
+        * [.trainOperatorCompanies](#module_openraildata/referencedata.V3RefData+trainOperatorCompanies) : [<code>Array.&lt;TrainOperatingCompany&gt;</code>](#module_openraildata/referencedata.TrainOperatingCompany)
+        * [.lateRunningReasons](#module_openraildata/referencedata.V3RefData+lateRunningReasons) : [<code>Array.&lt;LateRunningReason&gt;</code>](#module_openraildata/referencedata.LateRunningReason)
+        * [.cancellationReason](#module_openraildata/referencedata.V3RefData+cancellationReason) : [<code>Array.&lt;CancellationReason&gt;</code>](#module_openraildata/referencedata.CancellationReason)
+        * [.vias](#module_openraildata/referencedata.V3RefData+vias) : [<code>Array.&lt;Via&gt;</code>](#module_openraildata/referencedata.Via)
+        * [.CustomerInformationSystemSources](#module_openraildata/referencedata.V3RefData+CustomerInformationSystemSources) : [<code>Array.&lt;CustomerInformationSystem&gt;</code>](#module_openraildata/referencedata.CustomerInformationSystem)
     * _inner_
-        * [~findLocation(input)](#module_openraildata/referencedata.V3RefData..findLocation) ⇒ <code>module:openraildata/common.Location</code>
-        * [~findTrainOperatorCompany(input)](#module_openraildata/referencedata.V3RefData..findTrainOperatorCompany) ⇒ <code>TrainOperatorCompany</code>
-        * [~findLateRunningReason(input)](#module_openraildata/referencedata.V3RefData..findLateRunningReason) ⇒ <code>LateRunningReason</code>
+        * [~findLocation(input)](#module_openraildata/referencedata.V3RefData..findLocation) ⇒ <code>module:openraildata/referencedata.Location</code>
+        * [~findTrainOperatorCompany(input)](#module_openraildata/referencedata.V3RefData..findTrainOperatorCompany) ⇒ <code>module:openraildata/referencedata.TrainOperatorCompany</code>
+        * [~findLateRunningReason(input)](#module_openraildata/referencedata.V3RefData..findLateRunningReason) ⇒ [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason)
         * [~findVias(...input)](#module_openraildata/referencedata.V3RefData..findVias) ⇒ [<code>Array.&lt;Via&gt;</code>](#module_openraildata/referencedata.Via)
-        * [~findCustomerInformationSystem(input)](#module_openraildata/referencedata.V3RefData..findCustomerInformationSystem) ⇒ <code>CustomerInformationSystem</code>
+        * [~findCustomerInformationSystem(input)](#module_openraildata/referencedata.V3RefData..findCustomerInformationSystem) ⇒ [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem)
 
 
 * * *
@@ -540,7 +540,7 @@ gets the v3 timetable Id
 
 <a name="module_openraildata/referencedata.V3RefData+locations"></a>
 
-#### v3RefData.locations : <code>Array.&lt;Location&gt;</code>
+#### v3RefData.locations : <code>Array.&lt;module:openraildata/referencedata.Location&gt;</code>
 an array of locations
 
 **Kind**: instance property of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
@@ -551,7 +551,7 @@ an array of locations
 
 <a name="module_openraildata/referencedata.V3RefData+trainOperatorCompanies"></a>
 
-#### v3RefData.trainOperatorCompanies : <code>Array.&lt;TrainOperatingCompany&gt;</code>
+#### v3RefData.trainOperatorCompanies : [<code>Array.&lt;TrainOperatingCompany&gt;</code>](#module_openraildata/referencedata.TrainOperatingCompany)
 an array of train operator companies
 
 **Kind**: instance property of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
@@ -562,7 +562,7 @@ an array of train operator companies
 
 <a name="module_openraildata/referencedata.V3RefData+lateRunningReasons"></a>
 
-#### v3RefData.lateRunningReasons : <code>Array.&lt;LateRunningReason&gt;</code>
+#### v3RefData.lateRunningReasons : [<code>Array.&lt;LateRunningReason&gt;</code>](#module_openraildata/referencedata.LateRunningReason)
 an array of train late running reasons
 
 **Kind**: instance property of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
@@ -572,7 +572,7 @@ an array of train late running reasons
 
 <a name="module_openraildata/referencedata.V3RefData+cancellationReason"></a>
 
-#### v3RefData.cancellationReason : <code>Array.&lt;CancellationReason&gt;</code>
+#### v3RefData.cancellationReason : [<code>Array.&lt;CancellationReason&gt;</code>](#module_openraildata/referencedata.CancellationReason)
 an array of train cancellation reasons
 
 **Kind**: instance property of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
@@ -582,7 +582,7 @@ an array of train cancellation reasons
 
 <a name="module_openraildata/referencedata.V3RefData+vias"></a>
 
-#### v3RefData.vias : <code>Array.&lt;Via&gt;</code>
+#### v3RefData.vias : [<code>Array.&lt;Via&gt;</code>](#module_openraildata/referencedata.Via)
 an array of vias
 
 **Kind**: instance property of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
@@ -592,7 +592,7 @@ an array of vias
 
 <a name="module_openraildata/referencedata.V3RefData+CustomerInformationSystemSources"></a>
 
-#### v3RefData.CustomerInformationSystemSources : <code>Array.&lt;CustomerInformationSystem&gt;</code>
+#### v3RefData.CustomerInformationSystemSources : [<code>Array.&lt;CustomerInformationSystem&gt;</code>](#module_openraildata/referencedata.CustomerInformationSystem)
 an array of CISSources
 
 **Kind**: instance property of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
@@ -602,11 +602,11 @@ an array of CISSources
 
 <a name="module_openraildata/referencedata.V3RefData..findLocation"></a>
 
-#### V3RefData~findLocation(input) ⇒ <code>module:openraildata/common.Location</code>
+#### V3RefData~findLocation(input) ⇒ <code>module:openraildata/referencedata.Location</code>
 finds a location from a search input
 
 **Kind**: inner method of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
-**Returns**: <code>module:openraildata/common.Location</code> - returns a Location if found or a null if not found  
+**Returns**: <code>module:openraildata/referencedata.Location</code> - returns a Location if found or a null if not found  
 **See**: [https://github.com/CarbonCollins/openraildata-common-nodejs/blob/master/docs/api.md#module_openraildata/common+Location](https://github.com/CarbonCollins/openraildata-common-nodejs/blob/master/docs/api.md#module_openraildata/common+Location)  
 
 | Param | Type | Description |
@@ -618,11 +618,11 @@ finds a location from a search input
 
 <a name="module_openraildata/referencedata.V3RefData..findTrainOperatorCompany"></a>
 
-#### V3RefData~findTrainOperatorCompany(input) ⇒ <code>TrainOperatorCompany</code>
+#### V3RefData~findTrainOperatorCompany(input) ⇒ <code>module:openraildata/referencedata.TrainOperatorCompany</code>
 finds a rain operating company from a search input
 
 **Kind**: inner method of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
-**Returns**: <code>TrainOperatorCompany</code> - returns a train operating company  
+**Returns**: <code>module:openraildata/referencedata.TrainOperatorCompany</code> - returns a train operating company  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -633,11 +633,11 @@ finds a rain operating company from a search input
 
 <a name="module_openraildata/referencedata.V3RefData..findLateRunningReason"></a>
 
-#### V3RefData~findLateRunningReason(input) ⇒ <code>LateRunningReason</code>
+#### V3RefData~findLateRunningReason(input) ⇒ [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason)
 finds a late running reason from a search input
 
 **Kind**: inner method of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
-**Returns**: <code>LateRunningReason</code> - returns a late operating reason  
+**Returns**: [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason) - returns a late operating reason  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -663,11 +663,11 @@ finds a via from a search input. you can supply a single input for a list of via
 
 <a name="module_openraildata/referencedata.V3RefData..findCustomerInformationSystem"></a>
 
-#### V3RefData~findCustomerInformationSystem(input) ⇒ <code>CustomerInformationSystem</code>
+#### V3RefData~findCustomerInformationSystem(input) ⇒ [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem)
 finds a customer information system
 
 **Kind**: inner method of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
-**Returns**: <code>CustomerInformationSystem</code> - returns a Customer Information System  
+**Returns**: [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem) - returns a Customer Information System  
 
 | Param | Type | Description |
 | --- | --- | --- |
