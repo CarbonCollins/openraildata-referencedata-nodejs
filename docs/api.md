@@ -87,20 +87,49 @@ operated through an ftp server located at datafeeds.nationalrail.co.uk.
         * ["error"](#module_openraildata/referencedata+event_error)
         * ["update"](#module_openraildata/referencedata+event_update)
     * _static_
-        * [.ReferenceData](#module_openraildata/referencedata.ReferenceData) ⇐ [<code>ReferenceData</code>](#module_openraildata/referencedata.ReferenceData)
-            * [new ReferenceData(options)](#new_module_openraildata/referencedata.ReferenceData_new)
-            * [~connect()](#module_openraildata/referencedata.ReferenceData..connect)
-            * [~checkForReferenceDataUpdate()](#module_openraildata/referencedata.ReferenceData..checkForReferenceDataUpdate)
-        * [.TOC](#module_openraildata/referencedata.TOC) ⇐ [<code>TOC</code>](#module_openraildata/referencedata.TOC)
-            * [new TOC(payload)](#new_module_openraildata/referencedata.TOC_new)
-            * [.code](#module_openraildata/referencedata.TOC+code) : <code>String</code>
-            * [.name](#module_openraildata/referencedata.TOC+name) : <code>String</code>
-            * [.url](#module_openraildata/referencedata.TOC+url) : <code>String</code>
+        * [.CancellationReason](#module_openraildata/referencedata.CancellationReason) ⇐ [<code>CancellationReason</code>](#module_openraildata/referencedata.CancellationReason)
+            * [new CancellationReason(payload)](#new_module_openraildata/referencedata.CancellationReason_new)
+            * [.code](#module_openraildata/referencedata.CancellationReason+code) : <code>Number</code>
+            * [.reason](#module_openraildata/referencedata.CancellationReason+reason) : <code>String</code>
+        * [.CustomerInformationSystem](#module_openraildata/referencedata.CustomerInformationSystem) ⇐ [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem)
+            * [new CustomerInformationSystem(payload)](#new_module_openraildata/referencedata.CustomerInformationSystem_new)
+            * [.code](#module_openraildata/referencedata.CustomerInformationSystem+code) : <code>String</code>
+            * [.name](#module_openraildata/referencedata.CustomerInformationSystem+name) : <code>String</code>
+        * [.LateRunningReason](#module_openraildata/referencedata.LateRunningReason) ⇐ [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason)
+            * [new LateRunningReason(payload)](#new_module_openraildata/referencedata.LateRunningReason_new)
+            * [.code](#module_openraildata/referencedata.LateRunningReason+code) : <code>Number</code>
+            * [.reason](#module_openraildata/referencedata.LateRunningReason+reason) : <code>String</code>
+        * [.TrainOperatingCompany](#module_openraildata/referencedata.TrainOperatingCompany) ⇐ [<code>TrainOperatingCompany</code>](#module_openraildata/referencedata.TrainOperatingCompany)
+            * [new TrainOperatingCompany(payload)](#new_module_openraildata/referencedata.TrainOperatingCompany_new)
+            * [.code](#module_openraildata/referencedata.TrainOperatingCompany+code) : <code>String</code>
+            * [.name](#module_openraildata/referencedata.TrainOperatingCompany+name) : <code>String</code>
+            * [.url](#module_openraildata/referencedata.TrainOperatingCompany+url) : <code>String</code>
         * [.V3RefData](#module_openraildata/referencedata.V3RefData) ⇐ [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)
             * [new V3RefData(refData)](#new_module_openraildata/referencedata.V3RefData_new)
-            * [.timetableId](#module_openraildata/referencedata.V3RefData+timetableId) : <code>String</code>
-            * [.locations](#module_openraildata/referencedata.V3RefData+locations) : <code>Array.&lt;Object&gt;</code>
-            * [.trainOperatorCompanies](#module_openraildata/referencedata.V3RefData+trainOperatorCompanies) : <code>Array.&lt;Object&gt;</code>
+            * _instance_
+                * [.timetableId](#module_openraildata/referencedata.V3RefData+timetableId) : <code>String</code>
+                * [.locations](#module_openraildata/referencedata.V3RefData+locations) : <code>Array.&lt;Location&gt;</code>
+                * [.trainOperatorCompanies](#module_openraildata/referencedata.V3RefData+trainOperatorCompanies) : <code>Array.&lt;TrainOperatingCompany&gt;</code>
+                * [.lateRunningReasons](#module_openraildata/referencedata.V3RefData+lateRunningReasons) : <code>Array.&lt;LateRunningReason&gt;</code>
+                * [.cancellationReason](#module_openraildata/referencedata.V3RefData+cancellationReason) : <code>Array.&lt;CancellationReason&gt;</code>
+                * [.vias](#module_openraildata/referencedata.V3RefData+vias) : <code>Array.&lt;Via&gt;</code>
+                * [.CustomerInformationSystemSources](#module_openraildata/referencedata.V3RefData+CustomerInformationSystemSources) : <code>Array.&lt;CustomerInformationSystem&gt;</code>
+            * _inner_
+                * [~findLocation(input)](#module_openraildata/referencedata.V3RefData..findLocation) ⇒ <code>module:openraildata/common.Location</code>
+                * [~findTrainOperatorCompany(input)](#module_openraildata/referencedata.V3RefData..findTrainOperatorCompany) ⇒ <code>module:openraildata/referencedata.TrainOperatorCompany</code>
+                * [~findLateRunningReason(input)](#module_openraildata/referencedata.V3RefData..findLateRunningReason) ⇒ [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason)
+                * [~findVias(...input)](#module_openraildata/referencedata.V3RefData..findVias) ⇒ [<code>Array.&lt;Via&gt;</code>](#module_openraildata/referencedata.Via)
+                * [~findCustomerInformationSystem(input)](#module_openraildata/referencedata.V3RefData..findCustomerInformationSystem) ⇒ [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem)
+        * [.Via](#module_openraildata/referencedata.Via) ⇐ [<code>Via</code>](#module_openraildata/referencedata.Via)
+            * [new Via(payload, locations)](#new_module_openraildata/referencedata.Via_new)
+            * [.at](#module_openraildata/referencedata.Via+at) : <code>String</code>
+            * [.destination](#module_openraildata/referencedata.Via+destination) : <code>String</code>
+            * [.location1](#module_openraildata/referencedata.Via+location1) : <code>String</code>
+            * [.location2](#module_openraildata/referencedata.Via+location2) : <code>String</code>
+            * [.text](#module_openraildata/referencedata.Via+text) : <code>String</code>
+    * _inner_
+        * [~connect()](#module_openraildata/referencedata..connect)
+        * [~checkForReferenceDataUpdate()](#module_openraildata/referencedata..checkForReferenceDataUpdate)
 
 
 * * *
@@ -249,76 +278,25 @@ fired when the manifest changes or when the reference files have been updated
 
 * * *
 
-<a name="module_openraildata/referencedata.ReferenceData"></a>
+<a name="module_openraildata/referencedata.CancellationReason"></a>
 
-### openraildata/referencedata.ReferenceData ⇐ [<code>ReferenceData</code>](#module_openraildata/referencedata.ReferenceData)
-the main code base which maintains the connection to the ftp server and manages which
-reference data files to download. it also exposes all of the events and functions.
-
-**Kind**: static class of [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
-**Extends**: [<code>ReferenceData</code>](#module_openraildata/referencedata.ReferenceData)  
-
-* [.ReferenceData](#module_openraildata/referencedata.ReferenceData) ⇐ [<code>ReferenceData</code>](#module_openraildata/referencedata.ReferenceData)
-    * [new ReferenceData(options)](#new_module_openraildata/referencedata.ReferenceData_new)
-    * [~connect()](#module_openraildata/referencedata.ReferenceData..connect)
-    * [~checkForReferenceDataUpdate()](#module_openraildata/referencedata.ReferenceData..checkForReferenceDataUpdate)
-
-
-* * *
-
-<a name="new_module_openraildata/referencedata.ReferenceData_new"></a>
-
-#### new ReferenceData(options)
-
-| Param | Type | Description |
-| --- | --- | --- |
-| options | <code>Object</code> | optional data to configure the reference data with |
-
-
-* * *
-
-<a name="module_openraildata/referencedata.ReferenceData..connect"></a>
-
-#### ReferenceData~connect()
-connects to the openrail data FTP server
-
-**Kind**: inner method of [<code>ReferenceData</code>](#module_openraildata/referencedata.ReferenceData)  
-**Emits**: [<code>connected</code>](#module_openraildata/referencedata+event_connected), [<code>error</code>](#module_openraildata/referencedata+event_error)  
-**Access**: public  
-
-* * *
-
-<a name="module_openraildata/referencedata.ReferenceData..checkForReferenceDataUpdate"></a>
-
-#### ReferenceData~checkForReferenceDataUpdate()
-checks to see if the local refdata needs to be updated
-
-**Kind**: inner method of [<code>ReferenceData</code>](#module_openraildata/referencedata.ReferenceData)  
-**Emits**: [<code>error</code>](#module_openraildata/referencedata+event_error)  
-**Access**: public  
-
-* * *
-
-<a name="module_openraildata/referencedata.TOC"></a>
-
-### openraildata/referencedata.TOC ⇐ [<code>TOC</code>](#module_openraildata/referencedata.TOC)
-A train operating companys information
+### openraildata/referencedata.CancellationReason ⇐ [<code>CancellationReason</code>](#module_openraildata/referencedata.CancellationReason)
+A cancellation reason
 
 **Kind**: static class of [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
-**Extends**: [<code>TOC</code>](#module_openraildata/referencedata.TOC)  
+**Extends**: [<code>CancellationReason</code>](#module_openraildata/referencedata.CancellationReason)  
 
-* [.TOC](#module_openraildata/referencedata.TOC) ⇐ [<code>TOC</code>](#module_openraildata/referencedata.TOC)
-    * [new TOC(payload)](#new_module_openraildata/referencedata.TOC_new)
-    * [.code](#module_openraildata/referencedata.TOC+code) : <code>String</code>
-    * [.name](#module_openraildata/referencedata.TOC+name) : <code>String</code>
-    * [.url](#module_openraildata/referencedata.TOC+url) : <code>String</code>
+* [.CancellationReason](#module_openraildata/referencedata.CancellationReason) ⇐ [<code>CancellationReason</code>](#module_openraildata/referencedata.CancellationReason)
+    * [new CancellationReason(payload)](#new_module_openraildata/referencedata.CancellationReason_new)
+    * [.code](#module_openraildata/referencedata.CancellationReason+code) : <code>Number</code>
+    * [.reason](#module_openraildata/referencedata.CancellationReason+reason) : <code>String</code>
 
 
 * * *
 
-<a name="new_module_openraildata/referencedata.TOC_new"></a>
+<a name="new_module_openraildata/referencedata.CancellationReason_new"></a>
 
-#### new TOC(payload)
+#### new CancellationReason(payload)
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -327,37 +305,185 @@ A train operating companys information
 
 * * *
 
-<a name="module_openraildata/referencedata.TOC+code"></a>
+<a name="module_openraildata/referencedata.CancellationReason+code"></a>
 
-#### toC.code : <code>String</code>
+#### cancellationReason.code : <code>Number</code>
+a numerical indicator for itendifying which cancelation to display
+
+**Kind**: instance property of [<code>CancellationReason</code>](#module_openraildata/referencedata.CancellationReason)  
+**Overrides**: [<code>code</code>](#module_openraildata/referencedata.CancellationReason+code)  
+**Access**: public  
+
+* * *
+
+<a name="module_openraildata/referencedata.CancellationReason+reason"></a>
+
+#### cancellationReason.reason : <code>String</code>
+a string description of the Cancellation reason
+
+**Kind**: instance property of [<code>CancellationReason</code>](#module_openraildata/referencedata.CancellationReason)  
+**Overrides**: [<code>reason</code>](#module_openraildata/referencedata.CancellationReason+reason)  
+**Access**: public  
+
+* * *
+
+<a name="module_openraildata/referencedata.CustomerInformationSystem"></a>
+
+### openraildata/referencedata.CustomerInformationSystem ⇐ [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem)
+A customer information system source (CIS)
+
+**Kind**: static class of [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
+**Extends**: [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem)  
+
+* [.CustomerInformationSystem](#module_openraildata/referencedata.CustomerInformationSystem) ⇐ [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem)
+    * [new CustomerInformationSystem(payload)](#new_module_openraildata/referencedata.CustomerInformationSystem_new)
+    * [.code](#module_openraildata/referencedata.CustomerInformationSystem+code) : <code>String</code>
+    * [.name](#module_openraildata/referencedata.CustomerInformationSystem+name) : <code>String</code>
+
+
+* * *
+
+<a name="new_module_openraildata/referencedata.CustomerInformationSystem_new"></a>
+
+#### new CustomerInformationSystem(payload)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| payload | <code>Object</code> | the raw json object from the ftp containing the cis information |
+
+
+* * *
+
+<a name="module_openraildata/referencedata.CustomerInformationSystem+code"></a>
+
+#### customerInformationSystem.code : <code>String</code>
+the cis code (normaly 2 letters and 2 numbers)
+
+**Kind**: instance property of [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem)  
+**Overrides**: [<code>code</code>](#module_openraildata/referencedata.CustomerInformationSystem+code)  
+**Access**: public  
+
+* * *
+
+<a name="module_openraildata/referencedata.CustomerInformationSystem+name"></a>
+
+#### customerInformationSystem.name : <code>String</code>
+the human readable name of the cis source
+
+**Kind**: instance property of [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem)  
+**Overrides**: [<code>name</code>](#module_openraildata/referencedata.CustomerInformationSystem+name)  
+**Access**: public  
+
+* * *
+
+<a name="module_openraildata/referencedata.LateRunningReason"></a>
+
+### openraildata/referencedata.LateRunningReason ⇐ [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason)
+A late running reason
+
+**Kind**: static class of [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
+**Extends**: [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason)  
+
+* [.LateRunningReason](#module_openraildata/referencedata.LateRunningReason) ⇐ [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason)
+    * [new LateRunningReason(payload)](#new_module_openraildata/referencedata.LateRunningReason_new)
+    * [.code](#module_openraildata/referencedata.LateRunningReason+code) : <code>Number</code>
+    * [.reason](#module_openraildata/referencedata.LateRunningReason+reason) : <code>String</code>
+
+
+* * *
+
+<a name="new_module_openraildata/referencedata.LateRunningReason_new"></a>
+
+#### new LateRunningReason(payload)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| payload | <code>Object</code> | the raw json object from the ftp containing the toc information |
+
+
+* * *
+
+<a name="module_openraildata/referencedata.LateRunningReason+code"></a>
+
+#### lateRunningReason.code : <code>Number</code>
+a numerical indicator for itendifying which error to display
+
+**Kind**: instance property of [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason)  
+**Overrides**: [<code>code</code>](#module_openraildata/referencedata.LateRunningReason+code)  
+**Access**: public  
+
+* * *
+
+<a name="module_openraildata/referencedata.LateRunningReason+reason"></a>
+
+#### lateRunningReason.reason : <code>String</code>
+a string description of the late running reason
+
+**Kind**: instance property of [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason)  
+**Overrides**: [<code>reason</code>](#module_openraildata/referencedata.LateRunningReason+reason)  
+**Access**: public  
+
+* * *
+
+<a name="module_openraildata/referencedata.TrainOperatingCompany"></a>
+
+### openraildata/referencedata.TrainOperatingCompany ⇐ [<code>TrainOperatingCompany</code>](#module_openraildata/referencedata.TrainOperatingCompany)
+A train operating companys information
+
+**Kind**: static class of [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
+**Extends**: [<code>TrainOperatingCompany</code>](#module_openraildata/referencedata.TrainOperatingCompany)  
+
+* [.TrainOperatingCompany](#module_openraildata/referencedata.TrainOperatingCompany) ⇐ [<code>TrainOperatingCompany</code>](#module_openraildata/referencedata.TrainOperatingCompany)
+    * [new TrainOperatingCompany(payload)](#new_module_openraildata/referencedata.TrainOperatingCompany_new)
+    * [.code](#module_openraildata/referencedata.TrainOperatingCompany+code) : <code>String</code>
+    * [.name](#module_openraildata/referencedata.TrainOperatingCompany+name) : <code>String</code>
+    * [.url](#module_openraildata/referencedata.TrainOperatingCompany+url) : <code>String</code>
+
+
+* * *
+
+<a name="new_module_openraildata/referencedata.TrainOperatingCompany_new"></a>
+
+#### new TrainOperatingCompany(payload)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| payload | <code>Object</code> | the raw json object from the ftp containing the toc information |
+
+
+* * *
+
+<a name="module_openraildata/referencedata.TrainOperatingCompany+code"></a>
+
+#### trainOperatingCompany.code : <code>String</code>
 the train operating company 2 letter code
 
-**Kind**: instance property of [<code>TOC</code>](#module_openraildata/referencedata.TOC)  
-**Overrides**: [<code>code</code>](#module_openraildata/referencedata.TOC+code)  
+**Kind**: instance property of [<code>TrainOperatingCompany</code>](#module_openraildata/referencedata.TrainOperatingCompany)  
+**Overrides**: [<code>code</code>](#module_openraildata/referencedata.TrainOperatingCompany+code)  
 **Access**: public  
 
 * * *
 
-<a name="module_openraildata/referencedata.TOC+name"></a>
+<a name="module_openraildata/referencedata.TrainOperatingCompany+name"></a>
 
-#### toC.name : <code>String</code>
+#### trainOperatingCompany.name : <code>String</code>
 the train operating company human readable name
 
-**Kind**: instance property of [<code>TOC</code>](#module_openraildata/referencedata.TOC)  
-**Overrides**: [<code>name</code>](#module_openraildata/referencedata.TOC+name)  
+**Kind**: instance property of [<code>TrainOperatingCompany</code>](#module_openraildata/referencedata.TrainOperatingCompany)  
+**Overrides**: [<code>name</code>](#module_openraildata/referencedata.TrainOperatingCompany+name)  
 **Access**: public  
 
 * * *
 
-<a name="module_openraildata/referencedata.TOC+url"></a>
+<a name="module_openraildata/referencedata.TrainOperatingCompany+url"></a>
 
-#### toC.url : <code>String</code>
+#### trainOperatingCompany.url : <code>String</code>
 the train operating companys information page which contains extra information
 including: phone numbers, fax, addresses, emails, network maps ect (Might make a parser for
 this in the future... If you want it then raise a feature request for it :)
 
-**Kind**: instance property of [<code>TOC</code>](#module_openraildata/referencedata.TOC)  
-**Overrides**: [<code>url</code>](#module_openraildata/referencedata.TOC+url)  
+**Kind**: instance property of [<code>TrainOperatingCompany</code>](#module_openraildata/referencedata.TrainOperatingCompany)  
+**Overrides**: [<code>url</code>](#module_openraildata/referencedata.TrainOperatingCompany+url)  
 **Access**: public  
 
 * * *
@@ -372,9 +498,20 @@ a class to hold all of the v3 reference data aswell as functions for accessing a
 
 * [.V3RefData](#module_openraildata/referencedata.V3RefData) ⇐ [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)
     * [new V3RefData(refData)](#new_module_openraildata/referencedata.V3RefData_new)
-    * [.timetableId](#module_openraildata/referencedata.V3RefData+timetableId) : <code>String</code>
-    * [.locations](#module_openraildata/referencedata.V3RefData+locations) : <code>Array.&lt;Object&gt;</code>
-    * [.trainOperatorCompanies](#module_openraildata/referencedata.V3RefData+trainOperatorCompanies) : <code>Array.&lt;Object&gt;</code>
+    * _instance_
+        * [.timetableId](#module_openraildata/referencedata.V3RefData+timetableId) : <code>String</code>
+        * [.locations](#module_openraildata/referencedata.V3RefData+locations) : <code>Array.&lt;Location&gt;</code>
+        * [.trainOperatorCompanies](#module_openraildata/referencedata.V3RefData+trainOperatorCompanies) : <code>Array.&lt;TrainOperatingCompany&gt;</code>
+        * [.lateRunningReasons](#module_openraildata/referencedata.V3RefData+lateRunningReasons) : <code>Array.&lt;LateRunningReason&gt;</code>
+        * [.cancellationReason](#module_openraildata/referencedata.V3RefData+cancellationReason) : <code>Array.&lt;CancellationReason&gt;</code>
+        * [.vias](#module_openraildata/referencedata.V3RefData+vias) : <code>Array.&lt;Via&gt;</code>
+        * [.CustomerInformationSystemSources](#module_openraildata/referencedata.V3RefData+CustomerInformationSystemSources) : <code>Array.&lt;CustomerInformationSystem&gt;</code>
+    * _inner_
+        * [~findLocation(input)](#module_openraildata/referencedata.V3RefData..findLocation) ⇒ <code>module:openraildata/common.Location</code>
+        * [~findTrainOperatorCompany(input)](#module_openraildata/referencedata.V3RefData..findTrainOperatorCompany) ⇒ <code>module:openraildata/referencedata.TrainOperatorCompany</code>
+        * [~findLateRunningReason(input)](#module_openraildata/referencedata.V3RefData..findLateRunningReason) ⇒ [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason)
+        * [~findVias(...input)](#module_openraildata/referencedata.V3RefData..findVias) ⇒ [<code>Array.&lt;Via&gt;</code>](#module_openraildata/referencedata.Via)
+        * [~findCustomerInformationSystem(input)](#module_openraildata/referencedata.V3RefData..findCustomerInformationSystem) ⇒ [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem)
 
 
 * * *
@@ -403,21 +540,247 @@ gets the v3 timetable Id
 
 <a name="module_openraildata/referencedata.V3RefData+locations"></a>
 
-#### v3RefData.locations : <code>Array.&lt;Object&gt;</code>
+#### v3RefData.locations : <code>Array.&lt;Location&gt;</code>
 an array of locations
 
 **Kind**: instance property of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
 **Overrides**: [<code>locations</code>](#module_openraildata/referencedata.V3RefData+locations)  
+**Read only**: true  
 
 * * *
 
 <a name="module_openraildata/referencedata.V3RefData+trainOperatorCompanies"></a>
 
-#### v3RefData.trainOperatorCompanies : <code>Array.&lt;Object&gt;</code>
+#### v3RefData.trainOperatorCompanies : <code>Array.&lt;TrainOperatingCompany&gt;</code>
 an array of train operator companies
 
 **Kind**: instance property of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
 **Overrides**: [<code>trainOperatorCompanies</code>](#module_openraildata/referencedata.V3RefData+trainOperatorCompanies)  
+**Read only**: true  
+
+* * *
+
+<a name="module_openraildata/referencedata.V3RefData+lateRunningReasons"></a>
+
+#### v3RefData.lateRunningReasons : <code>Array.&lt;LateRunningReason&gt;</code>
+an array of train late running reasons
+
+**Kind**: instance property of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
+**Overrides**: [<code>lateRunningReasons</code>](#module_openraildata/referencedata.V3RefData+lateRunningReasons)  
+
+* * *
+
+<a name="module_openraildata/referencedata.V3RefData+cancellationReason"></a>
+
+#### v3RefData.cancellationReason : <code>Array.&lt;CancellationReason&gt;</code>
+an array of train cancellation reasons
+
+**Kind**: instance property of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
+**Overrides**: [<code>cancellationReason</code>](#module_openraildata/referencedata.V3RefData+cancellationReason)  
+
+* * *
+
+<a name="module_openraildata/referencedata.V3RefData+vias"></a>
+
+#### v3RefData.vias : <code>Array.&lt;Via&gt;</code>
+an array of vias
+
+**Kind**: instance property of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
+**Overrides**: [<code>vias</code>](#module_openraildata/referencedata.V3RefData+vias)  
+
+* * *
+
+<a name="module_openraildata/referencedata.V3RefData+CustomerInformationSystemSources"></a>
+
+#### v3RefData.CustomerInformationSystemSources : <code>Array.&lt;CustomerInformationSystem&gt;</code>
+an array of CISSources
+
+**Kind**: instance property of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
+**Overrides**: [<code>CustomerInformationSystemSources</code>](#module_openraildata/referencedata.V3RefData+CustomerInformationSystemSources)  
+
+* * *
+
+<a name="module_openraildata/referencedata.V3RefData..findLocation"></a>
+
+#### V3RefData~findLocation(input) ⇒ <code>module:openraildata/common.Location</code>
+finds a location from a search input
+
+**Kind**: inner method of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
+**Returns**: <code>module:openraildata/common.Location</code> - returns a Location if found or a null if not found  
+**See**: [https://github.com/CarbonCollins/openraildata-common-nodejs/blob/master/docs/api.md#module_openraildata/common+Location](https://github.com/CarbonCollins/openraildata-common-nodejs/blob/master/docs/api.md#module_openraildata/common+Location)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| input | <code>Stirng</code> | a string containing a search parameter of wither a tiploc code or a location name |
+
+
+* * *
+
+<a name="module_openraildata/referencedata.V3RefData..findTrainOperatorCompany"></a>
+
+#### V3RefData~findTrainOperatorCompany(input) ⇒ <code>module:openraildata/referencedata.TrainOperatorCompany</code>
+finds a rain operating company from a search input
+
+**Kind**: inner method of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
+**Returns**: <code>module:openraildata/referencedata.TrainOperatorCompany</code> - returns a train operating company  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| input | <code>Stirng</code> | a string containing a search parameter for the train operating company code |
+
+
+* * *
+
+<a name="module_openraildata/referencedata.V3RefData..findLateRunningReason"></a>
+
+#### V3RefData~findLateRunningReason(input) ⇒ [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason)
+finds a late running reason from a search input
+
+**Kind**: inner method of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
+**Returns**: [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason) - returns a late operating reason  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| input | <code>Stirng</code> | a string containing a search parameter for the late running reason code |
+
+
+* * *
+
+<a name="module_openraildata/referencedata.V3RefData..findVias"></a>
+
+#### V3RefData~findVias(...input) ⇒ [<code>Array.&lt;Via&gt;</code>](#module_openraildata/referencedata.Via)
+finds a via from a search input. you can supply a single input for a list of viasassociated with that location, or supply 2-3 inputs to find a specific one
+
+**Kind**: inner method of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
+**Returns**: [<code>Array.&lt;Via&gt;</code>](#module_openraildata/referencedata.Via) - returns a cancellation reason  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ...input | <code>Stirng</code> | a string containing a search parameter for the via location name, tiploc, or crs |
+
+
+* * *
+
+<a name="module_openraildata/referencedata.V3RefData..findCustomerInformationSystem"></a>
+
+#### V3RefData~findCustomerInformationSystem(input) ⇒ [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem)
+finds a customer information system
+
+**Kind**: inner method of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
+**Returns**: [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem) - returns a Customer Information System  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| input | <code>Stirng</code> | a string containing a search parameter for the customer information system code |
+
+
+* * *
+
+<a name="module_openraildata/referencedata.Via"></a>
+
+### openraildata/referencedata.Via ⇐ [<code>Via</code>](#module_openraildata/referencedata.Via)
+A cancellation reason
+
+**Kind**: static class of [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
+**Extends**: [<code>Via</code>](#module_openraildata/referencedata.Via)  
+
+* [.Via](#module_openraildata/referencedata.Via) ⇐ [<code>Via</code>](#module_openraildata/referencedata.Via)
+    * [new Via(payload, locations)](#new_module_openraildata/referencedata.Via_new)
+    * [.at](#module_openraildata/referencedata.Via+at) : <code>String</code>
+    * [.destination](#module_openraildata/referencedata.Via+destination) : <code>String</code>
+    * [.location1](#module_openraildata/referencedata.Via+location1) : <code>String</code>
+    * [.location2](#module_openraildata/referencedata.Via+location2) : <code>String</code>
+    * [.text](#module_openraildata/referencedata.Via+text) : <code>String</code>
+
+
+* * *
+
+<a name="new_module_openraildata/referencedata.Via_new"></a>
+
+#### new Via(payload, locations)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| payload | <code>Object</code> | the raw json object from the ftp containing the toc information |
+| locations | <code>Array.&lt;Object&gt;</code> | an array of locations in which to map into the via class |
+
+
+* * *
+
+<a name="module_openraildata/referencedata.Via+at"></a>
+
+#### via.at : <code>String</code>
+at which point this via is in effect
+
+**Kind**: instance property of [<code>Via</code>](#module_openraildata/referencedata.Via)  
+**Overrides**: [<code>at</code>](#module_openraildata/referencedata.Via+at)  
+**Access**: public  
+
+* * *
+
+<a name="module_openraildata/referencedata.Via+destination"></a>
+
+#### via.destination : <code>String</code>
+at which point this via is no longer in effect
+
+**Kind**: instance property of [<code>Via</code>](#module_openraildata/referencedata.Via)  
+**Overrides**: [<code>destination</code>](#module_openraildata/referencedata.Via+destination)  
+**Access**: public  
+
+* * *
+
+<a name="module_openraildata/referencedata.Via+location1"></a>
+
+#### via.location1 : <code>String</code>
+the location for the via text
+
+**Kind**: instance property of [<code>Via</code>](#module_openraildata/referencedata.Via)  
+**Overrides**: [<code>location1</code>](#module_openraildata/referencedata.Via+location1)  
+**Access**: public  
+
+* * *
+
+<a name="module_openraildata/referencedata.Via+location2"></a>
+
+#### via.location2 : <code>String</code>
+a secondary location for the via text
+
+**Kind**: instance property of [<code>Via</code>](#module_openraildata/referencedata.Via)  
+**Overrides**: [<code>location2</code>](#module_openraildata/referencedata.Via+location2)  
+**Access**: public  
+
+* * *
+
+<a name="module_openraildata/referencedata.Via+text"></a>
+
+#### via.text : <code>String</code>
+a human readable via text to be displayed
+
+**Kind**: instance property of [<code>Via</code>](#module_openraildata/referencedata.Via)  
+**Overrides**: [<code>text</code>](#module_openraildata/referencedata.Via+text)  
+**Access**: public  
+
+* * *
+
+<a name="module_openraildata/referencedata..connect"></a>
+
+### openraildata/referencedata~connect()
+connects to the openrail data FTP server
+
+**Kind**: inner method of [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
+**Emits**: [<code>connected</code>](#module_openraildata/referencedata+event_connected), [<code>error</code>](#module_openraildata/referencedata+event_error)  
+**Access**: public  
+
+* * *
+
+<a name="module_openraildata/referencedata..checkForReferenceDataUpdate"></a>
+
+### openraildata/referencedata~checkForReferenceDataUpdate()
+checks to see if the local refdata needs to be updated
+
+**Kind**: inner method of [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
+**Emits**: [<code>error</code>](#module_openraildata/referencedata+event_error)  
+**Access**: public  
 
 * * *
 
