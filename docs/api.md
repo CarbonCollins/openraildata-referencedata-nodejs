@@ -24,8 +24,6 @@ operated through an ftp server located at datafeeds.nationalrail.co.uk.</p>
 <dl>
 <dt><a href="#AssociationMix">AssociationMix</a></dt>
 <dd></dd>
-<dt><a href="#LocationMix">LocationMix</a></dt>
-<dd></dd>
 <dt><a href="#StationMix">StationMix</a></dt>
 <dd></dd>
 <dt><a href="#TrainOrderMix">TrainOrderMix</a></dt>
@@ -52,9 +50,6 @@ operated through an ftp server located at datafeeds.nationalrail.co.uk.</p>
 ## External
 
 <dl>
-<dt><a href="#external_Location">Location</a></dt>
-<dd><p>a class for location information and functions</p>
-</dd>
 <dt><a href="#external_Schedule">Schedule</a></dt>
 <dd><p>a class for schedule information and functions</p>
 </dd>
@@ -127,6 +122,7 @@ operated through an ftp server located at datafeeds.nationalrail.co.uk.
             * [.location1](#module_openraildata/referencedata.Via+location1) : <code>String</code>
             * [.location2](#module_openraildata/referencedata.Via+location2) : <code>String</code>
             * [.text](#module_openraildata/referencedata.Via+text) : <code>String</code>
+        * [.LocationMix](#module_openraildata/referencedata.LocationMix) ⇐ <code>module:openraildata/referencedata.Location</code>
     * _inner_
         * [~connect()](#module_openraildata/referencedata..connect)
         * [~checkForReferenceDataUpdate()](#module_openraildata/referencedata..checkForReferenceDataUpdate)
@@ -762,6 +758,14 @@ a human readable via text to be displayed
 
 * * *
 
+<a name="module_openraildata/referencedata.LocationMix"></a>
+
+### openraildata/referencedata.LocationMix ⇐ <code>module:openraildata/referencedata.Location</code>
+**Kind**: static mixin of [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
+**Extends**: <code>module:openraildata/referencedata.Location</code>, <code>module:openraildata/common.Location</code>  
+
+* * *
+
 <a name="module_openraildata/referencedata..connect"></a>
 
 ### openraildata/referencedata~connect()
@@ -984,27 +988,6 @@ gets the location name of the where the association happens
 
 * * *
 
-<a name="LocationMix"></a>
-
-## LocationMix
-**Kind**: global mixin  
-
-* * *
-
-<a name="LocationMix..updateLocation"></a>
-
-### LocationMix~updateLocation(location)
-Updates the location wiht a new raw data
-
-**Kind**: inner method of [<code>LocationMix</code>](#LocationMix)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| location | <code>Object</code> | the raw location object to be parsed |
-
-
-* * *
-
 <a name="StationMix"></a>
 
 ## StationMix
@@ -1060,16 +1043,6 @@ gets the stations name from the reference data
 **Kind**: global variable  
 **Returns**: <code>String</code> - the location name  
 **Read only**: true  
-
-* * *
-
-<a name="external_Location"></a>
-
-## Location
-a class for location information and functions
-
-**Kind**: global external  
-**See**: [Location](location.md)  
 
 * * *
 
