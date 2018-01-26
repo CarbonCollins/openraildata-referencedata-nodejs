@@ -116,7 +116,7 @@ operated through an ftp server located at datafeeds.nationalrail.co.uk.
                 * [.CustomerInformationSystemSources](#module_openraildata/referencedata.V3RefData+CustomerInformationSystemSources) : [<code>Array.&lt;CustomerInformationSystem&gt;</code>](#module_openraildata/referencedata.CustomerInformationSystem)
             * _inner_
                 * [~findLocation(input)](#module_openraildata/referencedata.V3RefData..findLocation) ⇒ <code>module:openraildata/referencedata.Location</code>
-                * [~findTrainOperatorCompany(input)](#module_openraildata/referencedata.V3RefData..findTrainOperatorCompany) ⇒ <code>module:openraildata/referencedata.TrainOperatorCompany</code>
+                * [~findTrainOperatingCompany(input)](#module_openraildata/referencedata.V3RefData..findTrainOperatingCompany) ⇒ [<code>TrainOperatingCompany</code>](#module_openraildata/referencedata.TrainOperatingCompany)
                 * [~findLateRunningReason(input)](#module_openraildata/referencedata.V3RefData..findLateRunningReason) ⇒ [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason)
                 * [~findVias(...input)](#module_openraildata/referencedata.V3RefData..findVias) ⇒ [<code>Array.&lt;Via&gt;</code>](#module_openraildata/referencedata.Via)
                 * [~findCustomerInformationSystem(input)](#module_openraildata/referencedata.V3RefData..findCustomerInformationSystem) ⇒ [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem)
@@ -508,7 +508,7 @@ a class to hold all of the v3 reference data aswell as functions for accessing a
         * [.CustomerInformationSystemSources](#module_openraildata/referencedata.V3RefData+CustomerInformationSystemSources) : [<code>Array.&lt;CustomerInformationSystem&gt;</code>](#module_openraildata/referencedata.CustomerInformationSystem)
     * _inner_
         * [~findLocation(input)](#module_openraildata/referencedata.V3RefData..findLocation) ⇒ <code>module:openraildata/referencedata.Location</code>
-        * [~findTrainOperatorCompany(input)](#module_openraildata/referencedata.V3RefData..findTrainOperatorCompany) ⇒ <code>module:openraildata/referencedata.TrainOperatorCompany</code>
+        * [~findTrainOperatingCompany(input)](#module_openraildata/referencedata.V3RefData..findTrainOperatingCompany) ⇒ [<code>TrainOperatingCompany</code>](#module_openraildata/referencedata.TrainOperatingCompany)
         * [~findLateRunningReason(input)](#module_openraildata/referencedata.V3RefData..findLateRunningReason) ⇒ [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason)
         * [~findVias(...input)](#module_openraildata/referencedata.V3RefData..findVias) ⇒ [<code>Array.&lt;Via&gt;</code>](#module_openraildata/referencedata.Via)
         * [~findCustomerInformationSystem(input)](#module_openraildata/referencedata.V3RefData..findCustomerInformationSystem) ⇒ [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem)
@@ -616,13 +616,13 @@ finds a location from a search input
 
 * * *
 
-<a name="module_openraildata/referencedata.V3RefData..findTrainOperatorCompany"></a>
+<a name="module_openraildata/referencedata.V3RefData..findTrainOperatingCompany"></a>
 
-#### V3RefData~findTrainOperatorCompany(input) ⇒ <code>module:openraildata/referencedata.TrainOperatorCompany</code>
+#### V3RefData~findTrainOperatingCompany(input) ⇒ [<code>TrainOperatingCompany</code>](#module_openraildata/referencedata.TrainOperatingCompany)
 finds a rain operating company from a search input
 
 **Kind**: inner method of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
-**Returns**: <code>module:openraildata/referencedata.TrainOperatorCompany</code> - returns a train operating company  
+**Returns**: [<code>TrainOperatingCompany</code>](#module_openraildata/referencedata.TrainOperatingCompany) - returns a train operating company  
 
 | Param | Type | Description |
 | --- | --- | --- |
