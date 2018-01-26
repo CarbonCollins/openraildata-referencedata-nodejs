@@ -116,10 +116,10 @@ operated through an ftp server located at datafeeds.nationalrail.co.uk.
                 * [.CustomerInformationSystemSources](#module_openraildata/referencedata.V3RefData+CustomerInformationSystemSources) : <code>Array.&lt;CustomerInformationSystem&gt;</code>
             * _inner_
                 * [~findLocation(input)](#module_openraildata/referencedata.V3RefData..findLocation) ⇒ <code>module:openraildata/common.Location</code>
-                * [~findTrainOperatorCompany(input)](#module_openraildata/referencedata.V3RefData..findTrainOperatorCompany) ⇒ <code>module:openraildata/referencedata.TrainOperatorCompany</code>
-                * [~findLateRunningReason(input)](#module_openraildata/referencedata.V3RefData..findLateRunningReason) ⇒ [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason)
+                * [~findTrainOperatorCompany(input)](#module_openraildata/referencedata.V3RefData..findTrainOperatorCompany) ⇒ <code>TrainOperatorCompany</code>
+                * [~findLateRunningReason(input)](#module_openraildata/referencedata.V3RefData..findLateRunningReason) ⇒ <code>LateRunningReason</code>
                 * [~findVias(...input)](#module_openraildata/referencedata.V3RefData..findVias) ⇒ [<code>Array.&lt;Via&gt;</code>](#module_openraildata/referencedata.Via)
-                * [~findCustomerInformationSystem(input)](#module_openraildata/referencedata.V3RefData..findCustomerInformationSystem) ⇒ [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem)
+                * [~findCustomerInformationSystem(input)](#module_openraildata/referencedata.V3RefData..findCustomerInformationSystem) ⇒ <code>CustomerInformationSystem</code>
         * [.Via](#module_openraildata/referencedata.Via) ⇐ [<code>Via</code>](#module_openraildata/referencedata.Via)
             * [new Via(payload, locations)](#new_module_openraildata/referencedata.Via_new)
             * [.at](#module_openraildata/referencedata.Via+at) : <code>String</code>
@@ -508,10 +508,10 @@ a class to hold all of the v3 reference data aswell as functions for accessing a
         * [.CustomerInformationSystemSources](#module_openraildata/referencedata.V3RefData+CustomerInformationSystemSources) : <code>Array.&lt;CustomerInformationSystem&gt;</code>
     * _inner_
         * [~findLocation(input)](#module_openraildata/referencedata.V3RefData..findLocation) ⇒ <code>module:openraildata/common.Location</code>
-        * [~findTrainOperatorCompany(input)](#module_openraildata/referencedata.V3RefData..findTrainOperatorCompany) ⇒ <code>module:openraildata/referencedata.TrainOperatorCompany</code>
-        * [~findLateRunningReason(input)](#module_openraildata/referencedata.V3RefData..findLateRunningReason) ⇒ [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason)
+        * [~findTrainOperatorCompany(input)](#module_openraildata/referencedata.V3RefData..findTrainOperatorCompany) ⇒ <code>TrainOperatorCompany</code>
+        * [~findLateRunningReason(input)](#module_openraildata/referencedata.V3RefData..findLateRunningReason) ⇒ <code>LateRunningReason</code>
         * [~findVias(...input)](#module_openraildata/referencedata.V3RefData..findVias) ⇒ [<code>Array.&lt;Via&gt;</code>](#module_openraildata/referencedata.Via)
-        * [~findCustomerInformationSystem(input)](#module_openraildata/referencedata.V3RefData..findCustomerInformationSystem) ⇒ [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem)
+        * [~findCustomerInformationSystem(input)](#module_openraildata/referencedata.V3RefData..findCustomerInformationSystem) ⇒ <code>CustomerInformationSystem</code>
 
 
 * * *
@@ -618,11 +618,11 @@ finds a location from a search input
 
 <a name="module_openraildata/referencedata.V3RefData..findTrainOperatorCompany"></a>
 
-#### V3RefData~findTrainOperatorCompany(input) ⇒ <code>module:openraildata/referencedata.TrainOperatorCompany</code>
+#### V3RefData~findTrainOperatorCompany(input) ⇒ <code>TrainOperatorCompany</code>
 finds a rain operating company from a search input
 
 **Kind**: inner method of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
-**Returns**: <code>module:openraildata/referencedata.TrainOperatorCompany</code> - returns a train operating company  
+**Returns**: <code>TrainOperatorCompany</code> - returns a train operating company  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -633,11 +633,11 @@ finds a rain operating company from a search input
 
 <a name="module_openraildata/referencedata.V3RefData..findLateRunningReason"></a>
 
-#### V3RefData~findLateRunningReason(input) ⇒ [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason)
+#### V3RefData~findLateRunningReason(input) ⇒ <code>LateRunningReason</code>
 finds a late running reason from a search input
 
 **Kind**: inner method of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
-**Returns**: [<code>LateRunningReason</code>](#module_openraildata/referencedata.LateRunningReason) - returns a late operating reason  
+**Returns**: <code>LateRunningReason</code> - returns a late operating reason  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -663,11 +663,11 @@ finds a via from a search input. you can supply a single input for a list of via
 
 <a name="module_openraildata/referencedata.V3RefData..findCustomerInformationSystem"></a>
 
-#### V3RefData~findCustomerInformationSystem(input) ⇒ [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem)
+#### V3RefData~findCustomerInformationSystem(input) ⇒ <code>CustomerInformationSystem</code>
 finds a customer information system
 
 **Kind**: inner method of [<code>V3RefData</code>](#module_openraildata/referencedata.V3RefData)  
-**Returns**: [<code>CustomerInformationSystem</code>](#module_openraildata/referencedata.CustomerInformationSystem) - returns a Customer Information System  
+**Returns**: <code>CustomerInformationSystem</code> - returns a Customer Information System  
 
 | Param | Type | Description |
 | --- | --- | --- |
