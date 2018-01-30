@@ -19,7 +19,7 @@ operated through an ftp server located at datafeeds.nationalrail.co.uk.</p>
 ## Mixins
 
 <dl>
-<dt><a href="#AssociationMix">AssociationMix</a> ⇐ <code><a href="#external_CommonAssociation">CommonAssociation</a></code></dt>
+<dt><a href="#AssociationMix">AssociationMix</a> ⇐ <code>external:Association</code></dt>
 <dd></dd>
 <dt><a href="#StationMix">StationMix</a></dt>
 <dd></dd>
@@ -47,8 +47,8 @@ operated through an ftp server located at datafeeds.nationalrail.co.uk.</p>
 ## External
 
 <dl>
-<dt><a href="#external_CommonAssociation">CommonAssociation</a></dt>
-<dd><p>The built in string object.</p>
+<dt><a href="#external_openraildata/common">openraildata/common</a></dt>
+<dd><p>openraildata/common module</p>
 </dd>
 <dt><a href="#external_Location">Location</a></dt>
 <dd><p>The built in string object.</p>
@@ -117,11 +117,11 @@ operated through an ftp server located at datafeeds.nationalrail.co.uk.
                 * [.previousSchedules](#module_openraildata/referencedata.V8RefData+previousSchedules) : <code>Array.&lt;Schedule&gt;</code>
                 * [.associations](#module_openraildata/referencedata.V8RefData+associations) : <code>Array.&lt;Association&gt;</code>
             * _inner_
-                * [~findSchedule(input)](#module_openraildata/referencedata.V8RefData..findSchedule) ⇒ <code>Array.&lt;module:openraildata/common.Schedule&gt;</code>
+                * [~findSchedule(input)](#module_openraildata/referencedata.V8RefData..findSchedule) ⇒ <code>Array.&lt;external:openraildata/common.Schedule&gt;</code>
                 * [~updateSchedule(schedule)](#module_openraildata/referencedata.V8RefData..updateSchedule)
-                * [~findAssociation(input)](#module_openraildata/referencedata.V8RefData..findAssociation) ⇒ <code>module:openraildata/common.Association</code>
+                * [~findAssociation(input)](#module_openraildata/referencedata.V8RefData..findAssociation) ⇒ <code>external:openraildata/common.Association</code>
                 * [~runSearch([filterFunction])](#module_openraildata/referencedata.V8RefData..runSearch) ⇒ <code>module:openraildata/referencedata.JurneySearch</code>
-                * [~findPreviousJourneys(input)](#module_openraildata/referencedata.V8RefData..findPreviousJourneys) ⇒ <code>Array.&lt;module:openraildata/common.Schedule&gt;</code>
+                * [~findPreviousJourneys(input)](#module_openraildata/referencedata.V8RefData..findPreviousJourneys) ⇒ <code>Array.&lt;external:openraildata/common.Schedule&gt;</code>
         * [.Via](#module_openraildata/referencedata.Via) ⇐ [<code>Via</code>](#module_openraildata/referencedata.Via)
             * [new Via(payload, locations)](#new_module_openraildata/referencedata.Via_new)
             * [.at](#module_openraildata/referencedata.Via+at) : <code>String</code>
@@ -133,7 +133,6 @@ operated through an ftp server located at datafeeds.nationalrail.co.uk.
     * _inner_
         * [~connect()](#module_openraildata/referencedata..connect)
         * [~checkForReferenceDataUpdate()](#module_openraildata/referencedata..checkForReferenceDataUpdate)
-        * [~openraildata/common](#external_openraildata/common)
 
 
 * * *
@@ -697,11 +696,11 @@ manipulation
         * [.previousSchedules](#module_openraildata/referencedata.V8RefData+previousSchedules) : <code>Array.&lt;Schedule&gt;</code>
         * [.associations](#module_openraildata/referencedata.V8RefData+associations) : <code>Array.&lt;Association&gt;</code>
     * _inner_
-        * [~findSchedule(input)](#module_openraildata/referencedata.V8RefData..findSchedule) ⇒ <code>Array.&lt;module:openraildata/common.Schedule&gt;</code>
+        * [~findSchedule(input)](#module_openraildata/referencedata.V8RefData..findSchedule) ⇒ <code>Array.&lt;external:openraildata/common.Schedule&gt;</code>
         * [~updateSchedule(schedule)](#module_openraildata/referencedata.V8RefData..updateSchedule)
-        * [~findAssociation(input)](#module_openraildata/referencedata.V8RefData..findAssociation) ⇒ <code>module:openraildata/common.Association</code>
+        * [~findAssociation(input)](#module_openraildata/referencedata.V8RefData..findAssociation) ⇒ <code>external:openraildata/common.Association</code>
         * [~runSearch([filterFunction])](#module_openraildata/referencedata.V8RefData..runSearch) ⇒ <code>module:openraildata/referencedata.JurneySearch</code>
-        * [~findPreviousJourneys(input)](#module_openraildata/referencedata.V8RefData..findPreviousJourneys) ⇒ <code>Array.&lt;module:openraildata/common.Schedule&gt;</code>
+        * [~findPreviousJourneys(input)](#module_openraildata/referencedata.V8RefData..findPreviousJourneys) ⇒ <code>Array.&lt;external:openraildata/common.Schedule&gt;</code>
 
 
 * * *
@@ -763,11 +762,11 @@ gets an array of associations
 
 <a name="module_openraildata/referencedata.V8RefData..findSchedule"></a>
 
-#### V8RefData~findSchedule(input) ⇒ <code>Array.&lt;module:openraildata/common.Schedule&gt;</code>
+#### V8RefData~findSchedule(input) ⇒ <code>Array.&lt;external:openraildata/common.Schedule&gt;</code>
 finds a specific schedule for a given rid, uniqueId or trainId
 
 **Kind**: inner method of [<code>V8RefData</code>](#module_openraildata/referencedata.V8RefData)  
-**Returns**: <code>Array.&lt;module:openraildata/common.Schedule&gt;</code> - returns a cancellation reason  
+**Returns**: <code>Array.&lt;external:openraildata/common.Schedule&gt;</code> - returns a cancellation reason  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -785,18 +784,18 @@ Adds a new schedule or updates an existing schedule to the stored reference data
 
 | Param | Type | Description |
 | --- | --- | --- |
-| schedule | <code>module:openraildata/common.Schedule</code> | a new/updated schedule to be added to the reference data |
+| schedule | <code>external:openraildata/common.Schedule</code> | a new/updated schedule to be added to the reference data |
 
 
 * * *
 
 <a name="module_openraildata/referencedata.V8RefData..findAssociation"></a>
 
-#### V8RefData~findAssociation(input) ⇒ <code>module:openraildata/common.Association</code>
+#### V8RefData~findAssociation(input) ⇒ <code>external:openraildata/common.Association</code>
 find an association that matches a search criteria
 
 **Kind**: inner method of [<code>V8RefData</code>](#module_openraildata/referencedata.V8RefData)  
-**Returns**: <code>module:openraildata/common.Association</code> - an Association or returns a null if an association was not found  
+**Returns**: <code>external:openraildata/common.Association</code> - an Association or returns a null if an association was not found  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -822,7 +821,7 @@ starts a new search query
 
 <a name="module_openraildata/referencedata.V8RefData..findPreviousJourneys"></a>
 
-#### V8RefData~findPreviousJourneys(input) ⇒ <code>Array.&lt;module:openraildata/common.Schedule&gt;</code>
+#### V8RefData~findPreviousJourneys(input) ⇒ <code>Array.&lt;external:openraildata/common.Schedule&gt;</code>
 searches for previous journeys that contain an input
 
 **Kind**: inner method of [<code>V8RefData</code>](#module_openraildata/referencedata.V8RefData)  
@@ -924,7 +923,7 @@ a human readable via text to be displayed
 
 ### openraildata/referencedata.LocationMix ⇐ <code>module:openraildata/referencedata.Location</code>
 **Kind**: static mixin of [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
-**Extends**: <code>module:openraildata/referencedata.Location</code>, <code>module:openraildata/common.Location</code>  
+**Extends**: <code>module:openraildata/referencedata.Location</code>, <code>external:openraildata/common.Location</code>  
 
 * * *
 
@@ -947,16 +946,6 @@ checks to see if the local refdata needs to be updated
 **Kind**: inner method of [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
 **Emits**: [<code>error</code>](#module_openraildata/referencedata+event_error)  
 **Access**: public  
-
-* * *
-
-<a name="external_openraildata/common"></a>
-
-### openraildata/referencedata~openraildata/common
-some test dec
-
-**Kind**: inner external of [<code>openraildata/referencedata</code>](#module_openraildata/referencedata)  
-**See**: [https://github.com/CarbonCollins/openraildata-common-nodejs/blob/master/docs/api.md](https://github.com/CarbonCollins/openraildata-common-nodejs/blob/master/docs/api.md)  
 
 * * *
 
@@ -1125,9 +1114,9 @@ applys a filter to find results which start today only
 
 <a name="AssociationMix"></a>
 
-## AssociationMix ⇐ [<code>CommonAssociation</code>](#external_CommonAssociation)
+## AssociationMix ⇐ <code>external:Association</code>
 **Kind**: global mixin  
-**Extends**: [<code>CommonAssociation</code>](#external_CommonAssociation)  
+**Extends**: <code>external:Association</code>  
 
 * * *
 
@@ -1199,13 +1188,23 @@ gets the stations name from the reference data
 
 * * *
 
-<a name="external_CommonAssociation"></a>
+<a name="external_openraildata/common"></a>
 
-## CommonAssociation
-The built in string object.
+## openraildata/common
+openraildata/common module
 
 **Kind**: global external  
-**See**: [openraildata/common.Association](https://github.com/CarbonCollins/openraildata-common-nodejs/blob/master/docs/api.md#module_openraildata/common+Location)  
+**See**: [openraildata/common Docs](https://github.com/CarbonCollins/openraildata-common-nodejs/blob/master/docs/api.md#module_openraildata/common)  
+
+* * *
+
+<a name="external_openraildata/common.external_Association"></a>
+
+### openraildata/common.Association
+a class within the openraildata/common module
+
+**Kind**: static external of [<code>openraildata/common</code>](#external_openraildata/common)  
+**See**: [openraildata/common Docs](https://github.com/CarbonCollins/openraildata-common-nodejs/blob/master/docs/api.md#module_openraildata/common)  
 
 * * *
 

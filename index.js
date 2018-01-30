@@ -14,12 +14,6 @@ const CancellationReason = require('./lib/models/cancellationReason');
  * operated through an ftp server located at datafeeds.nationalrail.co.uk.
  */
 
-/**
- * @external openraildata/common
- * @description some test dec
- * @see {@link https://github.com/CarbonCollins/openraildata-common-nodejs/blob/master/docs/api.md}
- */
-
 module.exports = new ReferenceData();
 
 module.exports.ReferenceData = ReferenceData;
