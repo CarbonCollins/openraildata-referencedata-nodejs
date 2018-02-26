@@ -9,7 +9,7 @@
         "fs-extra": "^5.0.0",
         "ftp": "^0.3.10",
         "moment": "^2.20.1",
-        "openraildata-common": "^2.0.3",
+        "openraildata-common": "^2.1.1",
         "progress": "^2.0.0",
         "progress-stream": "^2.0.0",
         "uuid": "^3.2.1",
