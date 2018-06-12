@@ -4,11 +4,7 @@
 
 ### Fixes
 
-*Add the issue number here or remove whiuch ever is applicable*
-
-### Examples
-
-*Any examples of using a new feature or change in current API*
+*Add the issue number/s here*
 
 ### Any other information
 

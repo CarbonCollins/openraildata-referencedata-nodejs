@@ -1,13 +1,11 @@
-# openraildata-referencedata
+![](https://gitlab.com/openrail/uk/referencedata-nodejs/uploads/f7c1519da20b9d7f7eb63f17872de68a/referencedata-banner.svg)
 
-[![GitHub issues](https://img.shields.io/github/issues/CarbonCollins/openraildata-referencedata-nodejs.svg)](https://github.com/CarbonCollins/openraildata-referencedata-nodejs/issues)
-[![npm](https://img.shields.io/npm/v/openraildata-referencedata.svg)](https://www.npmjs.com/package/openraildata-referencedata)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/CarbonCollins/openraildata-referencedata-nodejs/master/LICENSE)
-[![David](https://img.shields.io/david/CarbonCollins/openraildata-referencedata-nodejs.svg)]()
-[![David](https://img.shields.io/david/dev/CarbonCollins/openraildata-referencedata-nodejs.svg)]()
-[![sheilds](https://img.shields.io/badge/status-WIP-yellow.svg)](https://img.shields.io/badge/status-WIP-yellow.svg)
-[![Known Vulnerabilities](https://snyk.io/test/github/carboncollins/openraildata-referencedata-nodejs/badge.svg)](https://snyk.io/test/github/carboncollins/openraildata-referencedata-nodejs)
-[![Maintainability](https://api.codeclimate.com/v1/badges/4b55aebafb11269451ca/maintainability)](https://codeclimate.com/github/CarbonCollins/openraildata-referencedata-nodejs/maintainability)
+[![country](https://img.shields.io/badge/country-UK-blue.svg)](https://gitlab.com/groups/openrail/uk)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)
+[![npm (scoped)](https://img.shields.io/npm/v/@openrailuk/referencedata.svg)](https://www.npmjs.com/package/@openrailuk/referencedata)
+[![status](https://img.shields.io/badge/status-WIP-yellow.svg)](https://gitlab.com/openrail/uk/referencedata-nodejs)
+[![pipeline](https://gitlab.com/openrail/uk/referencedata-nodejs/badges/master/pipeline.svg)](https://gitlab.com/openrail/uk/referencedata-nodejs/commits/master)
+[![coverage](https://gitlab.com/openrail/uk/referencedata-nodejs/badges/master/coverage.svg)](https://gitlab.com/openrail/uk/referencedata-nodejs/commits/master)
 
 A package for accessing the the UK National Rails reference data FTP server aswell as some helper functions to process and use the reference data
 

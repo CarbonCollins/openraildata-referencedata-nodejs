@@ -57,7 +57,7 @@ typings/
 # dotenv environment variables file
 .env
 
-lib/
+src/
 coverage/
 ./nyc_output/
 tests.old/
