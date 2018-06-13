@@ -1,11 +1,10 @@
 'use strict';
 
-const { Location } = require('openraildata-common');
+const { Location, Via } = require('@openraildata/common');
 
 const TrainOperatingCompany = require('./trainOperatingCompany');
 const LateRunningReason = require('./lateRunningReason');
 const CancellationReason = require('./cancellationReason');
-const Via = require('./via');
 const CustomerInformationSystem = require('./customerInformationSystem');
 
 const s_timetableID = Symbol('timetableId');

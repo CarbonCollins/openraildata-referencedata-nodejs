@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@openrailuk/common@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@openrailuk/common/-/common-3.0.1.tgz#1079b3a54ebe24889eeddba9cfe2565d7d83186c"
+"@openrailuk/common@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@openrailuk/common/-/common-3.1.1.tgz#e9afb89459cc27951c62fe9f83142fa6124d580d"
 
 align-text@^0.1.1, align-text@^0.1.3:
   version "0.1.4"
