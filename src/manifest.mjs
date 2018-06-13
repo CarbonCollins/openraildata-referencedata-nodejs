@@ -1,8 +1,9 @@
-'use strict';
+import * as path from 'path';
+import * as fs from 'fs-extra';
+import * as uuidv1 from 'uuid/v1';
 
-const path = require('path');
-const fs = require('fs-extra');
-const uuidv1 = require('uuid/v1');
+const sManifestPath = Symbol('manifest path');
+const sAppManifest = Symbol('app manifest');
 
 /**
  * @class
@@ -11,15 +12,15 @@ const uuidv1 = require('uuid/v1');
  * @augments module:openraildata/referencedata.Manifest
  * @private
  */
-class Manifest {
+export default class Manifest {
   /**
    * @constructor
    * @param {String} dir the path to the dir to store the reference data in
    * @param {Object} manifest an optional set of options to configure the class
    */
   constructor(dir, options = {}) {
-    this.manifestPath = path.resolve((dir || process.cwd()), 'manifest.json');
-    this.appManifest = options.manifest || this.loadManifestSync(false);
+    this[sManifestPath] = path.resolve((dir || process.cwd()), 'manifest.json');
+    this[sAppManifest] = options.manifest || this.loadManifestSync(false);
   }
 
   /**
@@ -194,5 +195,3 @@ class Manifest {
     return (this.appManifest.manifestId && this.appManifest.manifestId !== '') ? baseManifest : null;
   }
 }
-
-module.exports = Manifest;
