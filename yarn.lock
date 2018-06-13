@@ -83,8 +83,8 @@
     to-fast-properties "^2.0.0"
 
 "@openrailuk/common@^3.0.1":
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/@openrailuk/common/-/common-3.0.4.tgz#d80059e26b66abbd42417c458d56b052af2207a7"
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/@openrailuk/common/-/common-3.0.5.tgz#098e63fe93fa6a2ed1752a35299d2fa111bc0665"
 
 abbrev@1:
   version "1.1.1"
