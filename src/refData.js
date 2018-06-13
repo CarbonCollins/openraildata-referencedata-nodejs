@@ -1,28 +1,30 @@
-'use strict';
+import * as path from 'path';
+import * as FTPClient from 'ftp';
+import * as EventEmitter from 'events';
+import * as fs from 'fs-extra';
+import * as zlib from 'zlib';
+import { parseString } from 'xml2js';
+import { associationMixer, locationMixer, stationMixer, trainOrderMixer } from '@openrailuk/common';
 
-const path = require('path');
-const FTPClient = require('ftp');
-const EventEmitter = require('events');
-const fs = require('fs-extra');
-const zlib = require('zlib');
-const { parseString } = require('xml2js');
-const common = require('openraildata-common');
+import Manifest from './manifest';
 
-const V3 = require('./models/v3');
-const V8 = require('./models/v8');
+import V3 from './models/v3';
+import V8 from './models/v8';
+import refAssociationMixin from './models/refAssociation';
+import refLocationMixin from './models/refLocation';
+import refStationMixin from './models/refStation';
+import refTrainOrderMixin from './models/refTrainOrder';
+
+associationMixer(refAssociationMixin);
+locationMixer(refLocationMixin);
+stationMixer(refStationMixin);
+trainOrderMixer(refTrainOrderMixin);
 
 const modelConstructors = {
   v3: V3,
   v8: V8,
   default: (data) => data
 }
-
-common.associationMixer(require('./models/refAssociation'));
-common.locationMixer(require('./models/refLocation'));
-common.stationMixer(require('./models/refStation'));
-common.trainOrderMixer(require('./models/refTrainOrder'));
-
-const Manifest = require('./manifest');
 
 const defaultOptions = {
   host: 'datafeeds.nationalrail.co.uk',
@@ -129,7 +131,7 @@ function getTypeFromKeys(data) {
  * reference data files to download. it also exposes all of the events and functions.
  * @private
  */
-class ReferenceData extends EventEmitter {
+export default class ReferenceData extends EventEmitter {
   /**
    * @constructor
    * @param {Object} options optional data to configure the reference data with
@@ -391,8 +393,6 @@ class ReferenceData extends EventEmitter {
       .then(() => this.emit('update', { type: 'reference' }));
   }
 }
-
-module.exports = ReferenceData;
 
 /**
  * @event module:openraildata/referencedata#connected

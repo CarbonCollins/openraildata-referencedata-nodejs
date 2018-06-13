@@ -37,11 +37,11 @@
     "generateDocs": "gulp generateDocs"
   },
   "repository": {
-      "type": "gitlab",
-      "url": "https://gitlab.com/openrail/uk/referencedata-nodejs"
+    "type": "gitlab",
+    "url": "https://gitlab.com/openrail/uk/referencedata-nodejs"
   },
   "bugs": {
-      "url": "https://gitlab.com/openrail/uk/referencedata-nodejs/issues"
+    "url": "https://gitlab.com/openrail/uk/referencedata-nodejs/issues"
   },
   "badges": [
     "https://img.shields.io/badge/license-MIT-blue.svg",
@@ -78,7 +78,22 @@
     "zlib": "^1.0.5"
   },
   "devDependencies": {
-      "gulp": "^3.9.1",
-      "jsdoc-to-markdown": "^4.0.1"
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-rename-import": "^2.2.0",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.1.2",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-mocha": "^5.0.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.1",
+    "gulp-clean": "^0.4.0",
+    "gulp-rename": "^1.3.0",
+    "istanbul": "^0.4.5",
+    "jsdoc-to-markdown": "^4.0.1",
+    "mocha": "^5.2.0",
+    "mochawesome": "^3.0.2",
+    "nyc": "^12.0.2"
   }
 }
