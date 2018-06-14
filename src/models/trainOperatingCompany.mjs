@@ -1,14 +1,12 @@
-'use strict';
-
-const s_toc = Symbol('trainOperatingCompanyCode');
-const s_tocname = Symbol('trainOperatingCompanyName');
-const s_url = Symbol('url');
+const sTrainOperatingCompany = Symbol('trainOperatingCompany');
+const sTrainOperatingCompanyName = Symbol('trainOperatingCompanyName');
+const sURL = Symbol('url');
 
 /**
  * @class
  * @memberof module:openraildata/referencedata
  * @augments module:openraildata/referencedata.TrainOperatingCompany
- * @classdesc A train operating companys information
+ * @classdesc A train operating companies information
  */
 class TrainOperatingCompany {
   /**
@@ -16,9 +14,9 @@ class TrainOperatingCompany {
    * @param {Object} payload the raw json object from the ftp containing the toc information
    */
   constructor(payload = {}) {
-    this[s_toc] = payload.toc;
-    this[s_tocname] = payload.tocname;
-    this[s_url] = payload.url;
+    this[sTrainOperatingCompany] = payload.trainOperatingCompany;
+    this[sTrainOperatingCompanyName] = payload.trainOperatingCompanyName;
+    this[sURL] = payload.url;
   }
 
   /**
@@ -29,7 +27,7 @@ class TrainOperatingCompany {
    * @public
    */
   get code() {
-    return this[s_toc] || null;
+    return this[sTrainOperatingCompany] || null;
   }
 
   /**
@@ -40,21 +38,19 @@ class TrainOperatingCompany {
    * @public
    */
   get name() {
-    return this[s_tocname] || null;
+    return this[sTrainOperatingCompanyName] || null;
   }
 
   /**
    * @member {String} url
    * @memberof module:openraildata/referencedata.TrainOperatingCompany
-   * @description the train operating companys information page which contains extra information
+   * @description the train operating companies information page which contains extra information
    * including: phone numbers, fax, addresses, emails, network maps ect (Might make a parser for
    * this in the future... If you want it then raise a feature request for it :)
    * @instance
    * @public
    */
   get url() {
-    return this[s_url] || null;
+    return this[sURL] || null;
   }
 }
-
-module.exports = TrainOperatingCompany;

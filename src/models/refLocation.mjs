@@ -1,6 +1,4 @@
-'use strict';
-
-const refData = require('../refData');
+import referenceData from '../referenceData';
 
 /**
  * The built in string object.
@@ -8,7 +6,7 @@ const refData = require('../refData');
  * @see {@link https://github.com/CarbonCollins/openraildata-common-nodejs/blob/master/docs/api.md#module_openraildata/common+Location|Location}
  */
 
-module.exports = (SuperClass, symbols) => {
+export default (SuperClass, symbols) => {
   /**
    * @class
    * @classdesc adds functions to the location model which can only be accessed if the reference data is used
@@ -20,19 +18,22 @@ module.exports = (SuperClass, symbols) => {
   return class LocationMix extends SuperClass {
     /**
      * @method module:openraildata/referencedata.Location~updateLocation
-     * @desc Updates the location wiht a new raw data
+     * @desc Updates the location with a new raw data
      * @param {Object} location the raw location object to be parsed
      * @override
      */
     updateLocation(location) {
       if (location) {
-        const refLocation = (refData && Object.keys(location).includes('computerReservationSystem')) ? refData.v3.getLocation(location.computerReservationSystem) : null;
+        const refLocation = (referenceData && Object.keys(location).includes('computerReservationSystem'))
+          ? referenceData.v3.getLocation(location.computerReservationSystem)
+          : null;
+
         const loc = (refLocation) ? refLocation : location;
 
-        this[symbols.s_tpl] = loc.tiploc;
-        this[symbols.s_crs] = loc.computerReservationSystem;
-        this[symbols.s_toc] = loc.trainOperatingCompany;
-        this[symbols.s_locname] = loc.locationName;
+        this[symbols.get('tiploc')] = loc.tiploc;
+        this[symbols.get('computerReservationSystem')] = loc.computerReservationSystem;
+        this[symbols.get('trainOperatingCompany')] = loc.trainOperatingCompany;
+        this[symbols.get('locationName')] = loc.locationName;
       }
     }
   };

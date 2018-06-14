@@ -1,6 +1,4 @@
-'use strict';
-
-const refData = require('../refData');
+import referenceData from '../refData';
 
 /**
  * @external openraildata/common
@@ -10,35 +8,39 @@ const refData = require('../refData');
 
 /**
  * @external Association
- * @description a class within the openraildata/common module
+ * @description a class within the openrailuk/common module
  * @memberof external:openraildata/common
  * @see {@link https://github.com/CarbonCollins/openraildata-common-nodejs/blob/master/docs/api.md#module_openraildata/common|openraildata/common Docs}
  */
 
-module.exports = (SuperClass, symbols) => {
+export default (SuperClass, symbols) => {
   /**
    * @class
    * @classdesc adds functions to the association model which can only be accessed if the reference data is used
    * @mixin AssociationMix
    * @extends external:Association
    */
-   return class AssociationMix extends SuperClass {
+  return class AssociationMix extends SuperClass {
     /** 
      * @desc gets the main trains schedule (if ref data is used)
      * @returns {Schedule|null} the main trains Schedule object or a null if ref data is not used
      * @readonly
      */
     get mainTrainSchedule() { 
-      return (this[symbols.s_main]) ? refData.v8.getSchedule(this[symbols.s_main].rid) : null;
+      return (this[symbols.sMain])
+        ? referenceData.v8.getSchedule(this[symbols.get('main')].rid)
+        : null;
     }
 
     /** 
-     * @desc gets the assoc trains schedule
-     * @returns {Schedule|null} the assoc trains Schedule object or null if ref data is not used
+     * @desc gets the association trains schedule
+     * @returns {Schedule|null} the association trains Schedule object or null if ref data is not used
      * @readonly
      */
-    get assocTrainSchedule() { 
-      return (this[symbols.s_association]) ? refData.v8.getSchedule(this[symbols.s_association].rid) : null;
+    get associationTrainSchedule() { 
+      return (this[symbols.sAssociation])
+        ? referenceData.v8.getSchedule(this[symbols.get('association')].rid)
+        : null;
     }
 
     /**
@@ -47,7 +49,9 @@ module.exports = (SuperClass, symbols) => {
      * @returns {String|null} the location name of the association or null if ref data is not used
      */
     getLocation() { 
-      return (this[symbols.s_tiploc]) ? refData.v3.getLocation(this[symbols.s_tiploc]) : null;
+      return (this[symbols.sTiploc])
+        ? referenceData.v3.getLocation(this[symbols.get('tiploc')])
+        : null;
     }
   };
 }

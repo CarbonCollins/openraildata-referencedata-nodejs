@@ -1,7 +1,5 @@
-'use strict';
-
-const s_code = Symbol('code');
-const s_reason = Symbol('reason');
+const sCode = Symbol('code');
+const sReason = Symbol('reason');
 
 /**
  * @class
@@ -9,14 +7,14 @@ const s_reason = Symbol('reason');
  * @augments module:openraildata/referencedata.LateRunningReason
  * @classdesc A late running reason
  */
-class LateRunningReason {
+export default class LateRunningReason {
   /**
    * @constructor
    * @param {Object} payload the raw json object from the ftp containing the toc information
    */
   constructor(payload = {}) {
-    this[s_code] = Number(payload.code);
-    this[s_reason] = payload.reasontext || null;
+    this[sCode] = Number(payload.code);
+    this[sReason] = payload.reason || null;
   }
 
   /**
@@ -27,7 +25,7 @@ class LateRunningReason {
    * @public
    */
   get code() {
-    return this[s_code] || null;
+    return this[sCode] || null;
   }
 
   /**
@@ -38,8 +36,6 @@ class LateRunningReason {
    * @public
    */
   get reason() {
-    return this[s_reason] || null;
+    return this[sReason] || null;
   }
 }
-
-module.exports = LateRunningReason;

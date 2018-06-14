@@ -1,8 +1,6 @@
-'use strict';
+import referenceData from '../refData';
 
-const refData = require('../refData');
-
-module.exports = (SuperClass, symbols) => {
+export default (SuperClass, symbols) => {
   /**
    * @class
    * @classdesc adds functions to the station model which can only be accessed if the reference data is used
@@ -15,7 +13,7 @@ module.exports = (SuperClass, symbols) => {
      * @readonly
      */
     get name() {
-      return refData.v3.getLocation(this[symbols.s_tpl]).locationName;
+      return referenceData.v3.getLocation(this[symbols.get('tiploc')]).locationName;
     }
   };
 }

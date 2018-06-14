@@ -1,19 +1,17 @@
-'use strict';
+import { Location, Via } from '@openraildata/common';
 
-const { Location, Via } = require('@openraildata/common');
+import TrainOperatingCompany from './trainOperatingCompany';
+import LateRunningReason from './lateRunningReason';
+import CancellationReason from './cancellationReason';
+import CustomerInformationSystem from './customerInformationSystem';
 
-const TrainOperatingCompany = require('./trainOperatingCompany');
-const LateRunningReason = require('./lateRunningReason');
-const CancellationReason = require('./cancellationReason');
-const CustomerInformationSystem = require('./customerInformationSystem');
-
-const s_timetableID = Symbol('timetableId');
-const s_location = Symbol('location');
-const s_toc = Symbol('trainOperatingCompanys');
-const s_lrr = Symbol('lateRunningReasons');
-const s_cr = Symbol('cancelationReasons');
-const s_via = Symbol('vias');
-const s_ciss = Symbol('customerInformationSystemSources');
+const sTimetableId = Symbol('timetableId');
+const sLocations = Symbol('location');
+const sTrainOperatingCompanies = Symbol('trainOperatingCompanies');
+const sLateRunningReasons = Symbol('lateRunningReasons');
+const sCancellationReasons = Symbol('cancellationReasons');
+const sVias = Symbol('vias');
+const sCustomerInformationSystemSources = Symbol('customerInformationSystemSources');
 
 /**
  * @method mapArray
@@ -26,7 +24,10 @@ const s_ciss = Symbol('customerInformationSystemSources');
  */
 function mapArray(arr, Constructor, refData = null) {
   return (Array.isArray(arr) && Constructor)
-    ? arr.map(o => new Constructor(o.$ || o || {}, refData))
+    ? arr
+      .map((o) => {
+        return new Constructor(o.$ || o || {}, refData);
+      })
     : [];
 }
 
@@ -64,7 +65,7 @@ function locationIncludedInVia(input, via) {
  * @augments module:openraildata/referencedata.V3RefData
  * @classdesc a class to hold all of the v3 reference data aswell as functions for accessing and manipulating the data
  */
-class V3RefData {
+export default class V3RefData {
   /**
    * @constructor
    * @param {Object} refData the raw object contaiting the v3 data
@@ -74,13 +75,13 @@ class V3RefData {
       ? refData.PportTimetableRef
       : {};
 
-    this[s_timetableID] = (payload.$ && payload.$.timetableId) ? payload.$.timetableId : null;
-    this[s_location] = mapArray(payload.LocationRef, Location);
-    this[s_toc] = mapArray(payload.TocRef, TrainOperatingCompany);
-    this[s_lrr] = mapArray(payload.LateRunningReasons, LateRunningReason);
-    this[s_cr] = mapArray(payload.CancellationReasons, CancellationReason);
-    this[s_via] = mapArray(payload.Via, Via, this[s_location]);
-    this[s_ciss] = mapArray(payload.CISSource, CustomerInformationSystem);
+    this[sTimetableId] = (payload.$ && payload.$.timetableId) ? payload.$.timetableId : null;
+    this[sLocations] = mapArray(payload.LocationRef, Location);
+    this[sTrainOperatingCompanies] = mapArray(payload.TocRef, TrainOperatingCompany);
+    this[sLateRunningReasons] = mapArray(payload.LateRunningReasons, LateRunningReason);
+    this[sCancellationReasons] = mapArray(payload.CancellationReasons, CancellationReason);
+    this[sVias] = mapArray(payload.Via, Via, this[sLocations]);
+    this[sCustomerInformationSystemSources] = mapArray(payload.CISSource, CustomerInformationSystem);
   }
 
   /**
@@ -90,7 +91,7 @@ class V3RefData {
    * @readonly
    */
   get timetableId() {
-    return this[s_timetableID];
+    return this[sTimetableId];
   }
 
   /**
@@ -100,7 +101,7 @@ class V3RefData {
    * @readonly
    */
   get locations() {
-    return this[s_location];
+    return this[sLocations];
   }
 
   /**
@@ -110,7 +111,7 @@ class V3RefData {
    * @readonly
    */
   get trainOperatorCompanies() {
-    return this[s_toc];
+    return this[sTrainOperatingCompanies];
   }
 
   /**
@@ -119,7 +120,7 @@ class V3RefData {
    * @instance
    */
   get lateRunningReasons() {
-    return this[s_lrr];
+    return this[sLateRunningReasons];
   }
 
   /**
@@ -128,7 +129,7 @@ class V3RefData {
    * @instance
    */
   get cancellationReasons() {
-    return this[s_cr];
+    return this[sCancellationReasons];
   }
 
   /**
@@ -137,7 +138,7 @@ class V3RefData {
    * @instance
    */
   get vias() {
-    return this[s_via];
+    return this[sVias];
   }
 
   /**
@@ -146,7 +147,7 @@ class V3RefData {
    * @instance
    */
   get CustomerInformationSystemSources() {
-    return this[s_ciss];
+    return this[sCustomerInformationSystemSources];
   }
 
   /**
@@ -157,7 +158,10 @@ class V3RefData {
    * @see {@link https://github.com/CarbonCollins/openraildata-common-nodejs/blob/master/docs/api.md#module_openraildata/common+Location}
    */
   findLocation(input) { 
-    return this[s_location].find(o => (o.tiploc === `${input}` || o.locationName === `${input}` || o.computerReservationSystem === `${input}`));
+    return this[sLocations]
+      .find((o) => {
+        return (o.tiploc === `${input}` || o.locationName === `${input}` || o.computerReservationSystem === `${input}`);
+      });
   }
 
   /**
@@ -167,7 +171,10 @@ class V3RefData {
    * @returns {?module:openraildata/referencedata.TrainOperatingCompany} returns a train operating company
    */
   findTrainOperatingCompany(input) {
-    return this[s_toc].find(o => (o.code === `${input}`));
+    return this[sTrainOperatingCompanies]
+      .find((o) => {
+        return (o.code === `${input}`);
+      });
   }
 
   /**
@@ -177,17 +184,23 @@ class V3RefData {
    * @returns {?module:openraildata/referencedata.LateRunningReason} returns a late operating reason
    */
   findLateRunningReason(input) {
-    return this[s_lrr].find(o => (o.code === `${input}`));
+    return this[sLateRunningReasons]
+      .find((o) => {
+        return (o.code === `${input}`);
+      });
   }
 
   /**
    * @method module:openraildata/referencedata#V3RefData~findCancellationReason
-   * @desc finds a cancelation reason from a search input
+   * @desc finds a cancellation reason from a search input
    * @param {Stirng} input a string containing a search parameter for the cancellation reason code
    * @returns {?module:openraildata/referencedata.CancellationReason} returns a cancellation reason
    */
   findCancellationReason(input) {
-    return this[s_cr].find(o => (o.code === `${input}`));
+    return this[sCancellationReasons]
+      .find((o) => {
+        return (o.code === `${input}`);
+      });
   }
 
   /**
@@ -199,7 +212,7 @@ class V3RefData {
    * @returns {module:openraildata/referencedata.Via[]} returns a cancellation reason
    */
   findVias(...input) {
-    return this[s_via]
+    return this[sVias]
       .slice(0)
       .filter((v) => {
         return locationIncludedInVia(input, v.at);
@@ -213,8 +226,9 @@ class V3RefData {
    * @returns {?module:openraildata/referencedata.CustomerInformationSystem} returns a Customer Information System
    */
   findCustomerInformationSystem(input) {
-    return this[s_ciss].find(o => (o.code === `${input}`));
+    return this[sCustomerInformationSystemSources]
+      .find((o) => {
+        return (o.code === `${input}`);
+      });
   }
 }
-
-module.exports = V3RefData;

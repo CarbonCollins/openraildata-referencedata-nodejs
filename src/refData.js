@@ -131,7 +131,7 @@ function getTypeFromKeys(data) {
  * reference data files to download. it also exposes all of the events and functions.
  * @private
  */
-export default class ReferenceData extends EventEmitter {
+class ReferenceData extends EventEmitter {
   /**
    * @constructor
    * @param {Object} options optional data to configure the reference data with
@@ -393,6 +393,8 @@ export default class ReferenceData extends EventEmitter {
       .then(() => this.emit('update', { type: 'reference' }));
   }
 }
+
+export default new ReferenceData();
 
 /**
  * @event module:openraildata/referencedata#connected
