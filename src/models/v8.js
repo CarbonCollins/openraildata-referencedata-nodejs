@@ -1,12 +1,10 @@
-'use strict';
+import { Schedule, Association } from '@openrailuk/common';
+import StationSearch from './stationSearch';
 
-const { Schedule, Association } = require('openraildata-common');
-const JurneySearch = require('./jurneySearch');
-
-const s_timetableId = Symbol('timetableId');
-const s_schedules = Symbol('schedules');
-const s_previousSchedules = Symbol('previousSchedules');
-const s_associations = Symbol('associations');
+const sTimetableId = Symbol('timetableId');
+const sSchedules = Symbol('schedules');
+const sPreviousSchedules = Symbol('previousSchedules');
+const sAssociations = Symbol('associations');
 
 /**
  * @class
@@ -15,7 +13,7 @@ const s_associations = Symbol('associations');
  * @classdesc A class for storing V8 reference data and for attaching usefull functions for data
  * manipulation
  */
-class V8RefData {
+export default class V8RefData {
   /**
    * @constructor
    * @param {Object} refData the raw v8 ref data object
@@ -25,10 +23,11 @@ class V8RefData {
       ? refData.PportTimetable
       : {};
 
-    this[s_timetableId] = (payload.$ && payload.$.timetableId) ? payload.$.timetableId : null;
-    this[s_schedules] = (payload.Journey) ? payload.Journey.map(journey => new Schedule(journey)) : [];
-    this[s_previousSchedules] = [];
-    this[s_associations] = (payload.Association) ? payload.Association.map(assoc => new Association(assoc)) : [];
+    this[sTimetableId] = (payload.$ && payload.$.timetableId)
+      ? payload.$.timetableId : null;
+    this[sSchedules] = (payload.Journey) ? payload.Journey.map(journey => new Schedule(journey)) : [];
+    this[sPreviousSchedules] = [];
+    this[sAssociations] = (payload.Association) ? payload.Association.map(assoc => new Association(assoc)) : [];
   }
 
   /**
@@ -38,7 +37,7 @@ class V8RefData {
    * @readonly
    */
   get timetableId() {
-    return this[s_timetableId];
+    return this[sTimetableId];
   }
 
   /**
@@ -48,7 +47,7 @@ class V8RefData {
    * @readonly
    */
   get schedules() {
-    return this[s_schedules] || [];
+    return this[sSchedules] || [];
   }
 
   /**
@@ -58,7 +57,7 @@ class V8RefData {
    * @readonly
    */
   get previousSchedules() {
-    return this[s_previousSchedules] || [];
+    return this[sPreviousSchedules] || [];
   }
 
   /**
@@ -68,7 +67,7 @@ class V8RefData {
    * @readonly
    */
   get associations() {
-    return this[s_associations] || [];
+    return this[sAssociations] || [];
   }
 
   /**
@@ -78,7 +77,10 @@ class V8RefData {
    * @returns {external:openraildata/common.Schedule[]} returns a cancellation reason
    */
   findSchedule(input) {
-    return this[s_schedules].find(o => (o.rid === input || o.uniqueID === input || o.trainId === input));
+    return this[sSchedules]
+      .find((o) => {
+        return (o.rid === input || o.uniqueId === input || o.trainId === input);
+      });
   }
 
   /**
@@ -87,12 +89,13 @@ class V8RefData {
    * @param {external:openraildata/common.Schedule} schedule a new/updated schedule to be added to the reference data
    */
   updateSchedule(schedule) {
-    const existingID = this[s_schedules].findIndex(o => o.rid === schedule.rid);
+    const existingID = this[sSchedules].findIndex(o => o.rid === schedule.rid);
+
     if (existingID) {
-      this[s_previousSchedules].push(this[s_schedules][existingID]);
-      this[s_schedules][existingID] = new Schedule(schedule);
+      this[sPreviousSchedules].push(this[sSchedules][existingID]);
+      this[sSchedules][existingID] = new Schedule(schedule);
     } else {
-      this[s_schedules].push(new Schedule(schedule));
+      this[sSchedules].push(new Schedule(schedule));
     }
   }
 
@@ -103,17 +106,22 @@ class V8RefData {
    * @returns {external:openraildata/common.Association} an Association or returns a null if an association was not found
    */
   findAssociation(input) {
-    return this[s_associations].find(o => (o.mainTrainId === input || o.assocTrainId === input || o.tiploc === input));
+    return this[sAssociations]
+      .find((o) => {
+        return (o.mainTrainId === input || o.associatedTrainId === input || o.tiploc === input);
+      });
   }
 
   /**
    * @method module:openraildata/referencedata.V8RefData~runSearch
    * @description starts a new search query
    * @param {Function} [filterFunction] an optional initial search function to run before returning
-   * @returns {module:openraildata/referencedata.JurneySearch} a new JurneySearch which allows chaining of search filters
+   * @returns {module:openraildata/referencedata.StationSearch} a new JurneySearch which allows chaining of search filters
    */
   runSearch(filterFunction) {
-    return new JurneySearch((filterFunction) ? this[s_schedules].filter(filterFunction) : this[s_schedules]);
+    return new StationSearch((filterFunction)
+      ? this[sSchedules].filter(filterFunction)
+      : this[sSchedules]);
   }
 
   /**
@@ -123,8 +131,9 @@ class V8RefData {
    * @returns {external:openraildata/common.Schedule[]}
    */
   findPreviousSchedules(input) {
-    return this[s_previousSchedules].filter(o => o.rid === input);
+    return this[sPreviousSchedules]
+      .filter((o) => {
+        return o.rid === input
+      });
   }
 }
-
-module.exports = V8RefData;
