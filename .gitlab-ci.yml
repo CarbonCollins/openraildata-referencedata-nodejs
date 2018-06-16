@@ -47,6 +47,9 @@ test_ES5_Node_latest:
   image: node:latest
   dependencies:
     - "compile_ES5"
+  cache:
+    key: "${CI_COMMIT_REF_SLUG}"
+    policy: pull
   script:
     - yarn install
     - "./node_modules/.bin/nyc -x \"**/lib/es6/**/*.js\" -x \"**/src/**/*.js\" -x \"**/tests/**/*.js\" yarn test"
