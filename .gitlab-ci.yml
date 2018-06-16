@@ -14,7 +14,7 @@ compile_ES5:
   artifacts:
     paths:
       - lib/
-    expire_in: 1 week
+    expire_in: 1 day
   script:
     - yarn install
     - ./node_modules/.bin/gulp compileES5
@@ -22,7 +22,12 @@ test_ES5_Node_6:
   stage: test
   image: node:6
   dependencies:
-    - "compile_ES5"
+    - compile_ES5
+  cache:
+    key: "${CI_COMMIT_REF_SLUG}"
+    paths:
+      - node_modules/
+    policy: pull
   script:
     - yarn install
     - yarn test
@@ -30,7 +35,12 @@ test_ES5_Node_8:
   stage: test
   image: node:8
   dependencies:
-    - "compile_ES5"
+    - compile_ES5
+  cache:
+    key: "${CI_COMMIT_REF_SLUG}"
+    paths:
+      - node_modules/
+    policy: pull
   script:
     - yarn install
     - yarn test
@@ -38,7 +48,12 @@ test_ES5_Node_10:
   stage: test
   image: node:10
   dependencies:
-    - "compile_ES5"
+    - compile_ES5
+  cache:
+    key: "${CI_COMMIT_REF_SLUG}"
+    paths:
+      - node_modules/
+    policy: pull
   script:
     - yarn install
     - yarn test
@@ -46,7 +61,7 @@ test_ES5_Node_latest:
   stage: test
   image: node:latest
   dependencies:
-    - "compile_ES5"
+    - compile_ES5
   cache:
     key: "${CI_COMMIT_REF_SLUG}"
     paths:
@@ -65,12 +80,12 @@ code_coverage:
   script:
     - "./node_modules/.bin/nyc report --reporter=\"text-summary\" --reporter=\"lcov\" --reporter=\"mochawesome\""
   dependencies:
-    - "test_ES5_Node_latest"
+    - test_ES5_Node_latest
   artifacts:
     paths:
       - mochawesome-report/mochawesome.html
       - coverage/lcov-report/
-    expire_in: 1 week
+    expire_in: 1 day
   coverage: '/^Statements\s*:\s*([^%]+)/'
 code_quality:
   image: docker:latest
