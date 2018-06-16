@@ -78,6 +78,11 @@ code_coverage:
   stage: post test
   image: node:latest
   allow_failure: true
+  cache:
+    key: "${CI_COMMIT_REF_SLUG}"
+    paths:
+      - node_modules/
+    policy: pull
   script:
     - "./node_modules/.bin/nyc report --reporter=\"text-summary\" --reporter=\"lcov\" --reporter=\"mochawesome\""
   dependencies:
