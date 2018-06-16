@@ -1,17 +1,38 @@
 import { Location, Via } from '@openrailuk/common';
 
-import TrainOperatingCompany from './trainOperatingCompany';
-import LateRunningReason from './lateRunningReason';
-import CancellationReason from './cancellationReason';
-import CustomerInformationSystem from './customerInformationSystem';
+import { TrainOperatingCompany } from './trainOperatingCompany';
+import { LateRunningReason } from './lateRunningReason';
+import { CancellationReason } from './cancellationReason';
+import { CustomerInformationSystem } from './customerInformationSystem';
 
-const sTimetableId = Symbol('timetableId');
-const sLocations = Symbol('location');
-const sTrainOperatingCompanies = Symbol('trainOperatingCompanies');
-const sLateRunningReasons = Symbol('lateRunningReasons');
-const sCancellationReasons = Symbol('cancellationReasons');
-const sVias = Symbol('vias');
-const sCustomerInformationSystemSources = Symbol('customerInformationSystemSources');
+export const symbols = new Map()
+  .set('timetableId', Symbol('timetable id'))
+  .set('locations', Symbol('location'))
+  .set('trainOperatingCompanies', Symbol('train operating companies'))
+  .set('lateRunningReasons', Symbol('late running reasons'))
+  .set('cancellationReasons', Symbol('cancellation reasons'))
+  .set('vias', Symbol('vias'))
+  .set('customerInformationSystemSources', Symbol('customer information system sources'));
+
+const rawV3Map = new Map()
+  .set('tiploc', 'tpl')
+  .set('locationName', 'locname')
+  .set('computerReservationSystem', 'crs')
+  .set('reason', 'reasontext')
+  .set('destination', 'dest')
+  .set('location1', 'loc1')
+  .set('location2', 'loc2')
+  .set('text', 'viatext')
+  .set('trainOperatingCompany', 'toc')
+  .set('trainOperatingCompanyName', 'tocname');
+
+const rawV3Handler = {
+    get: (obj, prop) => {
+      return (rawV3Map.has(prop))
+        ? obj[rawV3Map.get(prop)] || obj[prop]
+        : obj[prop];
+    }
+  }
 
 /**
  * @method mapArray
@@ -26,7 +47,7 @@ function mapArray(arr, Constructor, refData = null) {
   return (Array.isArray(arr) && Constructor)
     ? arr
       .map((o) => {
-        return new Constructor(o.$ || o || {}, refData);
+        return new Constructor(new Proxy(o.$ || o || {}, rawV3Handler), refData);
       })
     : [];
 }
@@ -75,13 +96,13 @@ export default class V3RefData {
       ? refData.PportTimetableRef
       : {};
 
-    this[sTimetableId] = (payload.$ && payload.$.timetableId) ? payload.$.timetableId : null;
-    this[sLocations] = mapArray(payload.LocationRef, Location);
-    this[sTrainOperatingCompanies] = mapArray(payload.TocRef, TrainOperatingCompany);
-    this[sLateRunningReasons] = mapArray(payload.LateRunningReasons, LateRunningReason);
-    this[sCancellationReasons] = mapArray(payload.CancellationReasons, CancellationReason);
-    this[sVias] = mapArray(payload.Via, Via, this[sLocations]);
-    this[sCustomerInformationSystemSources] = mapArray(payload.CISSource, CustomerInformationSystem);
+    this[symbols.get('timetableId')] = (payload.$ && payload.$.timetableId) ? payload.$.timetableId : null;
+    this[symbols.get('locations')] = mapArray(payload.LocationRef, Location);
+    this[symbols.get('trainOperatingCompanies')] = mapArray(payload.TocRef, TrainOperatingCompany);
+    this[symbols.get('lateRunningReasons')] = mapArray(payload.LateRunningReasons, LateRunningReason);
+    this[symbols.get('cancellationReasons')] = mapArray(payload.CancellationReasons, CancellationReason);
+    this[symbols.get('vias')] = mapArray(payload.Via, Via, this[symbols.get('locations')]);
+    this[symbols.get('customerInformationSystemSources')] = mapArray(payload.CISSource, CustomerInformationSystem);
   }
 
   /**
@@ -91,7 +112,7 @@ export default class V3RefData {
    * @readonly
    */
   get timetableId() {
-    return this[sTimetableId];
+    return this[symbols.get('timetableId')];
   }
 
   /**
@@ -101,7 +122,7 @@ export default class V3RefData {
    * @readonly
    */
   get locations() {
-    return this[sLocations];
+    return this[symbols.get('locations')];
   }
 
   /**
@@ -111,7 +132,7 @@ export default class V3RefData {
    * @readonly
    */
   get trainOperatorCompanies() {
-    return this[sTrainOperatingCompanies];
+    return this[symbols.get('trainOperatingCompanies')];
   }
 
   /**
@@ -120,7 +141,7 @@ export default class V3RefData {
    * @instance
    */
   get lateRunningReasons() {
-    return this[sLateRunningReasons];
+    return this[symbols.get('lateRunningReasons')];
   }
 
   /**
@@ -129,7 +150,7 @@ export default class V3RefData {
    * @instance
    */
   get cancellationReasons() {
-    return this[sCancellationReasons];
+    return this[symbols.get('cancellationReasons')];
   }
 
   /**
@@ -138,7 +159,7 @@ export default class V3RefData {
    * @instance
    */
   get vias() {
-    return this[sVias];
+    return this[symbols.get('vias')];
   }
 
   /**
@@ -147,7 +168,7 @@ export default class V3RefData {
    * @instance
    */
   get CustomerInformationSystemSources() {
-    return this[sCustomerInformationSystemSources];
+    return this[symbols.get('customerInformationSystemSources')];
   }
 
   /**
@@ -158,7 +179,7 @@ export default class V3RefData {
    * @see {@link https://github.com/CarbonCollins/openraildata-common-nodejs/blob/master/docs/api.md#module_openraildata/common+Location}
    */
   findLocation(input) { 
-    return this[sLocations]
+    return this[symbols.get('locations')]
       .find((o) => {
         return (o.tiploc === `${input}` || o.locationName === `${input}` || o.computerReservationSystem === `${input}`);
       });
@@ -171,7 +192,7 @@ export default class V3RefData {
    * @returns {?module:openraildata/referencedata.TrainOperatingCompany} returns a train operating company
    */
   findTrainOperatingCompany(input) {
-    return this[sTrainOperatingCompanies]
+    return this[symbols.get('trainOperatingCompanies')]
       .find((o) => {
         return (o.code === `${input}`);
       });
@@ -184,7 +205,7 @@ export default class V3RefData {
    * @returns {?module:openraildata/referencedata.LateRunningReason} returns a late operating reason
    */
   findLateRunningReason(input) {
-    return this[sLateRunningReasons]
+    return this[symbols.get('lateRunningReasons')]
       .find((o) => {
         return (o.code === `${input}`);
       });
@@ -197,7 +218,7 @@ export default class V3RefData {
    * @returns {?module:openraildata/referencedata.CancellationReason} returns a cancellation reason
    */
   findCancellationReason(input) {
-    return this[sCancellationReasons]
+    return this[symbols.get('cancellationReasons')]
       .find((o) => {
         return (o.code === `${input}`);
       });
@@ -212,7 +233,7 @@ export default class V3RefData {
    * @returns {module:openraildata/referencedata.Via[]} returns a cancellation reason
    */
   findVias(...input) {
-    return this[sVias]
+    return this[symbols.get('vias')]
       .slice(0)
       .filter((v) => {
         return locationIncludedInVia(input, v.at);
@@ -226,7 +247,7 @@ export default class V3RefData {
    * @returns {?module:openraildata/referencedata.CustomerInformationSystem} returns a Customer Information System
    */
   findCustomerInformationSystem(input) {
-    return this[sCustomerInformationSystemSources]
+    return this[symbols.get('customerInformationSystemSources')]
       .find((o) => {
         return (o.code === `${input}`);
       });
