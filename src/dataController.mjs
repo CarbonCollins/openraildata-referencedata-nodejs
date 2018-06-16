@@ -411,8 +411,8 @@ export class DataController extends EventEmitter {
    */
   updateLocalReferenceData() {
     this.listFTPReferenceFiles()
-      .then((files) => { return sequentialPromise(this, this.getFTPReferenceSize, files); })
-      .then((files) => { return sequentialPromise(this, this.getFTPReferenceFile, files); })
+      .then((files) => { return sequentialPromise(this, this.getFTPFileSize, files); })
+      .then((files) => { return sequentialPromise(this, this.downloadFTPReferenceFile, files); })
       .then((files) => { return this[symbols.get('manifest')].updateFromFiles(files); })
       .then((manifest) => { return this.emit('update', { type: 'manifest', manifest }); })
       .then(() => { return this.parseReferenceData() })
@@ -450,9 +450,12 @@ export class DataController extends EventEmitter {
    * @private
    */
   parseReferenceData() {
-    const manifest = this.manifest.baseManifest || {};
+    const manifest = this[symbols.get('manifest')].baseManifest || {};
 
-    return Promise.all(Object.keys(manifest).map((key) => { return fs.readJson(manifest[key].path); }))
+    return Promise.all(Object.keys(manifest)
+      .map((key) => {
+        return fs.readJson(manifest[key].path);
+      }))
       .then((refDatas) => {
         return refDatas.map((d) => {
           return { data: d, type: getTypeFromKeys(d) };

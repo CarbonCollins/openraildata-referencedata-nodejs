@@ -63,3 +63,5 @@ coverage/
 tests.old/
 mochawesome-report/
 quality/
+reference_data/
+reference_data/manifest.json
