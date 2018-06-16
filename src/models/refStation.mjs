@@ -1,4 +1,4 @@
-import referenceData from '../refData';
+import dataController from '../dataController';
 
 export default (SuperClass, symbols) => {
   /**
@@ -13,7 +13,7 @@ export default (SuperClass, symbols) => {
      * @readonly
      */
     get name() {
-      return referenceData.v3.getLocation(this[symbols.get('tiploc')]).locationName;
+      return dataController.v3.getLocation(this[symbols.get('tiploc')]).locationName;
     }
   };
 }

@@ -1,4 +1,4 @@
-import { Location, Via } from '@openraildata/common';
+import { Location, Via } from '@openrailuk/common';
 
 import TrainOperatingCompany from './trainOperatingCompany';
 import LateRunningReason from './lateRunningReason';

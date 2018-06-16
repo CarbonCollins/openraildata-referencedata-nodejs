@@ -1,6 +1,7 @@
-const sTrainOperatingCompany = Symbol('trainOperatingCompany');
-const sTrainOperatingCompanyName = Symbol('trainOperatingCompanyName');
-const sURL = Symbol('url');
+export const symbols = new Map()
+  .set('trainOperatingCompany', Symbol('train operating company'))
+  .set('trainOperatingCompanyName', Symbol('train operating company name'))
+  .set('url', Symbol('url'));
 
 /**
  * @class
@@ -8,15 +9,15 @@ const sURL = Symbol('url');
  * @augments module:openraildata/referencedata.TrainOperatingCompany
  * @classdesc A train operating companies information
  */
-class TrainOperatingCompany {
+export class TrainOperatingCompany {
   /**
    * @constructor
    * @param {Object} payload the raw json object from the ftp containing the toc information
    */
   constructor(payload = {}) {
-    this[sTrainOperatingCompany] = payload.trainOperatingCompany;
-    this[sTrainOperatingCompanyName] = payload.trainOperatingCompanyName;
-    this[sURL] = payload.url;
+    this[symbols.get('trainOperatingCompany')] = payload.trainOperatingCompany;
+    this[symbols.get('trainOperatingCompanyName')] = payload.trainOperatingCompanyName;
+    this[symbols.get('url')] = payload.url;
   }
 
   /**
@@ -27,7 +28,7 @@ class TrainOperatingCompany {
    * @public
    */
   get code() {
-    return this[sTrainOperatingCompany] || null;
+    return this[symbols.get('trainOperatingCompany')] || null;
   }
 
   /**
@@ -38,7 +39,7 @@ class TrainOperatingCompany {
    * @public
    */
   get name() {
-    return this[sTrainOperatingCompanyName] || null;
+    return this[symbols.get('trainOperatingCompanyName')] || null;
   }
 
   /**
@@ -51,6 +52,6 @@ class TrainOperatingCompany {
    * @public
    */
   get url() {
-    return this[sURL] || null;
+    return this[symbols.get('url')] || null;
   }
 }

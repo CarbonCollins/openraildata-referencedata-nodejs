@@ -82,9 +82,9 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
-"@openrailuk/common@^3.0.1":
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/@openrailuk/common/-/common-3.0.5.tgz#098e63fe93fa6a2ed1752a35299d2fa111bc0665"
+"@openrailuk/common@^3.1.2":
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/@openrailuk/common/-/common-3.1.2.tgz#008c9bd0ee731a711c7e79c507626ff2b91bbb9f"
 
 abbrev@1:
   version "1.1.1"
@@ -99,10 +99,6 @@ acorn-jsx@^3.0.0:
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-3.0.1.tgz#afdf9488fb1ecefc8348f6fb22f464e32a58b36b"
   dependencies:
     acorn "^3.0.4"
-
-"@openrailuk/common@^3.1.1":
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/@openrailuk/common/-/common-3.1.1.tgz#e9afb89459cc27951c62fe9f83142fa6124d580d"
 
 acorn@^3.0.4:
   version "3.3.0"
@@ -668,6 +664,12 @@ babel-plugin-transform-regenerator@^6.22.0:
 babel-plugin-transform-rename-import@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-rename-import/-/babel-plugin-transform-rename-import-2.2.0.tgz#6cf6b0fbc1da7fea969851539f0544ffd635e816"
+
+babel-plugin-transform-runtime@^6.23.0:
+  version "6.23.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-runtime/-/babel-plugin-transform-runtime-6.23.0.tgz#88490d446502ea9b8e7efb0fe09ec4d99479b1ee"
+  dependencies:
+    babel-runtime "^6.22.0"
 
 babel-plugin-transform-strict-mode@^6.24.1:
   version "6.24.1"

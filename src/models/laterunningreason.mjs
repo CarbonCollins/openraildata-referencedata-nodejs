@@ -1,5 +1,6 @@
-const sCode = Symbol('code');
-const sReason = Symbol('reason');
+export const symbols = new Map()
+  .set('code', Symbol('code'))
+  .set('reason', Symbol('reason'));
 
 /**
  * @class
@@ -7,14 +8,14 @@ const sReason = Symbol('reason');
  * @augments module:openraildata/referencedata.LateRunningReason
  * @classdesc A late running reason
  */
-export default class LateRunningReason {
+export class LateRunningReason {
   /**
    * @constructor
    * @param {Object} payload the raw json object from the ftp containing the toc information
    */
   constructor(payload = {}) {
-    this[sCode] = Number(payload.code);
-    this[sReason] = payload.reason || null;
+    this[symbols.get('code')] = Number(payload.code);
+    this[symbols.get('reason')] = payload.reason || null;
   }
 
   /**
@@ -25,7 +26,7 @@ export default class LateRunningReason {
    * @public
    */
   get code() {
-    return this[sCode] || null;
+    return this[symbols.get('code')] || null;
   }
 
   /**
@@ -36,6 +37,6 @@ export default class LateRunningReason {
    * @public
    */
   get reason() {
-    return this[sReason] || null;
+    return this[symbols.get('reason')] || null;
   }
 }

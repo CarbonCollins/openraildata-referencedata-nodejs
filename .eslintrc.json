@@ -12,9 +12,21 @@
     "es6": true
   },
   "plugins": [
-    "mocha"
+    "mocha",
+    "import"
   ],
   "rules": {
-    "mocha/no-exclusive-tests": "error"
+    "mocha/no-exclusive-tests": "error",
+    "import/extensions": ["error", "always", {
+      "js": "never",
+      "mjs": "never"
+    }]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".mjs"]
+      }
+    }
   }
 }

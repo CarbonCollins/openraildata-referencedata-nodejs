@@ -1,5 +1,6 @@
-const sCode = Symbol('code');
-const sName = Symbol('name');
+export const symbols = new Map()
+  .set('code', Symbol('code'))
+  .set('name', Symbol('name'));
 
 /**
  * @class
@@ -7,14 +8,14 @@ const sName = Symbol('name');
  * @augments module:openraildata/referencedata.CustomerInformationSystem
  * @classdesc A customer information system source (CIS)
  */
-export default class CustomerInformationSystem {
+export class CustomerInformationSystem {
   /**
    * @constructor
    * @param {Object} payload the raw json object from the ftp containing the cis information
    */
   constructor(payload = {}) {
-    this[sCode] = payload.code;
-    this[sName] = payload.name;
+    this[symbols.get('code')] = payload.code;
+    this[symbols.get('name')] = payload.name;
   }
 
   /**
@@ -25,7 +26,7 @@ export default class CustomerInformationSystem {
    * @public
    */
   get code() {
-    return this[sCode] || null;
+    return this[symbols.get('code')] || null;
   }
 
   /**
@@ -36,6 +37,6 @@ export default class CustomerInformationSystem {
    * @public
    */
   get name() {
-    return this[sName] || null;
+    return this[symbols.get('name')] || null;
   }
 }

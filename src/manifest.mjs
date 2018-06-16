@@ -1,9 +1,10 @@
-import * as path from 'path';
-import * as fs from 'fs-extra';
-import * as uuidv1 from 'uuid/v1';
+import path from 'path';
+import fs from 'fs-extra';
+import uuidv1 from 'uuid/v1';
 
-const sManifestPath = Symbol('manifest path');
-const sAppManifest = Symbol('app manifest');
+export const symbols = new Map()
+  .set('manifestPath', Symbol('manifest path'))
+  .set('appManifest', Symbol('app manifest'));
 
 /**
  * @class
@@ -12,15 +13,15 @@ const sAppManifest = Symbol('app manifest');
  * @augments module:openraildata/referencedata.Manifest
  * @private
  */
-export default class Manifest {
+export class Manifest {
   /**
    * @constructor
    * @param {String} dir the path to the dir to store the reference data in
    * @param {Object} manifest an optional set of options to configure the class
    */
   constructor(dir, options = {}) {
-    this[sManifestPath] = path.resolve((dir || process.cwd()), 'manifest.json');
-    this[sAppManifest] = options.manifest || this.loadManifestSync(false);
+    this[symbols.get('manifestPath')] = path.resolve((dir || process.cwd()), 'manifest.json');
+    this[symbols.get('appManifest')] = options.manifest || this.loadManifestSync(false);
   }
 
   /**
@@ -31,15 +32,15 @@ export default class Manifest {
    * @private
    */
   loadManifest(autoLoad = true) {
-    return fs.ensureDir(path.dirname(this.manifestPath))
+    return fs.ensureDir(path.dirname(this[symbols.get('manifestPath')]))
       .then(() => {
-        return fs.ensureFile(this.manifestPath);
+        return fs.ensureFile(this[symbols.get('manifestPath')]);
       })
       .then(() => {
-        return fs.access(this.manifestPath, fs.constants.R_OK | fs.constants.W_OK)
+        return fs.access(this[symbols.get('manifestPath')], fs.constants.R_OK | fs.constants.W_OK)
       })
       .then(() => {
-        return fs.readJson(this.manifestPath, { throws: false });
+        return fs.readJson(this[symbols.get('manifestPath')], { throws: false });
       })
       .then((manifestJson = {}) => {
         return this.updateManifest(manifestJson, autoLoad);
@@ -54,10 +55,10 @@ export default class Manifest {
    * @private
    */
   loadManifestSync(autoLoad = true) {
-    fs.ensureDirSync(path.dirname(this.manifestPath));
-    fs.ensureFileSync(this.manifestPath);
-    fs.accessSync(this.manifestPath, fs.constants.R_OK | fs.constants.W_OK);
-    const manifestJson = fs.readJsonSync(this.manifestPath, { throws: false }) || {};
+    fs.ensureDirSync(path.dirname(this[symbols.get('manifestPath')]));
+    fs.ensureFileSync(this[symbols.get('manifestPath')]);
+    fs.accessSync(this[symbols.get('manifestPath')], fs.constants.R_OK | fs.constants.W_OK);
+    const manifestJson = fs.readJsonSync(this[symbols.get('manifestPath')], { throws: false }) || {};
     return this.updateManifestSync(manifestJson, autoLoad);
   }
 
@@ -68,9 +69,9 @@ export default class Manifest {
    * @private
    */
   saveManifest() {
-    return fs.ensureFile(this.manifestPath)
+    return fs.ensureFile(this[symbols.get('manifestPath')])
       .then(() => {
-        return fs.writeJson(this.manifestPath, this.appManifest);
+        return fs.writeJson(this[symbols.get('manifestPath')], this[symbols.get('appManifest')]);
       });
   }
 
@@ -81,9 +82,9 @@ export default class Manifest {
    * @private
    */
   saveManifestSync() {
-    fs.ensureFileSync(this.manifestPath);
-    fs.writeJsonSync(this.manifestPath, this.appManifest);
-    return this.appManifest;
+    fs.ensureFileSync(this[symbols.get('manifestPath')]);
+    fs.writeJsonSync(this[symbols.get('manifestPath')], this[symbols.get('appManifest')]);
+    return this[symbols.get('appManifest')];
   }
 
   /**
@@ -97,10 +98,10 @@ export default class Manifest {
   updateManifest(manifestJson = {}, autoLoad = true) {
     const newManifest = (manifestJson.manifestId)
       ? manifestJson
-      : this.appManifest || {};
+      : this[symbols.get('appManifest')] || {};
 
     if (autoLoad) {
-      this.appManifest = newManifest;
+      this[symbols.get('appManifest')] = newManifest;
 
       return this.saveManifest(newManifest);
     }
@@ -119,10 +120,10 @@ export default class Manifest {
   updateManifestSync(manifestJson = {}, autoLoad = true) {
     const newManifest = (manifestJson.manifestId)
       ? manifestJson
-      : this.appManifest || {};
+      : this[symbols.get('appManifest')] || {};
 
     if (autoLoad) {
-      this.appManifest = newManifest;
+      this[symbols.get('appManifest')] = newManifest;
       this.saveManifestSync(newManifest);
     }
 
@@ -149,7 +150,7 @@ export default class Manifest {
     }
 
     return this.updateManifest(newManifest)
-      .then(() => this.appManifest);
+      .then(() => this[symbols.get('appManifest')]);
   }
 
   /**
@@ -160,11 +161,11 @@ export default class Manifest {
    * @public
    */
   get manifestId() {
-    return this.appManifest.manifestId || null;
+    return this[symbols.get('appManifest')].manifestId || null;
   }
 
   get allTimetableIds() {
-    return Object.keys(this.appManifest || {})
+    return Object.keys(this[symbols.get('appManifest')] || {})
       .filter(key => key !== 'manifestId')
       .reduce((refNames, refName) => Object.assign(refNames, { [refName]: this.getTimetableId(refName) }), {});
   }
@@ -177,8 +178,8 @@ export default class Manifest {
    * @public
    */
   getTimetableId(type) {
-    return (this.appManifest[type])
-      ? this.appManifest[type].timetableId || null
+    return (this[symbols.get('appManifest')][type])
+      ? this[symbols.get('appManifest')][type].timetableId || null
       : null;
   }
 
@@ -190,8 +191,8 @@ export default class Manifest {
    * @public
    */
   get baseManifest() {
-    const baseManifest = Object.assign({}, this.appManifest);
+    const baseManifest = Object.assign({}, this[symbols.get('appManifest')]);
     delete baseManifest.manifestId;
-    return (this.appManifest.manifestId && this.appManifest.manifestId !== '') ? baseManifest : null;
+    return (this[symbols.get('appManifest')].manifestId && this[symbols.get('appManifest')].manifestId !== '') ? baseManifest : null;
   }
 }

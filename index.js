@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./lib/es5/referencedata');
+module.exports = require('./lib/es5/referenceData');

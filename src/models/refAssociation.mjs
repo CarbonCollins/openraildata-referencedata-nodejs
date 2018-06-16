@@ -1,4 +1,4 @@
-import referenceData from '../refData';
+import dataController from '../dataController';
 
 /**
  * @external openraildata/common
@@ -28,7 +28,7 @@ export default (SuperClass, symbols) => {
      */
     get mainTrainSchedule() { 
       return (this[symbols.sMain])
-        ? referenceData.v8.getSchedule(this[symbols.get('main')].rid)
+        ? dataController.v8.getSchedule(this[symbols.get('main')].rid)
         : null;
     }
 
@@ -39,7 +39,7 @@ export default (SuperClass, symbols) => {
      */
     get associationTrainSchedule() { 
       return (this[symbols.sAssociation])
-        ? referenceData.v8.getSchedule(this[symbols.get('association')].rid)
+        ? dataController.v8.getSchedule(this[symbols.get('association')].rid)
         : null;
     }
 
@@ -50,7 +50,7 @@ export default (SuperClass, symbols) => {
      */
     getLocation() { 
       return (this[symbols.sTiploc])
-        ? referenceData.v3.getLocation(this[symbols.get('tiploc')])
+        ? dataController.v3.getLocation(this[symbols.get('tiploc')])
         : null;
     }
   };

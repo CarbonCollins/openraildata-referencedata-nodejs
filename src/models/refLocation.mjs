@@ -1,4 +1,4 @@
-import referenceData from '../referenceData';
+import dataController from '../dataController';
 
 /**
  * The built in string object.
@@ -24,8 +24,8 @@ export default (SuperClass, symbols) => {
      */
     updateLocation(location) {
       if (location) {
-        const refLocation = (referenceData && Object.keys(location).includes('computerReservationSystem'))
-          ? referenceData.v3.getLocation(location.computerReservationSystem)
+        const refLocation = (dataController && Object.keys(location).includes('computerReservationSystem'))
+          ? dataController.v3.getLocation(location.computerReservationSystem)
           : null;
 
         const loc = (refLocation) ? refLocation : location;

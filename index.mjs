@@ -1,1 +1,3 @@
-export * from './lib/es6/referencedata';
+import * as module from './lib/es6/referenceData';
+
+export default module;
