@@ -89,7 +89,6 @@ code_coverage:
     - test_ES5_Node_latest
   artifacts:
     paths:
-      - mochawesome-report/mochawesome.html
       - coverage/lcov-report/
     expire_in: 1 day
   coverage: '/^Statements\s*:\s*([^%]+)/'
