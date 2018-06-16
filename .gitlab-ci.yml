@@ -23,11 +23,6 @@ test_ES5_Node_6:
   image: node:6
   dependencies:
     - "compile_ES5"
-  cache:
-    key: "${CI_COMMIT_REF_SLUG}"
-    paths:
-      - node_modules/
-    policy: pull
   script:
     - yarn install
     - yarn test
@@ -36,11 +31,6 @@ test_ES5_Node_8:
   image: node:8
   dependencies:
     - "compile_ES5"
-  cache:
-    key: "${CI_COMMIT_REF_SLUG}"
-    paths:
-      - node_modules/
-    policy: pull
   script:
     - yarn install
     - yarn test
@@ -49,11 +39,6 @@ test_ES5_Node_10:
   image: node:10
   dependencies:
     - "compile_ES5"
-  cache:
-    key: "${CI_COMMIT_REF_SLUG}"
-    paths:
-      - node_modules/
-    policy: pull
   script:
     - yarn install
     - yarn test
@@ -62,11 +47,6 @@ test_ES5_Node_latest:
   image: node:latest
   dependencies:
     - "compile_ES5"
-  cache:
-    key: "${CI_COMMIT_REF_SLUG}"
-    paths:
-      - node_modules/
-    policy: pull
   script:
     - yarn install
     - "./node_modules/.bin/nyc -x \"**/lib/es6/**/*.js\" -x \"**/src/**/*.js\" -x \"**/tests/**/*.js\" yarn test"
