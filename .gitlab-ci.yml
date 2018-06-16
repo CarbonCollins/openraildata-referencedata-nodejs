@@ -29,6 +29,7 @@ test_ES5_Node_6:
       - node_modules/
     policy: pull
   script:
+    - yarn install
     - yarn test
 test_ES5_Node_8:
   stage: test
@@ -41,6 +42,7 @@ test_ES5_Node_8:
       - node_modules/
     policy: pull
   script:
+    - yarn install
     - yarn test
 test_ES5_Node_10:
   stage: test
@@ -53,6 +55,7 @@ test_ES5_Node_10:
       - node_modules/
     policy: pull
   script:
+    - yarn install
     - yarn test
 test_ES5_Node_latest:
   stage: test
@@ -65,6 +68,7 @@ test_ES5_Node_latest:
       - node_modules/
     policy: pull
   script:
+    - yarn install
     - "./node_modules/.bin/nyc -x \"**/lib/es6/**/*.js\" -x \"**/src/**/*.js\" -x \"**/tests/**/*.js\" yarn test"
   artifacts:
     paths:
