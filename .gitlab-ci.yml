@@ -14,8 +14,6 @@ stages:
   - deploy
 install dependencies:
   stage: prepare
-    paths:
-    - node_modules/
   script:
     - yarn install
 compile ES5:
