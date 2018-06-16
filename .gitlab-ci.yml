@@ -9,7 +9,7 @@ compile_ES5:
   cache:
     key: "${CI_COMMIT_REF_SLUG}"
     paths:
-    - node_modules/
+      - node_modules/
     policy: pull-push
   artifacts:
     paths:
@@ -49,6 +49,8 @@ test_ES5_Node_latest:
     - "compile_ES5"
   cache:
     key: "${CI_COMMIT_REF_SLUG}"
+    paths:
+      - node_modules/
     policy: pull
   script:
     - yarn install
