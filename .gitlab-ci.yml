@@ -84,7 +84,7 @@ code_coverage:
       - node_modules/
     policy: pull
   script:
-    - "./node_modules/.bin/nyc report --reporter=\"text-summary\" --reporter=\"lcov\" --reporter=\"mochawesome\""
+    - "./node_modules/.bin/nyc report --reporter=\"text-summary\" --reporter=\"lcov\""
   dependencies:
     - test_ES5_Node_latest
   artifacts:
