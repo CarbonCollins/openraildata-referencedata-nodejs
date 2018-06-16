@@ -13,9 +13,10 @@ compile_ES5:
   artifacts:
     paths:
       - lib/
+    expire_in: 1 week
   script:
     - yarn install
-    - ./node_modules/.bin/gulp compile
+    - ./node_modules/.bin/gulp compileES5
 test_ES5_Node_6:
   stage: test
   image: node:6
@@ -59,6 +60,7 @@ code_coverage:
     paths:
       - mochawesome-report/mochawesome.html
       - coverage/lcov-report/
+    expire_in: 1 week
   coverage: '/^Statements\s*:\s*([^%]+)/'
 code_quality:
   image: docker:latest
