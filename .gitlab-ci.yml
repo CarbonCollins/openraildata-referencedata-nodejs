@@ -7,7 +7,7 @@ stages:
 compile_ES5:
   stage: compile
   cache:
-    key: ${CI_COMMIT_REF_SLUG}
+    key: "${CI_COMMIT_REF_SLUG}"
     paths:
     - node_modules/
     policy: pull-push
@@ -24,7 +24,7 @@ test_ES5_Node_6:
   dependencies:
     - "compile_ES5"
   cache:
-    key: ${CI_COMMIT_REF_SLUG}
+    key: "${CI_COMMIT_REF_SLUG}"
     paths:
       - node_modules/
     policy: pull
@@ -36,7 +36,7 @@ test_ES5_Node_8:
   dependencies:
     - "compile_ES5"
   cache:
-    key: ${CI_COMMIT_REF_SLUG}
+    key: "${CI_COMMIT_REF_SLUG}"
     paths:
       - node_modules/
     policy: pull
@@ -48,7 +48,7 @@ test_ES5_Node_10:
   dependencies:
     - "compile_ES5"
   cache:
-    key: ${CI_COMMIT_REF_SLUG}
+    key: "${CI_COMMIT_REF_SLUG}"
     paths:
       - node_modules/
     policy: pull
@@ -60,7 +60,7 @@ test_ES5_Node_latest:
   dependencies:
     - "compile_ES5"
   cache:
-    key: ${CI_COMMIT_REF_SLUG}
+    key: "${CI_COMMIT_REF_SLUG}"
     paths:
       - node_modules/
     policy: pull
