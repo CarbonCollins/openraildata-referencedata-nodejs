@@ -12,9 +12,10 @@ compile_ES5:
       - node_modules/
     policy: pull-push
   artifacts:
+    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
     paths:
       - lib/
-    expire_in: 1 day
+    expire_in: 1 hour
   script:
     - yarn install
     - ./node_modules/.bin/gulp compileES5
