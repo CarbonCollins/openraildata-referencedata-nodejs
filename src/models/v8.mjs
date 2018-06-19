@@ -1,10 +1,66 @@
-import { Schedule, Association } from '@openrailuk/common';
+import { Schedule, Association, Station } from '@openrailuk/common';
 import StationSearch from './stationSearch';
 
-const sTimetableId = Symbol('timetableId');
-const sSchedules = Symbol('schedules');
-const sPreviousSchedules = Symbol('previousSchedules');
-const sAssociations = Symbol('associations');
+export const symbols = new Map()
+  .set('timetableId', Symbol('timetableId'))
+  .set('schedules', Symbol('schedules'))
+  .set('previousSchedules', Symbol('previous schedules'))
+  .set('associations', Symbol('associations'));
+
+const rawV8Map = new Map()
+  .set('uniqueId', 'uid')
+  .set('serviceStartingDate', 'ssd')
+  .set('trainOperatingCompany', 'toc')
+  .set('origin', 'OR')
+  .set('operationalOrigin', 'OPOR')
+  .set('destination', 'DT')
+  .set('operationalDestination', 'OPDT')
+  .set('passingPoints', 'PP')
+  .set('intermediatePoints', 'IP')
+  .set('operationalIntermediatePoints', 'OPIP')
+  .set('category', 'trainCat')
+  .set('qTrain', 'qtrain')
+  .set('passengerService', 'isPassengerSvc');
+
+const rawLocationMap = new Map()
+  .set('tiploc', 'tpl')
+  .set('action', 'act')
+  .set('platform', 'plat')
+  .set('workingTimeOfArrival', 'wta')
+  .set('workingTimeOfADestination', 'wtd')
+  .set('plannedTimeOfArrival', 'pta')
+  .set('plannedTimeOfADestination', 'ptd')
+  .set('platform', 'plat');
+
+const rawV8Handler = {
+  get: (obj, prop) => {
+    if (rawV8Map.has(prop)) {
+      if (Array.isArray(obj[rawV8Map.get(prop)])) {
+        if (['origin', 'destination', 'operationalOrigin', 'operationalDestination'].includes(prop)) {
+          return new Station(new Proxy(obj[rawV8Map.get(prop)][0].$ || obj[rawV8Map.get(prop)][0], rawLocHandler));
+        } else if (['passingPoints', 'intermediatePoints', 'operationalIntermediatePoints'].includes(prop)) {
+          return obj[rawV8Map.get(prop)]
+            .map((item) => {
+              // return item.$ || item;
+              return new Station(new Proxy(item.$ || item, rawLocHandler));
+            });
+        }
+        return obj[rawV8Map.get(prop)][0].$ || obj[rawV8Map.get(prop)][0];
+      }
+      return obj[rawV8Map.get(prop)]
+    }
+    return obj[prop]
+  }
+}
+
+const rawLocHandler = {
+  get: (obj, prop) => {
+    if (rawLocationMap.has(prop)) {
+      return obj[rawLocationMap.get(prop)]
+    }
+    return obj[prop]
+  }
+}
 
 /**
  * @class
@@ -13,7 +69,7 @@ const sAssociations = Symbol('associations');
  * @classdesc A class for storing V8 reference data and for attaching usefull functions for data
  * manipulation
  */
-export default class V8RefData {
+export class V8 {
   /**
    * @constructor
    * @param {Object} refData the raw v8 ref data object
@@ -23,11 +79,21 @@ export default class V8RefData {
       ? refData.PportTimetable
       : {};
 
-    this[sTimetableId] = (payload.$ && payload.$.timetableId)
+    this[symbols.get('timetableId')] = (payload.$ && payload.$.timetableId)
       ? payload.$.timetableId : null;
-    this[sSchedules] = (payload.Journey) ? payload.Journey.map(journey => new Schedule(journey)) : [];
-    this[sPreviousSchedules] = [];
-    this[sAssociations] = (payload.Association) ? payload.Association.map(assoc => new Association(assoc)) : [];
+    this[symbols.get('schedules')] = (payload.Journey)
+      ? payload.Journey
+        .map((journey) => {
+          return new Schedule(new Proxy(journey, rawV8Handler));
+        })
+      : [];
+    this[symbols.get('previousSchedules')] = [];
+    this[symbols.get('associations')] = (payload.Association)
+      ? payload.Association
+        .map((assoc) => {
+          return new Association(new Proxy(assoc, rawV8Handler));
+        })
+      : [];
   }
 
   /**
@@ -37,7 +103,7 @@ export default class V8RefData {
    * @readonly
    */
   get timetableId() {
-    return this[sTimetableId];
+    return this[symbols.get('timetableId')];
   }
 
   /**
@@ -47,7 +113,7 @@ export default class V8RefData {
    * @readonly
    */
   get schedules() {
-    return this[sSchedules] || [];
+    return this[symbols.get('schedules')] || [];
   }
 
   /**
@@ -57,7 +123,7 @@ export default class V8RefData {
    * @readonly
    */
   get previousSchedules() {
-    return this[sPreviousSchedules] || [];
+    return this[symbols.get('previousSchedules')] || [];
   }
 
   /**
@@ -67,7 +133,7 @@ export default class V8RefData {
    * @readonly
    */
   get associations() {
-    return this[sAssociations] || [];
+    return this[symbols.get('associations')] || [];
   }
 
   /**
@@ -77,7 +143,7 @@ export default class V8RefData {
    * @returns {external:openraildata/common.Schedule[]} returns a cancellation reason
    */
   findSchedule(input) {
-    return this[sSchedules]
+    return this[symbols.get('schedules')]
       .find((o) => {
         return (o.rid === input || o.uniqueId === input || o.trainId === input);
       });
@@ -89,13 +155,13 @@ export default class V8RefData {
    * @param {external:openraildata/common.Schedule} schedule a new/updated schedule to be added to the reference data
    */
   updateSchedule(schedule) {
-    const existingID = this[sSchedules].findIndex(o => o.rid === schedule.rid);
+    const existingID = this[symbols.get('schedules')].findIndex(o => o.rid === schedule.rid);
 
     if (existingID) {
-      this[sPreviousSchedules].push(this[sSchedules][existingID]);
-      this[sSchedules][existingID] = new Schedule(schedule);
+      this[symbols.get('previousSchedules')].push(this[symbols.get('schedules')][existingID]);
+      this[symbols.get('schedules')][existingID] = new Schedule(schedule);
     } else {
-      this[sSchedules].push(new Schedule(schedule));
+      this[symbols.get('schedules')].push(new Schedule(schedule));
     }
   }
 
@@ -106,7 +172,7 @@ export default class V8RefData {
    * @returns {external:openraildata/common.Association} an Association or returns a null if an association was not found
    */
   findAssociation(input) {
-    return this[sAssociations]
+    return this[symbols.get('associations')]
       .find((o) => {
         return (o.mainTrainId === input || o.associatedTrainId === input || o.tiploc === input);
       });
@@ -120,8 +186,8 @@ export default class V8RefData {
    */
   runSearch(filterFunction) {
     return new StationSearch((filterFunction)
-      ? this[sSchedules].filter(filterFunction)
-      : this[sSchedules]);
+      ? this[symbols.get('schedules')].filter(filterFunction)
+      : this[symbols.get('schedules')]);
   }
 
   /**
@@ -131,7 +197,7 @@ export default class V8RefData {
    * @returns {external:openraildata/common.Schedule[]}
    */
   findPreviousSchedules(input) {
-    return this[sPreviousSchedules]
+    return this[symbols.get('previousSchedules')]
       .filter((o) => {
         return o.rid === input
       });

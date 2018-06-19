@@ -15,7 +15,7 @@ import refTrainOrderMixin from './models/refTrainOrder';
 import * as dataController from './dataController';
 
 associationMixer(refAssociationMixin);
-locationMixer(refLocationMixin);
+// locationMixer(refLocationMixin);
 stationMixer(refStationMixin);
 trainOrderMixer(refTrainOrderMixin);
 

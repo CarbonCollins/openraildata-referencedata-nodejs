@@ -3,12 +3,12 @@ import FTPClient from 'ftp';
 import EventEmitter from 'events';
 import fs from 'fs-extra';
 import zlib from 'zlib';
-import { parseString } from 'xml2js';
+import xml2js from 'xml2js';
 
 import { Manifest } from './manifest';
 
-import V3 from './models/v3';
-import V8 from './models/v8';
+import { V3 } from './models/v3';
+import { V8 } from './models/v8';
 
 const modelConstructors = {
   v3: V3,
@@ -237,7 +237,7 @@ export class DataController extends EventEmitter {
 
           gz.on('data', (data) => { buffer.push(data); });
           gz.on('end', () => {
-            promisify(this, parseString, buffer.join(''), parserOptions)
+            promisify(this, xml2js.parseString, buffer.join(''), parserOptions)
               .then((result) => {
                 return fs.writeJson(downloadInfo.filePath, result);
               })
@@ -395,11 +395,17 @@ export class DataController extends EventEmitter {
             ? this.updateLocalReferenceData()
             : null;
         })
+        .then(() => {
+          return this.emit('dataReady');
+        })
         .catch((err) => {
           return this.emit('error', err);
         });
     } else {
-      this.updateLocalReferenceData();
+      return this.updateLocalReferenceData()
+        .then(() => {
+          return this.emit('dataReady');
+        })
     }
   }
 
@@ -410,13 +416,14 @@ export class DataController extends EventEmitter {
    * @fires #event:update
    */
   updateLocalReferenceData() {
-    this.listFTPReferenceFiles()
+    return this.listFTPReferenceFiles()
       .then((files) => { return sequentialPromise(this, this.getFTPFileSize, files); })
       .then((files) => { return sequentialPromise(this, this.downloadFTPReferenceFile, files); })
       .then((files) => { return this[symbols.get('manifest')].updateFromFiles(files); })
       .then((manifest) => { return this.emit('update', { type: 'manifest', manifest }); })
       .then(() => { return this.parseReferenceData() })
-      .then(() => { return this.cleanLocalReferenceData() });
+      .then(() => { return this.cleanLocalReferenceData() })
+      // .then(() => { return this.emit('dataReady'); });
   }
 
   /**

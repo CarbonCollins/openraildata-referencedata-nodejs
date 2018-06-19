@@ -1,4 +1,4 @@
-import dataController from '../dataController';
+import { referenceData } from '../referenceData';
 
 /**
  * The built in string object.
@@ -15,7 +15,7 @@ export default (SuperClass, symbols) => {
    * @extends external:openraildata/common.Location
    * @mixin LocationMix
    */
-  return class LocationMix extends SuperClass {
+  return class Location extends SuperClass {
     /**
      * @method module:openraildata/referencedata.Location~updateLocation
      * @desc Updates the location with a new raw data
@@ -24,8 +24,8 @@ export default (SuperClass, symbols) => {
      */
     updateLocation(location) {
       if (location) {
-        const refLocation = (dataController && Object.keys(location).includes('computerReservationSystem'))
-          ? dataController.v3.getLocation(location.computerReservationSystem)
+        const refLocation = (referenceData && Object.keys(location).includes('computerReservationSystem'))
+          ? referenceData.v3.getLocation(location.computerReservationSystem)
           : null;
 
         const loc = (refLocation) ? refLocation : location;

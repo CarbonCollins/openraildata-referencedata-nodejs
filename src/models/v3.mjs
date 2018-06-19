@@ -27,12 +27,12 @@ const rawV3Map = new Map()
   .set('trainOperatingCompanyName', 'tocname');
 
 const rawV3Handler = {
-    get: (obj, prop) => {
-      return (rawV3Map.has(prop))
-        ? obj[rawV3Map.get(prop)] || obj[prop]
-        : obj[prop];
-    }
+  get: (obj, prop) => {
+    return (rawV3Map.has(prop))
+      ? obj[rawV3Map.get(prop)] || obj[prop]
+      : obj[prop];
   }
+}
 
 /**
  * @method mapArray
@@ -86,7 +86,7 @@ function locationIncludedInVia(input, via) {
  * @augments module:openraildata/referencedata.V3RefData
  * @classdesc a class to hold all of the v3 reference data aswell as functions for accessing and manipulating the data
  */
-export default class V3RefData {
+export class V3 {
   /**
    * @constructor
    * @param {Object} refData the raw object contaiting the v3 data

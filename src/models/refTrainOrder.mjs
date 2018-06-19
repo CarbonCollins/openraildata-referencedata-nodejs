@@ -1,4 +1,4 @@
-import dataController from '../dataController';
+import { referenceData } from '../referenceData';
 
 export default (SuperClass, symbols) => {
   /**
@@ -6,14 +6,14 @@ export default (SuperClass, symbols) => {
    * @classdesc adds functions to the TrainOrder model which can only be accessed if the reference data is used
    * @mixin TrainOrderMix
    */
-  return class TrainOrderMix extends SuperClass {
+  return class TrainOrder extends SuperClass {
     /**
      * @desc gets the stations name from the reference data
      * @returns {String} the location name
      * @readonly
      */
     get name() { 
-      return dataController.v3.getLocation(this[symbols.get('tiploc')]).locationName;
+      return referenceData.v3.getLocation(this[symbols.get('tiploc')]).locationName;
     }
 
   };
