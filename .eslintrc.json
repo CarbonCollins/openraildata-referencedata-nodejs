@@ -5,7 +5,9 @@
   },
   "extends": [
     "airbnb-base",
-    "eslint:recommended"
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
   ],
   "env": {
     "node": true,
