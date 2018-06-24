@@ -1,5 +1,7 @@
 const moduleSuite = require('./module/module');
 
+const manifestSuite = require('./manifest/manifest');
+
 // const commonSuite = require('./common/common');
 
 // const associationSuite = require('./association/association');
@@ -13,5 +15,6 @@ const moduleSuite = require('./module/module');
 
 describe('@openrailuk/referencedata test suite', function () {
   moduleSuite();
+  manifestSuite();
   // referencedataSuite();
 });

@@ -25,6 +25,44 @@ export class Manifest {
   }
 
   /**
+   * @member {String} manifestId
+   * @memberof module:openraildata/referencedata.Manifest
+   * @description the manifestId of the current manifest
+   * @instance
+   * @public
+   */
+  get manifestId() {
+    return this[symbols.get('appManifest')].manifestId || null;
+  }
+
+  get allTimetableIds() {
+    return Object.keys(this[symbols.get('appManifest')] || {})
+      .filter((key) => {
+        return key !== 'manifestId';
+      })
+      .reduce((refNames, refName) => {
+        return Object.assign(refNames, { [refName]: this.getTimetableId(refName) })
+      }, {});
+  }
+
+  /**
+   * @method module:openraildata/referencedata.Manifest~baseManifest
+   * @description gets the manifest without the manifestId
+   * @param {String} type the ref data to obtain the timetableId for
+   * @returns {String} the new ref datas timetableId
+   * @public
+   */
+  get baseManifest() {
+    const baseManifest = Object.assign({}, this[symbols.get('appManifest')]);
+
+    delete baseManifest.manifestId;
+
+    return (this[symbols.get('appManifest')].manifestId && this[symbols.get('appManifest')].manifestId !== '')
+      ? baseManifest
+      : null;
+  }
+
+  /**
    * @method module:openraildata/referencedata.Manifest~loadManifest
    * @description loads a previously saved manifest from the file system
    * @param {Boolean} [autoLoad=true] should the loaded manifest be saved to the class
@@ -33,7 +71,7 @@ export class Manifest {
    */
   loadManifest(autoLoad = true) {
     return fs.ensureDir(path.dirname(this[symbols.get('manifestPath')]))
-      .then(() => {
+      .then(() => {       
         return fs.ensureFile(this[symbols.get('manifestPath')]);
       })
       .then(() => {
@@ -154,23 +192,6 @@ export class Manifest {
   }
 
   /**
-   * @member {String} manifestId
-   * @memberof module:openraildata/referencedata.Manifest
-   * @description the manifestId of the current manifest
-   * @instance
-   * @public
-   */
-  get manifestId() {
-    return this[symbols.get('appManifest')].manifestId || null;
-  }
-
-  get allTimetableIds() {
-    return Object.keys(this[symbols.get('appManifest')] || {})
-      .filter(key => key !== 'manifestId')
-      .reduce((refNames, refName) => Object.assign(refNames, { [refName]: this.getTimetableId(refName) }), {});
-  }
-
-  /**
    * @method module:openraildata/referencedata.Manifest~getTimetableId
    * @description gets thew timetable id for a specific ref data type
    * @param {String} type the ref data to obtain the timetableId for
@@ -181,18 +202,5 @@ export class Manifest {
     return (this[symbols.get('appManifest')][type])
       ? this[symbols.get('appManifest')][type].timetableId || null
       : null;
-  }
-
-  /**
-   * @method module:openraildata/referencedata.Manifest~getTimetableId
-   * @description gets thew timetable id for a specific ref data type
-   * @param {String} type the ref data to obtain the timetableId for
-   * @returns {String} the new ref datas timetableId
-   * @public
-   */
-  get baseManifest() {
-    const baseManifest = Object.assign({}, this[symbols.get('appManifest')]);
-    delete baseManifest.manifestId;
-    return (this[symbols.get('appManifest')].manifestId && this[symbols.get('appManifest')].manifestId !== '') ? baseManifest : null;
   }
 }
