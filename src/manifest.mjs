@@ -122,7 +122,7 @@ export class Manifest {
   saveManifestSync() {
     fs.ensureFileSync(this[symbols.get('manifestPath')]);
     fs.writeJsonSync(this[symbols.get('manifestPath')], this[symbols.get('appManifest')]);
-    return this[symbols.get('appManifest')];
+    // return this[symbols.get('appManifest')];
   }
 
   /**
@@ -134,7 +134,7 @@ export class Manifest {
    * @public
    */
   updateManifest(manifestJson = {}, autoLoad = true) {
-    const newManifest = (manifestJson.manifestId)
+    const newManifest = (manifestJson && manifestJson.manifestId)
       ? manifestJson
       : this[symbols.get('appManifest')] || {};
 
@@ -144,7 +144,7 @@ export class Manifest {
       return this.saveManifest(newManifest);
     }
 
-    return newManifest;
+    return Promise.resolve(newManifest);
   }
 
   /**
@@ -162,7 +162,7 @@ export class Manifest {
 
     if (autoLoad) {
       this[symbols.get('appManifest')] = newManifest;
-      this.saveManifestSync(newManifest);
+      return this.saveManifestSync(newManifest);
     }
 
     return newManifest;
@@ -172,23 +172,28 @@ export class Manifest {
    * @method module:openraildata/referencedata.Manifest~updateFromFiles
    * @description updates the manifest file with an array of files
    * @param {Object[]} files an array of objects containing reference data information
-   * @returns {Object} the new manifest
+   * @returns {Promise} the new manifest
    * @public
    */
-  updateFromFiles(files) {
-    const newManifest = {
-      manifestId: uuidv1()
-    };
+  updateFromFiles(files = []) {
+    if (Array.isArray(files) && files.length > 0) {
+      const newManifest = {
+        manifestId: uuidv1()
+      };
 
-    for (let i = 0, iLength = files.length; i < iLength; i += 1) {
-      const type = files[i].name.match(/(\d+).+?(v\d+)\.json/);
-      if (Array.isArray(type) && type.length === 3) {
-        newManifest[type[2]] = Object.assign(files[i], { timetableId: type[1] });
+      for (let i = 0, iLength = files.length; i < iLength; i += 1) {
+        const type = files[i].name.match(/(\d+).+?(v\d+)\.json/);
+        if (Array.isArray(type) && type.length === 3) {
+          newManifest[type[2]] = Object.assign(files[i], { timetableId: type[1] });
+        }
       }
-    }
 
-    return this.updateManifest(newManifest)
-      .then(() => this[symbols.get('appManifest')]);
+      return this.updateManifest(newManifest)
+        .then(() => {
+          return this[symbols.get('appManifest')];
+        });
+    }
+    return Promise.resolve(this[symbols.get('appManifest')]);
   }
 
   /**
@@ -199,6 +204,10 @@ export class Manifest {
    * @public
    */
   getTimetableId(type) {
+    if (!type || typeof type !== typeof '' || type === '') {
+      return null;
+    }
+
     return (this[symbols.get('appManifest')][type])
       ? this[symbols.get('appManifest')][type].timetableId || null
       : null;

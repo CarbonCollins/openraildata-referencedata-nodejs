@@ -7,6 +7,17 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Yarn Test",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": [
+        "run",
+        "test"
+      ],
+      "port": 9229
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Launch Dev Test ES6",
       "program": "${workspaceFolder}\\tests.old\\devTest.mjs",
       "runtimeArgs": [

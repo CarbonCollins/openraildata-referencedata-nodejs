@@ -33,6 +33,7 @@
     "compileES5": "gulp compileES5",
     "compileES6": "gulp compileES6",
     "compileQuality": "gulp prepCodeQuality",
+    "build": "",
     "generateDocs": "gulp generateDocs"
   },
   "repository": {
@@ -81,6 +82,7 @@
     "babel-plugin-transform-rename-import": "^2.2.0",
     "babel-preset-env": "^1.7.0",
     "chai": "^4.1.2",
+    "chai-uuid": "^1.0.6",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.12.0",
