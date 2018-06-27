@@ -126,115 +126,116 @@ module.exports = function () {
       });
     });
 
-    // describe('loadManifestSync()', function() {
-    //   beforeEach(function() {
-    //     return fs.ensureDir(tmpDir);
-    //   });
+    describe('loadManifestSync()', function() {
+      beforeEach(function() {
+        return fs.ensureDir(tmpDir);
+      });
 
-    //   afterEach(function() {
-    //     return fs.emptyDir(tmpDir);
-    //   });
+      afterEach(function() {
+        return fs.emptyDir(tmpDir);
+      });
 
-    //   it('Should read a manifest file when autoload false', function(done) {
-    //     const unit = new model.Manifest(tmpDir, { manifest: {} });
+      it('Should read a manifest file when autoload false', function(done) {
+        const unit = new model.Manifest(tmpDir, { manifest: {} });
 
-    //     fs.writeJson(tmpPath, standardConfig)
-    //       .then(() => {
-    //         expect(unit.manifestId).to.be.equal(null);
-    //         return unit.loadManifestSync(false);
-    //       })
-    //       .then((manifest) => {
-    //         expect(manifest.manifestId).to.be.equal(standardConfig.manifestId);
-    //         expect(manifest.v3).to.be.an('object');
-    //         expect(manifest.v3.timetableId).to.be.equal(standardConfig.v3.timetableId);
-    //         expect(manifest.v8).to.be.an('object');
-    //         expect(manifest.v8.timetableId).to.be.equal(standardConfig.v8.timetableId);
-    //         done();
-    //       })
-    //       .catch(done);
-    //   });
+        fs.writeJson(tmpPath, standardConfig)
+          .then(() => {
+            expect(unit.manifestId).to.be.equal(null);
+            return unit.loadManifestSync(false);
+          })
+          .then((manifest) => {
+            expect(manifest.manifestId).to.be.equal(standardConfig.manifestId);
+            expect(manifest.v3).to.be.an('object');
+            expect(manifest.v3.timetableId).to.be.equal(standardConfig.v3.timetableId);
+            expect(manifest.v8).to.be.an('object');
+            expect(manifest.v8.timetableId).to.be.equal(standardConfig.v8.timetableId);
+            done();
+          })
+          .catch(done);
+      });
 
-    //   it('Should read a manifest file when autoload true', function(done) {
-    //     const unit = new model.Manifest(tmpDir, { manifest: {} });
-    //     let modifiedTime = 0;
+      it('Should read a manifest file when autoload true', function(done) {
+        const unit = new model.Manifest(tmpDir, { manifest: {} });
+        let modifiedTime = 0;
 
-    //     fs.writeJson(tmpPath, standardConfig)
-    //       .then(() => {
-    //         return fs.stat(tmpPath);
-    //       })
-    //       .then((stats) => {
-    //         modifiedTime = moment(stats.mtime);
+        fs.writeJson(tmpPath, standardConfig)
+          .then(() => {
+            return fs.stat(tmpPath);
+          })
+          .then((stats) => {
+            modifiedTime = moment(stats.mtime);
 
-    //         expect(modifiedTime).to.not.be.equal(0);
-    //         expect(unit.manifestId).to.be.equal(null);
+            expect(modifiedTime).to.not.be.equal(0);
+            expect(unit.manifestId).to.be.equal(null);
 
-    //         return unit.loadManifestSync(true);
-    //       })
-    //       .then((manifest) => {
-    //         expect(manifest).to.be.equal(undefined);
+            return unit.loadManifestSync(true);
+          })
+          .then((manifest) => {
+            expect(manifest).to.be.equal(undefined);
 
-    //         return fs.stat(tmpPath);
-    //       })
-    //       .then((stats) => {
-    //         const newModifiedTime = moment(stats.mtime);
+            return fs.stat(tmpPath);
+          })
+          .then((stats) => {
+            const newModifiedTime = moment(stats.mtime);
 
-    //         expect(newModifiedTime.isSame(modifiedTime)).to.be.equal(false);
-    //         expect(newModifiedTime.isAfter(modifiedTime)).to.be.equal(true);
-    //         expect(unit.manifestId).to.be.equal(standardConfig.manifestId);
+            expect(newModifiedTime.isSame(modifiedTime)).to.be.equal(false);
+            expect(newModifiedTime.isAfter(modifiedTime)).to.be.equal(true);
+            expect(unit.manifestId).to.be.equal(standardConfig.manifestId);
 
-    //         done();
-    //       })
-    //       .catch(done);
-    //   });
+            done();
+          })
+          .catch(done);
+      });
 
-    //   it('Should read a manifest file when autoload defults to true', function(done) {
-    //     const unit = new model.Manifest(tmpDir, { manifest: {} });
-    //     let modifiedTime = 0;
+      it('Should read a manifest file when autoload defults to true', function(done) {
+        const unit = new model.Manifest(tmpDir, { manifest: {} });
+        let modifiedTime = 0;
 
-    //     fs.writeJson(tmpPath, standardConfig)
-    //       .then(() => {
-    //         return fs.stat(tmpPath);
-    //       })
-    //       .then((stats) => {
-    //         modifiedTime = moment(stats.mtime);
+        fs.writeJson(tmpPath, standardConfig)
+          .then(() => {
+            return fs.stat(tmpPath);
+          })
+          .then((stats) => {
+            modifiedTime = moment(stats.mtime);
 
-    //         expect(modifiedTime).to.not.be.equal(0);
-    //         expect(unit.manifestId).to.be.equal(null);
+            expect(modifiedTime).to.not.be.equal(0);
+            expect(unit.manifestId).to.be.equal(null);
 
-    //         return unit.loadManifestSync();
-    //       })
-    //       .then((manifest) => {
-    //         expect(manifest).to.be.equal(undefined);
+            return unit.loadManifestSync();
+          })
+          .then((manifest) => {
+            expect(manifest).to.be.equal(undefined);
 
-    //         return fs.stat(tmpPath);
-    //       })
-    //       .then((stats) => {
-    //         const newModifiedTime = moment(stats.mtime);
+            return fs.stat(tmpPath);
+          })
+          .then((stats) => {
+            const newModifiedTime = moment(stats.mtime);
 
-    //         expect(newModifiedTime.isSame(modifiedTime)).to.be.equal(false);
-    //         expect(newModifiedTime.isAfter(modifiedTime)).to.be.equal(true);
-    //         expect(unit.manifestId).to.be.equal(standardConfig.manifestId);
+            expect(newModifiedTime.isSame(modifiedTime)).to.be.equal(false);
+            expect(newModifiedTime.isAfter(modifiedTime)).to.be.equal(true);
+            expect(unit.manifestId).to.be.equal(standardConfig.manifestId);
 
-    //         done();
-    //       })
-    //       .catch(done);
-    //   });
+            done();
+          })
+          .catch(done);
+      });
 
-    //   it('Should create a manifest file when non present', function(done) {
-    //     const unit = new model.Manifest(tmpDir, { manifest: {} });
+      it('Should create a manifest file when non present', function() {
+        const unit = new model.Manifest(tmpDir, { manifest: {} });
 
-    //     unit.loadManifestSync(false)
-    //       .then((manifest) => {
-    //         expect(manifest.manifestId).to.be.equal(standardConfig.manifestId);
-    //         expect(manifest.v3).to.be.an('object');
-    //         expect(manifest.v3.timetableId).to.be.equal(standardConfig.v3.timetableId);
-    //         expect(manifest.v8).to.be.an('object');
-    //         expect(manifest.v8.timetableId).to.be.equal(standardConfig.v8.timetableId);
-    //         done();
-    //       })
-    //       .catch(done);
-    //   });
-    // });
+        fs.writeJsonSync(tmpPath, standardConfig);
+
+        expect(unit.manifestId).to.be.equal(null);
+
+        const manifest = unit.loadManifestSync(false);
+
+        expect(manifest.manifestId).to.be.equal(standardConfig.manifestId);
+        expect(manifest.v3).to.be.an('object');
+        expect(manifest.v3.timetableId).to.be.equal(standardConfig.v3.timetableId);
+        expect(manifest.v8).to.be.an('object');
+        expect(manifest.v8.timetableId).to.be.equal(standardConfig.v8.timetableId);
+      });
+    });
 
     describe('saveManifest()', function() {
       beforeEach(function() {
@@ -308,6 +309,59 @@ module.exports = function () {
       });
     });
 
+    describe('saveManifestSync()', function() {
+      beforeEach(function() {
+        return fs.ensureDir(tmpDir)
+          .then(() => { return fs.emptyDir(tmpDir); });
+      });
+
+      afterEach(function() {
+        return fs.emptyDir(tmpDir);
+      });
+
+      it('should save a new manifest file', function(done) {
+        const unit = new model.Manifest(tmpDir, { manifest: standardConfig });
+
+        unit.saveManifestSync();
+
+        fs.access(tmpPath, fs.constants.R_OK)
+          .then(() => {
+            return fs.readJson(tmpPath)
+          })
+          .then((savedManifest) => {
+            expect(savedManifest).to.be.an('object');
+            expect(savedManifest).to.have.all.keys(['manifestId', 'v3', 'v8']);
+
+            expect(savedManifest.manifestId).to.be.equal(standardConfig.manifestId);
+            expect(savedManifest.v3).to.be.an('object');
+            expect(savedManifest.v3.timetableId).to.be.equal(standardConfig.v3.timetableId);
+            expect(savedManifest.v8).to.be.an('object');
+            expect(savedManifest.v8.timetableId).to.be.equal(standardConfig.v8.timetableId);
+
+            done();
+          })
+          .catch(done);
+      });
+
+      it('should save an empty manifest file', function(done) {
+        const unit = new model.Manifest(tmpDir, { manifest: {} });
+
+        unit.saveManifestSync();
+
+        fs.access(tmpPath, fs.constants.R_OK)
+          .then(() => {
+            return fs.readJson(tmpPath)
+          })
+          .then((savedManifest) => {
+            expect(savedManifest).to.be.an('object');
+            expect(savedManifest).to.not.have.keys(['manifestId', 'v3', 'v8']);
+
+            done();
+          })
+          .catch(done);
+      });
+    });
+
     describe('updateManifest()', function() {
       it('should load the manifest file (autoload false)', function(done) {
         const unit = new model.Manifest(tmpDir, { manifest: standardConfig });
@@ -374,6 +428,59 @@ module.exports = function () {
             done();
           })
           .catch(done);
+      });
+    });
+
+    describe('updateManifestSync()', function() {
+      it('should load the manifest file (autoload false)', function() {
+        const unit = new model.Manifest(tmpDir, { manifest: standardConfig });
+
+        expect(unit.manifestId).to.be.equal(standardConfig.manifestId);
+
+        const newManifest = unit.updateManifestSync(altConfig, false);
+
+        expect(newManifest).to.be.an('object');
+        expect(newManifest.manifestId).to.be.an('string');
+        expect(newManifest.manifestId).to.be.equal(altConfig.manifestId);
+
+        expect(unit.manifestId).to.be.equal(standardConfig.manifestId);
+      });
+
+      it('should load an empty manifest file (autoload false)', function() {
+        const unit = new model.Manifest(tmpDir, { manifest: {} });
+
+        expect(unit.manifestId).to.be.equal(null);
+
+        const newManifest = unit.updateManifestSync({}, false)
+
+        expect(newManifest).to.be.an('object');
+        expect(newManifest).to.not.have.keys('manifestId', 'v3', 'v8');
+
+        expect(unit.manifestId).to.be.equal(null);
+      });
+
+      it('should load a null manifest file (autoload false)', function() {
+        const unit = new model.Manifest(tmpDir, { manifest: {} });
+
+        expect(unit.manifestId).to.be.equal(null);
+
+        const newManifest = unit.updateManifestSync(null, false)
+ 
+        expect(newManifest).to.be.an('object');
+        expect(newManifest).to.not.have.keys('manifestId', 'v3', 'v8');
+
+        expect(unit.manifestId).to.be.equal(null);
+      });
+
+      it('should load the manifest file (autoload true)', function() {
+        const unit = new model.Manifest(tmpDir, { manifest: standardConfig });
+
+        expect(unit.manifestId).to.be.equal(standardConfig.manifestId);
+
+        const newManifest = unit.updateManifestSync(altConfig, true)
+
+        expect(newManifest).to.be.equal(undefined);
+        expect(unit.manifestId).to.be.equal(altConfig.manifestId);
       });
     });
 

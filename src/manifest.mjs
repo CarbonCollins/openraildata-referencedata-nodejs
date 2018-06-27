@@ -97,6 +97,7 @@ export class Manifest {
     fs.ensureFileSync(this[symbols.get('manifestPath')]);
     fs.accessSync(this[symbols.get('manifestPath')], fs.constants.R_OK | fs.constants.W_OK);
     const manifestJson = fs.readJsonSync(this[symbols.get('manifestPath')], { throws: false }) || {};
+
     return this.updateManifestSync(manifestJson, autoLoad);
   }
 
@@ -156,7 +157,7 @@ export class Manifest {
    * @public
    */
   updateManifestSync(manifestJson = {}, autoLoad = true) {
-    const newManifest = (manifestJson.manifestId)
+    const newManifest = (manifestJson && manifestJson.manifestId)
       ? manifestJson
       : this[symbols.get('appManifest')] || {};
 
