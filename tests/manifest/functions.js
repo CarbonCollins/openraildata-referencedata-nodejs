@@ -61,6 +61,11 @@ module.exports = function () {
             expect(modifiedTime).to.not.be.equal(0);
             expect(unit.manifestId).to.be.equal(null);
 
+            return new Promise((resolve) => {
+              setTimeout(resolve, 1000);
+            });
+          })
+          .then(() => {
             return unit.loadManifest(true);
           })
           .then((manifest) => {
@@ -94,6 +99,11 @@ module.exports = function () {
             expect(modifiedTime).to.not.be.equal(0);
             expect(unit.manifestId).to.be.equal(null);
 
+            return new Promise((resolve) => {
+              setTimeout(resolve, 1000);
+            });
+          })
+          .then(() => {
             return unit.loadManifest();
           })
           .then((manifest) => {
@@ -104,8 +114,8 @@ module.exports = function () {
           .then((stats) => {
             const newModifiedTime = moment(stats.mtime);
 
-            expect(newModifiedTime.isSame(modifiedTime)).to.be.equal(false);
-            expect(newModifiedTime.isAfter(modifiedTime)).to.be.equal(true);
+            expect(newModifiedTime.isSame(modifiedTime), `"${newModifiedTime}" was the same as "${modifiedTime}"`).to.be.equal(false);
+            expect(newModifiedTime.isAfter(modifiedTime), `"${newModifiedTime}" was not after "${modifiedTime}"`).to.be.equal(true);
             expect(unit.manifestId).to.be.equal(standardConfig.manifestId);
 
             done();
@@ -168,6 +178,11 @@ module.exports = function () {
             expect(modifiedTime).to.not.be.equal(0);
             expect(unit.manifestId).to.be.equal(null);
 
+            return new Promise((resolve) => {
+              setTimeout(resolve, 1000);
+            });
+          })
+          .then(() => {
             return unit.loadManifestSync(true);
           })
           .then((manifest) => {
@@ -178,8 +193,8 @@ module.exports = function () {
           .then((stats) => {
             const newModifiedTime = moment(stats.mtime);
 
-            expect(newModifiedTime.isSame(modifiedTime)).to.be.equal(false);
-            expect(newModifiedTime.isAfter(modifiedTime)).to.be.equal(true);
+            expect(newModifiedTime.isSame(modifiedTime), `"${newModifiedTime}" was the same as "${modifiedTime}"`).to.be.equal(false);
+            expect(newModifiedTime.isAfter(modifiedTime), `"${newModifiedTime}" was not after "${modifiedTime}"`).to.be.equal(true);
             expect(unit.manifestId).to.be.equal(standardConfig.manifestId);
 
             done();
@@ -201,6 +216,12 @@ module.exports = function () {
             expect(modifiedTime).to.not.be.equal(0);
             expect(unit.manifestId).to.be.equal(null);
 
+
+            return new Promise((resolve) => {
+              setTimeout(resolve, 1000);
+            });
+          })
+          .then(() => {
             return unit.loadManifestSync();
           })
           .then((manifest) => {
@@ -211,8 +232,8 @@ module.exports = function () {
           .then((stats) => {
             const newModifiedTime = moment(stats.mtime);
 
-            expect(newModifiedTime.isSame(modifiedTime)).to.be.equal(false);
-            expect(newModifiedTime.isAfter(modifiedTime)).to.be.equal(true);
+            expect(newModifiedTime.isSame(modifiedTime), `"${newModifiedTime}" was the same as "${modifiedTime}"`).to.be.equal(false);
+            expect(newModifiedTime.isAfter(modifiedTime), `"${newModifiedTime}" was not after "${modifiedTime}"`).to.be.equal(true);
             expect(unit.manifestId).to.be.equal(standardConfig.manifestId);
 
             done();
