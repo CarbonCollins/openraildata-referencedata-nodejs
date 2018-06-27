@@ -71,8 +71,8 @@ module.exports = function () {
           .then((stats) => {
             const newModifiedTime = moment(stats.mtime);
 
-            expect(newModifiedTime.isSame(modifiedTime)).to.be.equal(false);
-            expect(newModifiedTime.isAfter(modifiedTime)).to.be.equal(true);
+            expect(newModifiedTime.isSame(modifiedTime), `"${newModifiedTime}" was the same as "${modifiedTime}"`).to.be.equal(false);
+            expect(newModifiedTime.isAfter(modifiedTime), `"${newModifiedTime}" was not after "${modifiedTime}"`).to.be.equal(true);
             expect(unit.manifestId).to.be.equal(standardConfig.manifestId);
 
             done();
