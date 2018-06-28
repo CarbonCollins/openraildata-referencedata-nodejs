@@ -3,19 +3,20 @@ const { expect } = require('chai');
 
 const model = require('../../lib/es5/referenceData');
 
-const DataController = require('../../lib/es5/dataController');
-const Manifest = require('../../lib/es5/manifest');
+const { DataController } = require('../../lib/es5/dataController');
+const { Manifest } = require('../../lib/es5/manifest');
 
-const TrainOperatingCompany = require('../../lib/es5/models/trainOperatingCompany');
-const LateRunningReason = require('../../lib/es5/models/lateRunningReason');
-const CancellationReason = require('../../lib/es5/models/cancellationReason');
+const { TrainOperatingCompany } = require('../../lib/es5/models/trainOperatingCompany');
+const { CustomerInformationSystem } = require('../../lib/es5/models/customerInformationSystem');
+const { LateRunningReason } = require('../../lib/es5/models/lateRunningReason');
+const { CancellationReason } = require('../../lib/es5/models/cancellationReason');
 
 module.exports = function () {
   describe('Export suite', function () {
     it('Should export', function() {
       expect(model).to.be.an('object');
 
-      expect(model).to.have.all.keys(['DataController', 'Manifest', 'TrainOperatingCompany', 'LateRunningReason', 'CancellationReason']);
+      expect(model).to.have.all.keys(['referenceData', 'DataController', 'TrainOperatingCompany', 'CustomerInformationSystem', 'LateRunningReason', 'CancellationReason', 'Manifest']);
     });
 
     it('Should export DataController Class', function () {
@@ -49,6 +50,17 @@ module.exports = function () {
       expect(unit).to.exist;
       expect(unit).to.be.an('object');
       expect(unit).to.be.an.instanceof(TrainOperatingCompany);
+    });
+
+    it('Should export CustomerInformationSystem Class', function () {
+      expect(model.CustomerInformationSystem).to.exist;
+      expect(model.CustomerInformationSystem).to.be.an('function');
+
+      const unit = new model.CustomerInformationSystem();
+
+      expect(unit).to.exist;
+      expect(unit).to.be.an('object');
+      expect(unit).to.be.an.instanceof(CustomerInformationSystem);
     });
 
     it('Should export LateRunningReason Class', function () {

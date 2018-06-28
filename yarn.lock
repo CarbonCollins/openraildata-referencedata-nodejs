@@ -1148,6 +1148,10 @@ cross-spawn@^5.0.1, cross-spawn@^5.1.0:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
+dateformat@1.0.7-1.2.3:
+  version "1.0.7-1.2.3"
+  resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-1.0.7-1.2.3.tgz#ebb561bb7214ee57a8dc2687adab1d555de9419c"
+
 dateformat@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-2.2.0.tgz#4065e2013cf9fb916ddfd82efb506ad4c6769062"
@@ -1726,6 +1730,12 @@ ftp@^0.3.10:
   dependencies:
     readable-stream "1.1.x"
     xregexp "2.0.0"
+
+ftpd@^0.2.15:
+  version "0.2.15"
+  resolved "https://registry.yarnpkg.com/ftpd/-/ftpd-0.2.15.tgz#877ead07ce6b5bd8b4c6e9ea270510924bbd099d"
+  dependencies:
+    dateformat "1.0.7-1.2.3"
 
 function-bind@^1.1.1:
   version "1.1.1"
