@@ -13,7 +13,7 @@ import { referenceData } from '../referenceData';
  * @see {@link https://github.com/CarbonCollins/openraildata-common-nodejs/blob/master/docs/api.md#module_openraildata/common|openraildata/common Docs}
  */
 
-export default (SuperClass, symbols) => {
+export function refAssociationMixin(SuperClass, symbols) {
   /**
    * @class
    * @classdesc adds functions to the association model which can only be accessed if the reference data is used

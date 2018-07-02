@@ -1,5 +1,5 @@
 import { Schedule, Association, Station } from '@openrailuk/common';
-import StationSearch from './stationSearch';
+import ScheduleSearch from './scheduleSearch';
 
 export const symbols = new Map()
   .set('timetableId', Symbol('timetableId'))
@@ -185,7 +185,7 @@ export class V8 {
    * @returns {module:openraildata/referencedata.StationSearch} a new JurneySearch which allows chaining of search filters
    */
   runSearch(filterFunction) {
-    return new StationSearch((filterFunction)
+    return new ScheduleSearch((filterFunction)
       ? this[symbols.get('schedules')].filter(filterFunction)
       : this[symbols.get('schedules')]);
   }

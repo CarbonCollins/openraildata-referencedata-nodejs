@@ -7,7 +7,7 @@ import * as cancellationReason from './models/cancellationReason';
 
 import * as manifest from './manifest';
 
-import refAssociationMixin from './models/refAssociation';
+import { refAssociationMixin } from './models/refAssociation';
 import refLocationMixin from './models/refLocation';
 import refStationMixin from './models/refStation';
 import refTrainOrderMixin from './models/refTrainOrder';

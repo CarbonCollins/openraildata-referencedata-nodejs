@@ -23,7 +23,8 @@
     "import/extensions": ["error", "always", {
       "js": "never",
       "mjs": "never"
-    }]
+    }],
+    "import/prefer-default-export": "off"
   },
   "settings": {
     "import/resolver": {
