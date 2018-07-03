@@ -1,6 +1,18 @@
-import { referenceData } from '../referenceData';
 
-export default (SuperClass, symbols) => {
+let referenceData = null; // placeholder
+
+export function injectReferenceDataToStation(refData) {
+  referenceData = refData;
+}
+
+function checkInjection(refData) {
+  if (!refData || typeof refData !== 'object') {
+    throw new Error('ReferenceData has not been injected, please run `injectReferenceDataToStation` first.');
+  }
+  return true;
+}
+
+export function refStationMixin(SuperClass, symbols) {
   /**
    * @class
    * @classdesc adds functions to the station model which can only be accessed if the reference data is used
@@ -13,7 +25,9 @@ export default (SuperClass, symbols) => {
      * @readonly
      */
     get name() {
-      return referenceData.v3.getLocation(this[symbols.get('tiploc')]).locationName;
+      return (checkInjection(referenceData) && this[symbols.get('tiploc')])
+        ? referenceData.v3.getLocation(this[symbols.get('tiploc')]).locationName
+        : null;
     }
   };
 }

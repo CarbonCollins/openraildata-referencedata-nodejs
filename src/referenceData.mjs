@@ -8,7 +8,7 @@ import * as cancellationReason from './models/cancellationReason';
 import * as manifest from './manifest';
 
 import { refAssociationMixin, injectReferenceDataToAssociation } from './models/refAssociation';
-import refStationMixin from './models/refStation';
+import { refStationMixin, injectReferenceDataToStation } from './models/refStation';
 import refTrainOrderMixin from './models/refTrainOrder';
 
 import * as dataController from './dataController';
@@ -21,6 +21,7 @@ trainOrderMixer(refTrainOrderMixin);
 export const referenceData = new dataController.DataController();
 
 injectReferenceDataToAssociation(referenceData);
+injectReferenceDataToStation(referenceData);
 
 export const DataController = dataController.DataController;
 
