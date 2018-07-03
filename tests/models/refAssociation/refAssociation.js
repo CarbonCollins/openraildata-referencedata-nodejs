@@ -1,13 +1,13 @@
 'use strict';
 
 const exportsSuite = require('./exports');
-// const functionSuite = require('./functions');
+const functionSuite = require('./functions');
 const valueSuite = require('./value');
 
 module.exports = function () {
   describe('refAssociation mixin Suite', function() {
     exportsSuite();
-    // functionSuite();
+    functionSuite();
     valueSuite();
   });
 };

@@ -1,4 +1,17 @@
-import { referenceData } from '../referenceData';
+// import { referenceData } from '../referenceData';
+
+let referenceData = null; // placeholder
+
+export function injectReferenceDataToAssociation(refData) {
+  referenceData = refData;
+}
+
+function checkInjection(refData) {
+  if (!refData || typeof refData !== 'object') {
+    throw new Error('ReferenceData has not been injected, please run `injectReferenceDataToAssociation` first.');
+  }
+  return true;
+}
 
 /**
  * @external openraildata/common
@@ -26,8 +39,8 @@ export function refAssociationMixin(SuperClass, symbols) {
      * @returns {Schedule|null} the main trains Schedule object or a null if ref data is not used
      * @readonly
      */
-    get mainTrainSchedule() { 
-      return (this[symbols.sMain])
+    get mainTrainSchedule() {
+      return (checkInjection(referenceData) && this[symbols.get('main')])
         ? referenceData.v8.getSchedule(this[symbols.get('main')].rid)
         : null;
     }
@@ -38,7 +51,7 @@ export function refAssociationMixin(SuperClass, symbols) {
      * @readonly
      */
     get associationTrainSchedule() { 
-      return (this[symbols.sAssociation])
+      return (checkInjection(referenceData) && this[symbols.get('association')])
         ? referenceData.v8.getSchedule(this[symbols.get('association')].rid)
         : null;
     }
@@ -49,7 +62,7 @@ export function refAssociationMixin(SuperClass, symbols) {
      * @returns {String|null} the location name of the association or null if ref data is not used
      */
     getLocation() { 
-      return (this[symbols.sTiploc])
+      return (checkInjection(referenceData) && this[symbols.get('tiploc')])
         ? referenceData.v3.getLocation(this[symbols.get('tiploc')])
         : null;
     }
