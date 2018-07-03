@@ -4,7 +4,7 @@ stages:
   - test
   - post_test
   - deploy
-build_ES5:
+build_commonjs:
   stage: build
   cache:
     key: "${CI_COMMIT_REF_SLUG}"
@@ -38,7 +38,7 @@ test_commonjs_Node_6:
   stage: test
   image: node:6
   dependencies:
-    - build_ES5
+    - build_commonjs
   cache:
     key: "${CI_COMMIT_REF_SLUG}"
     paths:
@@ -51,7 +51,7 @@ test_commonjs_Node_8:
   stage: test
   image: node:8
   dependencies:
-    - build_ES5
+    - build_commonjs
   cache:
     key: "${CI_COMMIT_REF_SLUG}"
     paths:
@@ -64,7 +64,7 @@ test_commonjs_Node_10:
   stage: test
   image: node:10
   dependencies:
-    - build_ES5
+    - build_commonjs
   cache:
     key: "${CI_COMMIT_REF_SLUG}"
     paths:
@@ -77,7 +77,7 @@ test_commonjs_Node_latest:
   stage: test
   image: node:latest
   dependencies:
-    - build_ES5
+    - build_commonjs
   cache:
     key: "${CI_COMMIT_REF_SLUG}"
     paths:
