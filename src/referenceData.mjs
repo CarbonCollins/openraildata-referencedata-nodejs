@@ -1,4 +1,4 @@
-import { associationMixer, locationMixer, stationMixer, trainOrderMixer } from '@openrailuk/common';
+import { associationMixer, stationMixer, trainOrderMixer } from '@openrailuk/common';
 
 import * as trainOperatingCompany from './models/trainOperatingCompany';
 import * as customerInformationSystem from './models/customerInformationSystem';
@@ -8,7 +8,6 @@ import * as cancellationReason from './models/cancellationReason';
 import * as manifest from './manifest';
 
 import { refAssociationMixin, injectReferenceDataToAssociation } from './models/refAssociation';
-import refLocationMixin from './models/refLocation';
 import refStationMixin from './models/refStation';
 import refTrainOrderMixin from './models/refTrainOrder';
 
