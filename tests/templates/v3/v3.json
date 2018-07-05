@@ -1,0 +1,86 @@
+{
+  "PportTimetableRef": {
+    "$": {
+      "timetableId": "timetableId"
+    },
+    "LocationRef": [
+      {
+        "tpl": "locationTIPLOC",
+        "crs": "computerReservationSystem",
+        "toc": "trainOperatingCompany",
+        "locname": "locationName"
+      },
+      {
+        "tpl": "locationTIPLOC2",
+        "crs": "computerReservationSystem2",
+        "toc": "trainOperatingCompany2",
+        "locname": "locationName2"
+      }
+    ],
+    "TocRef": [
+      {
+        "toc": "code",
+        "tocname": "name",
+        "url": "some url"
+      },
+      {
+        "toc": "code2",
+        "tocname": "name2",
+        "url": "some url2"
+      }
+    ],
+    "LateRunningReasons": [
+      {
+        "code": "1",
+        "reasontext": "Some abstract reason"
+      },
+      {
+        "code": 2,
+        "reasontext": "Some abstract reason2"
+      }
+    ],
+    "CancellationReasons": [
+      {
+        "code": 1,
+        "reasontext": "Some abstract reason"
+      },
+      {
+        "code": "2",
+        "reasontext": "Some abstract reason2"
+      }
+    ],
+    "Via": [
+      {
+        "at": "computerReservationSystem",
+        "dest": "locationTIPLOC",
+        "loc1": "location1",
+        "loc2": "location2",
+        "text": "testText"
+      },
+      {
+        "at": "computerReservationSystem2",
+        "dest": "locationTIPLOC2",
+        "loc1": "location1",
+        "loc2": "location2",
+        "text": "testText"
+      },
+      {
+        "at": "computerReservationSystem2",
+        "dest": "locationTIPLOC",
+        "loc1": "location1",
+        "loc2": "location2",
+        "text": "testText"
+      }
+    ],
+    "CISSource": [
+      {
+        "code": "cisCode",
+        "name": "a custom name"
+      },
+      {
+        "code": "cisCode2",
+        "name": "a custom name2"
+      }
+    ]
+  }
+}

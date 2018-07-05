@@ -7,7 +7,7 @@ import { CustomerInformationSystem } from './customerInformationSystem';
 
 export const symbols = new Map()
   .set('timetableId', Symbol('timetable id'))
-  .set('locations', Symbol('location'))
+  .set('locations', Symbol('locations'))
   .set('trainOperatingCompanies', Symbol('train operating companies'))
   .set('lateRunningReasons', Symbol('late running reasons'))
   .set('cancellationReasons', Symbol('cancellation reasons'))
@@ -61,9 +61,10 @@ function mapArray(arr, Constructor, refData = null) {
  * @returns {Boolean} returns true if the input matches within the location
  * @private
  */
-function locationIncluded(input, loc) {
-  return (input.includes(loc.tiploc) || input.includes(loc.locationName)
-    || input.includes(loc.computerReservationSystem));
+function locationIncluded(input, loc = {}) {
+  return ((loc.tiploc && input === loc.tiploc)
+    || (loc.locationName && input === loc.locationName)
+    || (loc.computerReservationSystem && input === loc.computerReservationSystem));
 }
 
 /**
@@ -75,9 +76,11 @@ function locationIncluded(input, loc) {
  * @returns {Boolean} returns true if the input matches within the location
  * @private
  */
-function locationIncludedInVia(input, via) {
-  return (locationIncluded(input, via.at) || locationIncluded(input, via.destination)
-    || locationIncluded(input, via.location1) || locationIncluded(input, via.location2));
+function locationIncludedInVia(input, via = {}) {
+  return ((via.at && locationIncluded(input, via.at))
+    || (via.destination && locationIncluded(input, via.destination))
+    || (via.location1 && locationIncluded(input, via.location1))
+    || (via.location2 && locationIncluded(input, via.location2)));
 }
 
 /**
@@ -163,11 +166,11 @@ export class V3 {
   }
 
   /**
-   * @member {module:openraildata/referencedata.CustomerInformationSystem[]} CustomerInformationSystemSources an array of CISSources
+   * @member {module:openraildata/referencedata.customerInformationSystem[]} CustomerInformationSystemSources an array of CISSources
    * @memberof module:openraildata/referencedata.V3RefData
    * @instance
    */
-  get CustomerInformationSystemSources() {
+  get customerInformationSystemSources() {
     return this[symbols.get('customerInformationSystemSources')];
   }
 
@@ -178,11 +181,13 @@ export class V3 {
    * @returns {?module:openraildata/referencedata.Location} returns a Location if found or a null if not found
    * @see {@link https://github.com/CarbonCollins/openraildata-common-nodejs/blob/master/docs/api.md#module_openraildata/common+Location}
    */
-  findLocation(input) { 
-    return this[symbols.get('locations')]
-      .find((o) => {
-        return (o.tiploc === `${input}` || o.locationName === `${input}` || o.computerReservationSystem === `${input}`);
-      });
+  findLocation(input) {
+    return (input && typeof input === typeof '' && input !== '')
+      ? this[symbols.get('locations')]
+        .find((o) => {
+          return (o.tiploc === `${input}` || o.locationName === `${input}` || o.computerReservationSystem === `${input}`);
+        })
+      : null;
   }
 
   /**
@@ -192,10 +197,12 @@ export class V3 {
    * @returns {?module:openraildata/referencedata.TrainOperatingCompany} returns a train operating company
    */
   findTrainOperatingCompany(input) {
-    return this[symbols.get('trainOperatingCompanies')]
-      .find((o) => {
-        return (o.code === `${input}`);
-      });
+    return (input && typeof input === typeof '' && input !== '')
+      ? this[symbols.get('trainOperatingCompanies')]
+        .find((o) => {
+          return (o.code === `${input}`);
+        })
+      : null;
   }
 
   /**
@@ -205,10 +212,12 @@ export class V3 {
    * @returns {?module:openraildata/referencedata.LateRunningReason} returns a late operating reason
    */
   findLateRunningReason(input) {
-    return this[symbols.get('lateRunningReasons')]
-      .find((o) => {
-        return (o.code === `${input}`);
-      });
+    return (input && (typeof input === typeof '' || typeof input === typeof 0) && input !== '')
+      ? this[symbols.get('lateRunningReasons')]
+        .find((o) => {
+          return (o.code=== Number(input));
+        })
+      : null;
   }
 
   /**
@@ -218,25 +227,34 @@ export class V3 {
    * @returns {?module:openraildata/referencedata.CancellationReason} returns a cancellation reason
    */
   findCancellationReason(input) {
-    return this[symbols.get('cancellationReasons')]
-      .find((o) => {
-        return (o.code === `${input}`);
-      });
+    return (input && (typeof input === typeof '' || typeof input === typeof 0) && input !== '')
+      ? this[symbols.get('cancellationReasons')]
+        .find((o) => {
+          return (o.code === Number(input));
+        })
+      : null;
   }
 
   /**
    * @method module:openraildata/referencedata.V3RefData~findVias
    * @desc finds a via from a search input. you can supply a single input for a list of vias
    * associated with that location, or supply 2-3 inputs to find a specific one
-   * @param {...Stirng} input a string containing a search parameter for the via location name,
+   * @param {...Stirng} inputs a string containing a search parameter for the via location name,
    * tiploc, or crs
    * @returns {module:openraildata/referencedata.Via[]} returns a cancellation reason
    */
-  findVias(...input) {
+  findVias(...inputs) {
     return this[symbols.get('vias')]
       .slice(0)
       .filter((v) => {
-        return locationIncludedInVia(input, v.at);
+        return inputs
+          .map((input) => {
+            return locationIncludedInVia(input, v);
+          })
+          .reduce((finalMatch, currMatch) => {
+            finalMatch = finalMatch || currMatch;
+            return finalMatch;
+          }, false);
       });
   }
 
@@ -247,9 +265,11 @@ export class V3 {
    * @returns {?module:openraildata/referencedata.CustomerInformationSystem} returns a Customer Information System
    */
   findCustomerInformationSystem(input) {
-    return this[symbols.get('customerInformationSystemSources')]
-      .find((o) => {
-        return (o.code === `${input}`);
-      });
+    return (input && typeof input === typeof '' && input !== '')
+      ? this[symbols.get('customerInformationSystemSources')]
+        .find((o) => {
+          return (o.code === `${input}`);
+        })
+      : null
   }
 }

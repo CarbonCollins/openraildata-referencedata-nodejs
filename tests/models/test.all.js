@@ -5,6 +5,8 @@ const trainOperatingCompanySuite = require('./trainOperatingCompany/trainOperati
 const scheduleSearchSuite = require('./scheduleSearch/scheduleSearch');
 const refAssociationSuite = require('./refAssociation/refAssociation');
 const refStatonSuite = require('./refStation/refStation');
+const refTrainOrderSuite = require('./refTrainOrder/refTrainOrder');
+const v3Suite = require('./v3/v3');
 
 module.exports = function () {
   describe('Model suite', function () {
@@ -15,5 +17,7 @@ module.exports = function () {
     scheduleSearchSuite();
     refAssociationSuite();
     refStatonSuite();
+    refTrainOrderSuite();
+    v3Suite();
   });
 };

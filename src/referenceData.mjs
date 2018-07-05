@@ -9,12 +9,11 @@ import * as manifest from './manifest';
 
 import { refAssociationMixin, injectReferenceDataToAssociation } from './models/refAssociation';
 import { refStationMixin, injectReferenceDataToStation } from './models/refStation';
-import refTrainOrderMixin from './models/refTrainOrder';
+import { refTrainOrderMixin, injectReferenceDataToTrainOrder } from './models/refTrainOrder';
 
 import * as dataController from './dataController';
 
 associationMixer(refAssociationMixin);
-// locationMixer(refLocationMixin);
 stationMixer(refStationMixin);
 trainOrderMixer(refTrainOrderMixin);
 
@@ -22,6 +21,7 @@ export const referenceData = new dataController.DataController();
 
 injectReferenceDataToAssociation(referenceData);
 injectReferenceDataToStation(referenceData);
+injectReferenceDataToTrainOrder(referenceData);
 
 export const DataController = dataController.DataController;
 
