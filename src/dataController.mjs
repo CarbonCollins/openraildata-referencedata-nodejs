@@ -323,9 +323,11 @@ export class DataController extends EventEmitter {
             this[symbols.get('reconnectDelay')] = this[symbols.get('initialReconnectDelay')];
             this[symbols.get('updateInterval')] = setInterval(this.checkForReferenceDataUpdate.bind(this), this[symbols.get('updateDelay')]);
 
-            this.checkForReferenceDataUpdate();
+            if (!optionOverrides.noAuto || optionOverrides.noAuto === false) {
+              this.checkForReferenceDataUpdate();
+            }
 
-            this.emit('connected', { options: this.options });
+            this.emit('connected', { options: this[symbols.get('options')] });
           }).bind(this))
           .on('close', this.ftpClose.bind(this))
           .on('end', this.ftpClose.bind(this));
@@ -335,7 +337,7 @@ export class DataController extends EventEmitter {
 
       this[symbols.get('reconnectInterval')] = undefined;
       this[symbols.get('options')] = Object.assign({}, this[symbols.get('options')], optionOverrides);
-      this[symbols.get('ftpClient')].connect(pickProperties(this[symbols.get('options')], 'host', 'user', 'password'));
+      this[symbols.get('ftpClient')].connect(pickProperties(this[symbols.get('options')], 'host', 'user', 'password', 'port'));
     } else {
       this.emit('connected', { options: this[symbols.get('options')] });
     }
@@ -376,7 +378,7 @@ export class DataController extends EventEmitter {
    */
   checkForReferenceDataUpdate() {
     if (this[symbols.get('manifest')].manifestId && this[symbols.get('manifest')].manifestId !== '') {
-      this.listFTPReferenceFiles()
+      return this.listFTPReferenceFiles()
         .then((files) => {
           return files
             .map((f) => { return f.name.match(/(\d+).+?(v\d+)\.xml/); })
@@ -434,7 +436,7 @@ export class DataController extends EventEmitter {
    * @private
    */
   cleanLocalReferenceData() {
-    const manifest = this[symbols.get('manifest')].baseManifest;
+    const manifest = this[symbols.get('manifest')].baseManifest || {};
 
     return fs.ensureDir(localReferenceDataDir)
       .then(() => { return fs.readdir(localReferenceDataDir); })

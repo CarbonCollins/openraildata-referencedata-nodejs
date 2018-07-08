@@ -46,9 +46,9 @@ module.exports = function () {
         });
       });
 
-      expect(unit.trainOperatorCompanies).to.be.an('array');
-      expect(unit.trainOperatorCompanies).to.have.lengthOf(standardConfig.PportTimetableRef.TocRef.length);
-      expect(unit.trainOperatorCompanies).to.satisfy((tocs) => {
+      expect(unit.trainOperatingCompanies).to.be.an('array');
+      expect(unit.trainOperatingCompanies).to.have.lengthOf(standardConfig.PportTimetableRef.TocRef.length);
+      expect(unit.trainOperatingCompanies).to.satisfy((tocs) => {
         return tocs.every((toc) => {
           return toc instanceof TrainOperatingCompany;
         });

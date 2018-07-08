@@ -20,6 +20,6 @@ describe('@openrailuk/referencedata test suite', function () {
   moduleSuite();
   manifestSuite();
   referenceDataSuite();
-  dataControllerSuite();
   modelSuite();
+  dataControllerSuite();
 });

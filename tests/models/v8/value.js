@@ -42,7 +42,7 @@ module.exports = function () {
       expect(unit).to.be.an.instanceOf(model.V8);
 
       expect(unit.timetableId).to.be.an('string');
-      expect(unit.timetableId).to.be.equal(standardConfig.PportTimetable.$.timetableId);
+      expect(unit.timetableId).to.be.equal(standardConfig.PportTimetable.$.timetableID);
 
       expect(unit.schedules).to.be.an('array');
       expect(unit.schedules).to.have.lengthOf(standardConfig.PportTimetable.Journey.length);

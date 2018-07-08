@@ -80,8 +80,8 @@ export class V8 {
       ? refData.PportTimetable
       : {};
 
-    this[symbols.get('timetableId')] = (payload.$ && payload.$.timetableId)
-      ? payload.$.timetableId : null;
+    this[symbols.get('timetableId')] = (payload.$ && payload.$.timetableID)
+      ? payload.$.timetableID : null;
     this[symbols.get('schedules')] = (payload.Journey)
       ? payload.Journey
         .map((journey) => {

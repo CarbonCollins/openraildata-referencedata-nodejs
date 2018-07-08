@@ -129,12 +129,12 @@ export class V3 {
   }
 
   /**
-   * @member {module:openraildata/referencedata.TrainOperatingCompany[]} trainOperatorCompanies an array of train operator companies
+   * @member {module:openraildata/referencedata.trainOperatingCompanies[]} trainOperatingCompanies an array of train operator companies
    * @memberof module:openraildata/referencedata.V3RefData
    * @instance
    * @readonly
    */
-  get trainOperatorCompanies() {
+  get trainOperatingCompanies() {
     return this[symbols.get('trainOperatingCompanies')];
   }
 

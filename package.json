@@ -27,7 +27,7 @@
   "scripts": {
     "prepublishOnly": "gulp compile",
     "publish-npm": "npm publish --scope=@openrailuk --access=public",
-    "test": "mocha ./tests/test.all.js",
+    "test": "mocha ./tests/test.all.js --require mocha-steps",
     "coverage": "./node_modules/.bin/nyc -x \"**/lib/es6/**/*.js\" -x \"**/src/**/*.js\" -x \"**/tests/**/*.js\" --reporter=\"text-summary\" --reporter=\"lcov\" yarn test --reporter=\"mochawesome\"",
     "compile": "gulp compile",
     "compileES5": "gulp compileES5",
@@ -95,6 +95,7 @@
     "istanbul": "^0.4.5",
     "jsdoc-to-markdown": "^4.0.1",
     "mocha": "^5.2.0",
+    "mocha-steps": "^1.1.0",
     "mochawesome": "^3.0.2",
     "nyc": "^12.0.2"
   }

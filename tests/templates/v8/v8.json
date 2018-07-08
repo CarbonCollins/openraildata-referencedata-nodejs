@@ -1,7 +1,7 @@
 {
   "PportTimetable": {
     "$": {
-      "timetableId": "some id"
+      "timetableID": "some id"
     },
     "Journey": [
       {
