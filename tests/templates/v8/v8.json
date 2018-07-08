@@ -1,0 +1,31 @@
+{
+  "PportTimetable": {
+    "$": {
+      "timetableId": "some id"
+    },
+    "Journey": [
+      {
+        "rid": "scheduleRid",
+        "trainId": "scheduleTrainId",
+        "uid": "scheduleUniqueId"
+      },
+      {
+        "rid": "scheduleRidUpdate",
+        "trainId": "scheduleTrainIdUpdate",
+        "uid": "scheduleUniqueIdUpdate"
+      }
+    ],
+    "Association": [
+      {
+        "tpl": "tiploc",
+        "trainCat": "JJ",
+        "main": {
+          "rid": "mainTrain"
+        },
+        "association": {
+          "rid": "assocTrain"
+        }
+      }
+    ]
+  }
+}

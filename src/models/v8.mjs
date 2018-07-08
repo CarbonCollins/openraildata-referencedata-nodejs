@@ -1,8 +1,8 @@
 import { Schedule, Association, Station } from '@openrailuk/common';
-import ScheduleSearch from './scheduleSearch';
+import { ScheduleSearch } from './scheduleSearch';
 
 export const symbols = new Map()
-  .set('timetableId', Symbol('timetableId'))
+  .set('timetableId', Symbol('timetable id'))
   .set('schedules', Symbol('schedules'))
   .set('previousSchedules', Symbol('previous schedules'))
   .set('associations', Symbol('associations'));
@@ -18,6 +18,7 @@ const rawV8Map = new Map()
   .set('passingPoints', 'PP')
   .set('intermediatePoints', 'IP')
   .set('operationalIntermediatePoints', 'OPIP')
+  .set('tiploc', 'tpl')
   .set('category', 'trainCat')
   .set('qTrain', 'qtrain')
   .set('passengerService', 'isPassengerSvc');
@@ -47,7 +48,7 @@ const rawV8Handler = {
         }
         return obj[rawV8Map.get(prop)][0].$ || obj[rawV8Map.get(prop)][0];
       }
-      return obj[rawV8Map.get(prop)]
+      return obj[rawV8Map.get(prop)] || obj[prop]
     }
     return obj[prop]
   }
@@ -56,7 +57,7 @@ const rawV8Handler = {
 const rawLocHandler = {
   get: (obj, prop) => {
     if (rawLocationMap.has(prop)) {
-      return obj[rawLocationMap.get(prop)]
+      return obj[rawLocationMap.get(prop)] || obj[prop]
     }
     return obj[prop]
   }
@@ -143,10 +144,12 @@ export class V8 {
    * @returns {external:openraildata/common.Schedule[]} returns a cancellation reason
    */
   findSchedule(input) {
-    return this[symbols.get('schedules')]
-      .find((o) => {
-        return (o.rid === input || o.uniqueId === input || o.trainId === input);
-      });
+    return (input && typeof input === typeof '' && input !== '')
+      ? this[symbols.get('schedules')]
+        .find((o) => {
+          return (o.rid === input || o.uniqueId === input || o.trainId === input);
+        }) || null
+      : null;
   }
 
   /**
@@ -155,13 +158,15 @@ export class V8 {
    * @param {external:openraildata/common.Schedule} schedule a new/updated schedule to be added to the reference data
    */
   updateSchedule(schedule) {
-    const existingID = this[symbols.get('schedules')].findIndex(o => o.rid === schedule.rid);
+    if (schedule && schedule instanceof Schedule) {
+      const existingID = this[symbols.get('schedules')].findIndex(o => o.rid === schedule.rid);
 
-    if (existingID) {
-      this[symbols.get('previousSchedules')].push(this[symbols.get('schedules')][existingID]);
-      this[symbols.get('schedules')][existingID] = new Schedule(schedule);
-    } else {
-      this[symbols.get('schedules')].push(new Schedule(schedule));
+      if (existingID && existingID >= 0) {
+        this[symbols.get('previousSchedules')].push(this[symbols.get('schedules')][existingID]);
+        this[symbols.get('schedules')][existingID] = new Schedule(schedule);
+      } else {
+        this[symbols.get('schedules')].push(new Schedule(schedule));
+      }
     }
   }
 
@@ -172,10 +177,12 @@ export class V8 {
    * @returns {external:openraildata/common.Association} an Association or returns a null if an association was not found
    */
   findAssociation(input) {
-    return this[symbols.get('associations')]
-      .find((o) => {
-        return (o.mainTrainId === input || o.associatedTrainId === input || o.tiploc === input);
-      });
+    return (input && typeof input === typeof '' && input !== '')
+      ? this[symbols.get('associations')]
+        .find((o) => {
+          return (o.mainTrainId === input || o.associatedTrainId === input || o.tiploc === input);
+        }) || null
+      : null;
   }
 
   /**
@@ -184,7 +191,7 @@ export class V8 {
    * @param {Function} [filterFunction] an optional initial search function to run before returning
    * @returns {module:openraildata/referencedata.StationSearch} a new JurneySearch which allows chaining of search filters
    */
-  runSearch(filterFunction) {
+  runSearch(filterFunction = null) {
     return new ScheduleSearch((filterFunction)
       ? this[symbols.get('schedules')].filter(filterFunction)
       : this[symbols.get('schedules')]);
@@ -197,9 +204,12 @@ export class V8 {
    * @returns {external:openraildata/common.Schedule[]}
    */
   findPreviousSchedules(input) {
-    return this[symbols.get('previousSchedules')]
-      .filter((o) => {
-        return o.rid === input
-      });
+    
+    return (input && typeof input === typeof '' && input !== '')
+      ? this[symbols.get('previousSchedules')]
+        .filter((o) => {
+          return o.rid === input
+        }) || []
+      : null;
   }
 }
