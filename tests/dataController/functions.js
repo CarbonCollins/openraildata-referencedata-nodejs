@@ -775,13 +775,13 @@ module.exports = function () {
             expect(disconnectFired).to.be.equal(true);
   
             done()
-          }).timeout(5000);
+          });
 
           sharedDataController.ftpClose()
         });
 
         sharedDataController.connect({ noAuto: true });
-      });
+      }).timeout(5000);
     })
   });
 };
