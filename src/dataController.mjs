@@ -275,7 +275,7 @@ export class DataController extends EventEmitter {
    */
   ftpClose() {
     if (this[symbols.get('ftpConnected')] === true) {
-      this.emit('disconnected', pickProperties(this[symbols.get('options')], 'keepAlive'));
+      this.emit('disconnected', { keepAlive: this[symbols.get('keepAlive')] });
     }
 
     this[symbols.get('ftpConnected')] = false;
@@ -353,7 +353,7 @@ export class DataController extends EventEmitter {
    */
   reconnect() {
     if (this[symbols.get('reconnectInterval')] === undefined) {
-      this.emit('reconnecting', Object.assign({}, pickProperties(this[symbols.get('options')], 'keepAlive'), { reconnectDelay: this[symbols.get('reconnectDelay')] }));
+      this.emit('reconnecting', { reconnectDelay: this[symbols.get('reconnectDelay')], keepAlive: this[symbols.get('keepAlive')] });
 
       this.reconnectInterval = setTimeout((() => {
         this.emit('reconnectionAttempt');

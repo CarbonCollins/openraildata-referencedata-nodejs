@@ -41,7 +41,7 @@ module.exports = function () {
     ftpServer = new FtpServer('ftp://127.0.0.1:9876', {});
     ftpServer.log.level('fatal'); // all the debug logs were annoing me
 
-    sharedDataController = new model.DataController();
+    sharedDataController = new model.DataController({ keepAlive: false });
 
     ftpServer.on('login', (data, resolve, reject) => {
       if (data.password && data.password === 'customPass') {
@@ -99,7 +99,7 @@ module.exports = function () {
           done();
         })
 
-        sharedDataController.connect({ host: '127.0.0.1', port: '9876', noAuto: true });
+        sharedDataController.connect({ host: '127.0.0.1', port: '9876', noAuto: true, keepAlive: false });
       });
 
       step('should connect to ftp server', function(done) {
@@ -113,7 +113,7 @@ module.exports = function () {
 
         sharedDataController.once('error', errorCB)
 
-        sharedDataController.connect({ host: '127.0.0.1', port: '9876', password: 'customPass', noAuto: true });
+        sharedDataController.connect({ host: '127.0.0.1', port: '9876', password: 'customPass', noAuto: true, keepAlive: false });
       });
 
       step('should fire connect event even when already connected', function(done) {
@@ -127,7 +127,7 @@ module.exports = function () {
 
         sharedDataController.once('error', errorCB)
 
-        sharedDataController.connect({ host: '127.0.0.1', port: '9876', noAuto: true });
+        sharedDataController.connect({ host: '127.0.0.1', port: '9876', noAuto: true, keepAlive: false });
       });
     });
 
@@ -703,8 +703,84 @@ module.exports = function () {
     });
 
     describe('ftpClose()', function() {
-      it('should fail', function() {
-        expect(true).to.be.false;
+      it('should be a callable function', function() {
+        expect(sharedDataController).to.be.an('object');
+        expect(sharedDataController).to.be.an.instanceOf(model.DataController);
+  
+        expect(sharedDataController.ftpClose).to.be.an('function');
+      });
+
+      it('should close the current connection without reconnecting', function(done) {
+        let reconnectingFired = false;
+        let disconnectFired = false;
+
+        sharedDataController.once('reconnecting', function() {
+          reconnectingFired = true;
+        });
+
+        sharedDataController.once('disconnected', (options) => {
+          expect(options).to.be.an('object');
+          expect(options.keepAlive).to.be.an('boolean');
+          expect(options.keepAlive).to.be.equal(false);
+          disconnectFired = true;
+        });
+
+        sharedDataController.once('connected', function() {
+          expect(sharedDataController[model.symbols.get('keepAlive')]).to.be.equal(false);
+          expect(sharedDataController[model.symbols.get('ftpConnected')]).to.be.equal(true);
+
+          sharedDataController.ftpClose()
+
+          expect(reconnectingFired).to.be.equal(false);
+          expect(disconnectFired).to.be.equal(true);
+          done();
+        });
+
+        sharedDataController.connect({ noAuto: true });
+      });
+
+      it('should close the current connection and then reconnect', function(done) {
+        let reconnectingFired = false;
+        let disconnectFired = false;
+
+        sharedDataController.once('reconnecting', (options) => {
+          expect(options).to.be.an('object');
+
+          expect(options.keepAlive).to.be.an('boolean');
+          expect(options.keepAlive).to.be.equal(true);
+
+          expect(options.reconnectDelay).to.be.an('number');
+          expect(options.reconnectDelay).to.be.equal(1000);
+
+          reconnectingFired = true;
+        });
+
+        sharedDataController.once('disconnected', (options) => {
+          expect(options).to.be.an('object');
+          expect(options.keepAlive).to.be.an('boolean');
+          expect(options.keepAlive).to.be.equal(true);
+          disconnectFired = true;
+        });
+
+        sharedDataController.once('connected', function() {
+          sharedDataController[model.symbols.get('keepAlive')] = true;
+
+          expect(sharedDataController[model.symbols.get('keepAlive')]).to.be.equal(true);
+          expect(sharedDataController[model.symbols.get('ftpConnected')]).to.be.equal(true);
+
+          sharedDataController.once('connected', (options) => {
+            expect(options).to.be.an('object');
+  
+            expect(reconnectingFired).to.be.equal(true);
+            expect(disconnectFired).to.be.equal(true);
+  
+            done()
+          }).timeout(5000);
+
+          sharedDataController.ftpClose()
+        });
+
+        sharedDataController.connect({ noAuto: true });
       });
     })
   });
