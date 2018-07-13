@@ -1,0 +1,22 @@
+{
+  "PportTimetable": {
+    "Journey": [
+      {
+        "rid": "rid",
+        "ssd": "serviceStartingDate",
+        "toc": "trainOperatingCompany",
+        "trainId": "trainId",
+        "uid": "uniqueId",
+        "OR": { "tiploc": "OR" },
+        "OPOR": { "tiploc": "OPOR" },
+        "DT": { "tiploc": "DT" },
+        "OPDT": { "tiploc": "OPDT" },
+        "PP": [{ "tiploc": "PP" }],
+        "IP": [{ "tiploc": "IP" }],
+        "OPIP": [{ "tiploc": "OPIP" }],
+        "trainCat": "OO",
+        "qtrain": false
+      }
+    ]
+  }
+}

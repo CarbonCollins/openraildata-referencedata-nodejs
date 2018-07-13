@@ -1,0 +1,9 @@
+{
+  "manifestId": "some other manifest Id",
+  "v3": {
+    "timetableId": "56789"
+  },
+  "v8": {
+    "timetableId": "01234"
+  }
+}

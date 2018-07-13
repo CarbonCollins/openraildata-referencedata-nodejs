@@ -1,0 +1,11 @@
+{
+  "mocha.files.glob": "tests/*.js",
+  "git.enableCommitSigning": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact"
+  ],
+  "eslint.options": {
+    "configFile": ".eslintrc.json",
+  }
+}

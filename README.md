@@ -1,19 +1,19 @@
-# openraildata-referencedata
+![](https://gitlab.com/openrail/uk/referencedata-nodejs/uploads/f7c1519da20b9d7f7eb63f17872de68a/referencedata-banner.svg)
 
-[![GitHub issues](https://img.shields.io/github/issues/CarbonCollins/openraildata-referencedata-nodejs.svg)](https://github.com/CarbonCollins/openraildata-referencedata-nodejs/issues)
-[![npm](https://img.shields.io/npm/v/openraildata-referencedata.svg)](https://www.npmjs.com/package/openraildata-referencedata)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/CarbonCollins/openraildata-referencedata-nodejs/master/LICENSE)
-[![David](https://img.shields.io/david/CarbonCollins/openraildata-referencedata-nodejs.svg)]()
-[![David](https://img.shields.io/david/dev/CarbonCollins/openraildata-referencedata-nodejs.svg)]()
-[![sheilds](https://img.shields.io/badge/status-WIP-yellow.svg)](https://img.shields.io/badge/status-WIP-yellow.svg)
+[![country](https://img.shields.io/badge/country-UK-blue.svg)](https://gitlab.com/groups/openrail/uk)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)
+[![npm (scoped)](https://img.shields.io/npm/v/@openrailuk/referencedata.svg)](https://www.npmjs.com/package/@openrailuk/referencedata)
+[![status](https://img.shields.io/badge/status-WIP-yellow.svg)](https://gitlab.com/openrail/uk/referencedata-nodejs)
+[![pipeline](https://gitlab.com/openrail/uk/referencedata-nodejs/badges/master/pipeline.svg)](https://gitlab.com/openrail/uk/referencedata-nodejs/commits/master)
+[![coverage](https://gitlab.com/openrail/uk/referencedata-nodejs/badges/master/coverage.svg)](https://gitlab.com/openrail/uk/referencedata-nodejs/commits/master)
+[![slack](https://open-rail-slack-invite.herokuapp.com/badge.svg)](https://open-rail-slack-invite.herokuapp.com/)
 
-A package for accessing the the UK National Rails reference data FTP server aswell as some helper functions to process and use the reference data
+A package for accessing the the UK National Rails reference data FTP server as well as some helper functions to process and use the reference data
 
-this is a work in progress so stuff may change without warning
 
 ## installation
 1. install [npm](https://nodejs.org "npm homepage")
-2. `npm install openraildata-referencedata --save`
+2. `npm install @openrailuk/referencedata --save`
 
 ## table of contents
 - [getting started](#getting-started)
@@ -22,13 +22,13 @@ this is a work in progress so stuff may change without warning
 
 ## getting started
 
-this package downloads and parses the xml reference data from the National Rail ftp server and parses into JSON for use on a Node.JS application. The package also provide some helper functions for retreiving the reference data.
+this package downloads and parses the xml reference data from the National Rail ftp server and parses into JSON for use on a Node.JS application. The package also provide some helper functions for retrieving the reference data.
 
 the reference data contains information about locations, train operating companies, reason codes, and daily timetables among other information for the UK rail network.
 
-to use `openraildata-referencedata` you first need to supply the ftp password for your account found on the `my feeds` section of the [National Rail Data Portal](https://datafeeds.nationalrail.co.uk/darwin/index.html#/filter) 
+to use `@openrailuk/referencedata` you first need to supply the ftp password for your account found on the `my feeds` section of the [National Rail Data Portal](https://datafeeds.nationalrail.co.uk/darwin/index.html#/filter) 
 ```
-const refData = require('openraildata-referencedata');
+const { referenceData } = require('@openrailuk/referencedata');
 
 refData.connect('ftpUserPassword');
 ```
