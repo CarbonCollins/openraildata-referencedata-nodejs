@@ -27,14 +27,16 @@ this package downloads and parses the xml reference data from the National Rail 
 the reference data contains information about locations, train operating companies, reason codes, and daily timetables among other information for the UK rail network.
 
 to use `@openrailuk/referencedata` you first need to supply the ftp password for your account found on the `my feeds` section of the [National Rail Data Portal](https://datafeeds.nationalrail.co.uk/darwin/index.html#/filter) 
-```
+
+```javascript
 const { referenceData } = require('@openrailuk/referencedata');
 
 referenceData.connect('ftpUserPassword');
 ```
 
 a simple example of getting the v3 reference data:
-```
+
+```javascript
 const { referenceData } = require('@openrailuk/referencedata');
 
 referenceData.connect('ftpUserPassword');
