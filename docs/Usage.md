@@ -30,3 +30,6 @@ referenceData.connect(options);
 
 For more information on the events that reference data emits please see the [Event Docs](https://openrail.gitlab.io/docs/uk/referencedata/Events)
 
+## Extending common classes
+
+This package mixes some extra functionality into the [@openrailuk/common](https://www.npmjs.com/package/@openrailuk/common) package. For information on what functions are added please see [Common Extensions](https://openrail.gitlab.io/docs/uk/referencedata/Common_Extensions)
