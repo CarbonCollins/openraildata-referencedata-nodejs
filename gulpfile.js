@@ -56,13 +56,14 @@ gulp.task('compile', ['compileES5', 'compileES6']);
 
 gulp.task('prepCodeQuality', ['copySrcToJs', 'copyQualityConfigs']);
 
-gulp.task('generateDocs', () => {
+gulp.task('build:docs', () => {
   return fs.ensureDir(path.join(__dirname, './docs'))
     .then(() => {
       return jsdoc2md.render({
         'no-cache': true,
         separators: true,
-        files: ['./index.js', './lib/*.js', './lib/models/*.js']
+        files: ['src/referenceData.mjs', 'src/models/*.mjs'],//        files: ['index.mjs', 'src/*.mjs', 'src/models/cancellationReason.mjs'],
+        configure: '.jsdoc.json'
       });
     })
     .then((output) => {

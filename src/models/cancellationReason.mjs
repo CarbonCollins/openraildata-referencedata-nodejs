@@ -3,15 +3,18 @@ export const symbols = new Map()
   .set('reason', Symbol('reason'));
 
 /**
- * @class
- * @memberof module:openraildata/referencedata
- * @augments module:openraildata/referencedata.CancellationReason
- * @classdesc A cancellation reason
+ * @description A data model for a cancellation reason. This stores a `code` to identify the type of
+ * cancellation as well as a test `reason` for the cancellation.
+ * @memberof module:openrailuk/referencedata
+ * @author Steven Collins <steven@carboncollins.uk>
+ * @export CancellationReason
+ * @class CancellationReason
  */
 export class CancellationReason {
   /**
-   * @constructor
-   * @param {Object} payload the raw json object from the ftp containing the toc information
+   * Creates an instance of CancellationReason.
+   * @author Steven Collins <steven@carboncollins.uk>
+   * @param {module:openrailuk/referencedata.CancellationReason|Object} [payload={}] an object containing the `code` and `reason`.
    */
   constructor(payload = {}) {
     this[symbols.get('code')] = Number(payload.code);
@@ -19,9 +22,9 @@ export class CancellationReason {
   }
 
   /**
-   * @member {Number} code
-   * @memberof module:openraildata/referencedata.CancellationReason
-   * @description a numerical indicator for itendifying which cancelation to display
+   * @member {Number} code A code number for identifying this cancellation reason
+   * @memberof module:openrailuk/referencedata.CancellationReason
+   * @readonly
    * @instance
    * @public
    */
@@ -30,9 +33,9 @@ export class CancellationReason {
   }
 
   /**
-   * @member {String} reason
-   * @memberof module:openraildata/referencedata.CancellationReason
-   * @description a string description of the Cancellation reason
+   * @member {String} reason A string description of the cancellation reason
+   * @memberof module:openrailuk/referencedata.CancellationReason
+   * @readonly
    * @instance
    * @public
    */

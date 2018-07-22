@@ -3,15 +3,18 @@ export const symbols = new Map()
   .set('name', Symbol('name'));
 
 /**
- * @class
- * @memberof module:openraildata/referencedata
- * @augments module:openraildata/referencedata.CustomerInformationSystem
- * @classdesc A customer information system source (CIS)
+ * @description A data model for a customer information system sources. This stores a `code` used
+ * to identify a cis source and a `name` in human readable format
+ * @memberof module:openrailuk/referencedata
+ * @author Steven Collins <steven@carboncollins.uk>
+ * @export CustomerInformationSystem
+ * @class CustomerInformationSystem
  */
 export class CustomerInformationSystem {
   /**
-   * @constructor
-   * @param {Object} payload the raw json object from the ftp containing the cis information
+   * Creates an instance of CustomerInformationSystem.
+   * @author Steven Collins <steven@carboncollins.uk>
+   * @param {module:openrailuk/referencedata.CustomerInformationSystem|Object} [payload={}] an object contianing the code and name.
    */
   constructor(payload = {}) {
     this[symbols.get('code')] = payload.code;
@@ -19,9 +22,9 @@ export class CustomerInformationSystem {
   }
 
   /**
-   * @member {String} code
-   * @memberof module:openraildata/referencedata.CustomerInformationSystem
-   * @description the cis code (normaly 2 letters and 2 numbers)
+   * @member {String} code the cis code (normaly 2 letters and 2 numbers)
+   * @memberof module:openrailuk/referencedata.CustomerInformationSystem
+   * @readonly
    * @instance
    * @public
    */
@@ -30,9 +33,9 @@ export class CustomerInformationSystem {
   }
 
   /**
-   * @member {String} name
-   * @memberof module:openraildata/referencedata.CustomerInformationSystem
-   * @description the human readable name of the cis source
+   * @member {String} name the human readable name of the cis source
+   * @memberof module:openrailuk/referencedata.CustomerInformationSystem
+   * @readonly
    * @instance
    * @public
    */

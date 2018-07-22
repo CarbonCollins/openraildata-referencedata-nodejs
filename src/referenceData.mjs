@@ -1,3 +1,10 @@
+
+/**
+ * @module openrailuk/referencedata
+ * @description A package for accessing the the UK National Rails reference data FTP server as well
+ * as some helper functions to process and use the reference data.
+ */
+
 import { associationMixer, stationMixer, trainOrderMixer } from '@openrailuk/common';
 
 import * as trainOperatingCompany from './models/trainOperatingCompany';

@@ -30,20 +30,21 @@ to use `@openrailuk/referencedata` you first need to supply the ftp password for
 ```
 const { referenceData } = require('@openrailuk/referencedata');
 
-refData.connect('ftpUserPassword');
+referenceData.connect('ftpUserPassword');
 ```
 
 a simple example of getting the v3 reference data:
 ```
-const refData = require('openraildata-referencedata');
+const { referenceData } = require('@openrailuk/referencedata');
 
-refData.connect('ftpUserPassword');
-refData.on('ready', () => {
-  refData.getCurrentV3().then((v3RefData) => {
-    console.log(v3RefData);
-  }).catch((err) => {
-    console.log(err);
-  });
+referenceData.connect('ftpUserPassword');
+referenceData.on('dataReady', () => {
+  referenceData.getCurrentV3()
+    .then((v3RefData) => {
+      console.log(v3RefData);
+    }).catch((err) => {
+      console.log(err);
+    });
 });
 ```
 

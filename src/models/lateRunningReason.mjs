@@ -3,15 +3,23 @@ export const symbols = new Map()
   .set('reason', Symbol('reason'));
 
 /**
- * @class
- * @memberof module:openraildata/referencedata
- * @augments module:openraildata/referencedata.LateRunningReason
- * @classdesc A late running reason
+ * @description A data model for a late running reason. This stores a `code` to identify the type of
+ * late running as well as a test `reason` for the late running o the service.
+ * @memberof module:openrailuk/referencedata
+ * @author Steven Collins <steven@carboncollins.uk>
+ * @export LateRunningReason
+ * @class LateRunningReason
  */
 export class LateRunningReason {
   /**
    * @constructor
    * @param {Object} payload the raw json object from the ftp containing the toc information
+   */
+
+  /**
+   * Creates an instance of LateRunningReason.
+   * @author Steven Collins <steven@carboncollins.uk>
+   * @param {module:openrailuk/referencedata.LateRunningReason|Object} [payload={}] an object containing the `code` and `reason`.
    */
   constructor(payload = {}) {
     this[symbols.get('code')] = Number(payload.code);
@@ -19,9 +27,9 @@ export class LateRunningReason {
   }
 
   /**
-   * @member {Number} code
-   * @memberof module:openraildata/referencedata.LateRunningReason
-   * @description a numerical indicator for itendifying which error to display
+   * @member {Number} code A code number for identifying this late running reason
+   * @memberof module:openrailuk/referencedata.LateRunningReason
+   * @readonly
    * @instance
    * @public
    */
@@ -30,9 +38,9 @@ export class LateRunningReason {
   }
 
   /**
-   * @member {String} reason
-   * @memberof module:openraildata/referencedata.LateRunningReason
-   * @description a string description of the late running reason
+   * @member {String} reason A string description of the late running reason
+   * @memberof module:openrailuk/referencedata.LateRunningReason
+   * @readonly
    * @instance
    * @public
    */
