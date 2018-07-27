@@ -53,7 +53,7 @@ referenceData.on('dataReady', () => {
 
 ## package docs
 
-<a href="./docs/refData.md">code docs found here</a>
+<a href="https://openrail.gitlab.io/docs/uk/referencedata">code docs found here</a>
 
 ## dev notes
 
