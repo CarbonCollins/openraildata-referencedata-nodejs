@@ -1,12 +1,12 @@
 {
   "name": "@openrailuk/referencedata",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "displayName": "Open Rail UK Reference Data",
   "description": "A package for accessing the the UK National Rails reference data FTP server as well as some helper functions to process and use the reference data",
   "license": "MIT",
   "main": "index",
   "module": "index.mjs",
-  "homepage": "https://gitlab.com/openrail/uk/referencedata-nodejs/uploads/d88da25cc746937bb208f9d3e13ed90c/reference.svg",
+  "homepage": "https://openrail.gitlab.io/docs/uk/referencedata",
   "keywords": [
     "openrail",
     "openrailuk",
