@@ -1,8 +1,11 @@
 # Change Log for common-nodejs
 
-## [v2.0.1](https://gitlab.com/openrail/uk/referencedata-nodejs/tags/v2.0.1)
+## [v2.0.2](https://gitlab.com/openrail/uk/referencedata-nodejs/tags/v2.0.2)
 * fixed homepage link issue
 * fixed readme docs link issue
+
+## v2.0.1
+* missing tag because i messed up :D
 
 ## [v2.0.0](https://gitlab.com/openrail/uk/referencedata-nodejs/tags/v2.0.0)
 * Changed package structure to fully use ES6 modules
