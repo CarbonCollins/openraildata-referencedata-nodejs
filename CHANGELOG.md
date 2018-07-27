@@ -1,5 +1,9 @@
 # Change Log for common-nodejs
 
+## [v2.0.1](https://gitlab.com/openrail/uk/referencedata-nodejs/tags/v2.0.1)
+* fixed homepage link issue
+* fixed readme docs link issue
+
 ## [v2.0.0](https://gitlab.com/openrail/uk/referencedata-nodejs/tags/v2.0.0)
 * Changed package structure to fully use ES6 modules
 * Added a babel build to export an ES5 transpiled version of library, his will be discontinues once Node.JS supports ES6 modules without a flag
