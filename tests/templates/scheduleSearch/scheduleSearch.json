@@ -1,0 +1,60 @@
+{
+  "schedules": [
+    {
+      "rid": "rid",
+      "serviceStartingDate": "YYYY-MM-DD",
+      "trainOperatingCompany": "trainOperatingCompany",
+      "trainId": "trainId",
+      "uniqueId": "uniqueId",
+      "origin": { "tiploc": "OR1" },
+      "operationalOrigin": { "tiploc": "OPOR1" },
+      "destination": { "tiploc": "DT1" },
+      "operationalDestination": { "tiploc": "OPDT1" },
+      "passingPoints": [{ "tiploc": "PP1" }],
+      "intermediatePoints": [{ "tiploc": "IP1" }],
+      "operationalIntermediatePoints": [{ "tiploc": "OPIP1" }]
+    },
+    {
+      "rid": "rid",
+      "serviceStartingDate": "serviceStartingDate",
+      "trainOperatingCompany": "trainOperatingCompany",
+      "trainId": "trainId",
+      "uniqueId": "uniqueId",
+      "origin": { "tiploc": "OR2", "plannedTimeOfDeparture": "12:00" },
+      "operationalOrigin": { "tiploc": "OPOR2" },
+      "destination": { "tiploc": "DT2", "plannedTimeOfArrival": "12:00" },
+      "operationalDestination": { "tiploc": "OPDT2" },
+      "passingPoints": [{ "tiploc": "PP2", "plannedTimeOfArrival": "12:00" }],
+      "intermediatePoints": [{ "tiploc": "IP2", "plannedTimeOfArrival": "12:00" }],
+      "operationalIntermediatePoints": [{ "tiploc": "OPIP2" }]
+    },
+    {
+      "rid": "rid",
+      "serviceStartingDate": "serviceStartingDate",
+      "trainOperatingCompany": "trainOperatingCompany",
+      "trainId": "trainId",
+      "uniqueId": "uniqueId",
+      "origin": { "tiploc": "OR2", "plannedTimeOfDeparture": "13:00" },
+      "operationalOrigin": { "tiploc": "OPOR2" },
+      "destination": { "tiploc": "DT2", "plannedTimeOfArrival": "13:00" },
+      "operationalDestination": { "tiploc": "OPDT2" },
+      "passingPoints": [{ "tiploc": "PP2", "plannedTimeOfArrival": "13:00" }],
+      "intermediatePoints": [{ "tiploc": "IP2", "plannedTimeOfArrival": "13:00" }],
+      "operationalIntermediatePoints": [{ "tiploc": "OPIP2" }]
+    },
+    {
+      "rid": "rid",
+      "serviceStartingDate": "serviceStartingDate",
+      "trainOperatingCompany": "trainOperatingCompany",
+      "trainId": "trainId",
+      "uniqueId": "uniqueId",
+      "origin": { "tiploc": "OR2", "plannedTimeOfDeparture": "14:00" },
+      "operationalOrigin": { "tiploc": "OPOR2" },
+      "destination": { "tiploc": "DT2", "plannedTimeOfArrival": "14:00" },
+      "operationalDestination": { "tiploc": "OPDT2" },
+      "passingPoints": [{ "tiploc": "PP2", "plannedTimeOfArrival": "14:00" }],
+      "intermediatePoints": [{ "tiploc": "IP2", "plannedTimeOfArrival": "14:00" }],
+      "operationalIntermediatePoints": [{ "tiploc": "OPIP2" }]
+    }
+  ]
+}

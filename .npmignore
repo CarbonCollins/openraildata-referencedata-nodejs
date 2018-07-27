@@ -57,11 +57,11 @@ typings/
 # dotenv environment variables file
 .env
 
-lib/
+src/
 coverage/
 ./nyc_output/
 tests.old/
 mochawesome-report/
 quality/
-reference_data/
-reference_data/manifest.json
+yarn.lock
+package-lock.json
