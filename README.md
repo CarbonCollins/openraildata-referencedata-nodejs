@@ -44,7 +44,8 @@ referenceData.on('dataReady', () => {
   referenceData.getCurrentV3()
     .then((v3RefData) => {
       console.log(v3RefData);
-    }).catch((err) => {
+    })
+    .catch((err) => {
       console.log(err);
     });
 });
