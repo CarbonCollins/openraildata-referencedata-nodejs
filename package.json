@@ -1,6 +1,6 @@
 {
   "name": "@openrailuk/referencedata",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "displayName": "Open Rail UK Reference Data",
   "description": "A package for accessing the the UK National Rails reference data FTP server as well as some helper functions to process and use the reference data",
   "license": "MIT",
@@ -25,15 +25,18 @@
     "url": "https://carboncollins.uk"
   },
   "scripts": {
-    "prepublishOnly": "gulp compile",
+    "prepublishOnly": "gulp build",
     "publish-npm": "npm publish --scope=@openrailuk --access=public",
     "test": "mocha ./tests/test.all.js --require mocha-steps",
     "coverage": "./node_modules/.bin/nyc -x \"**/lib/es6/**/*.js\" -x \"**/src/**/*.js\" -x \"**/tests/**/*.js\" --reporter=\"text-summary\" --reporter=\"lcov\" yarn test --reporter=\"mochawesome\"",
-    "compile": "gulp compile",
-    "compileES5": "gulp compileES5",
-    "compileES6": "gulp compileES6",
-    "compileQuality": "gulp prepCodeQuality",
-    "build:docs": "gulp build:docs"
+    "build": "gulp build",
+    "build:common": "gulp build:common",
+    "build:es6": "gulp build:es6",
+    "build:quality": "gulp build:quality",
+    "build:docs": "gulp build:docs",
+    "clean:lib": "gulp clean:lib",
+    "clean:lib:common": "gulp clean:lib:common",
+    "clean:lib:es6": "gulp clean:lib:es6"
   },
   "repository": {
     "type": "gitlab",
@@ -66,13 +69,12 @@
     "test": "./tests"
   },
   "dependencies": {
-    "@openrailuk/common": "^3.3.1",
+    "@openrailuk/common": "^3.3.4",
     "fs-extra": "^6.0.1",
     "ftp": "^0.3.10",
     "moment": "^2.22.2",
     "uuid": "^3.3.2",
-    "xml2js": "^0.4.19",
-    "zlib": "^1.0.5"
+    "xml2js": "^0.4.19"
   },
   "devDependencies": {
     "@openrail/eslint-config": "^1.2.2",

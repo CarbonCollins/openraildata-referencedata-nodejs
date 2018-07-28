@@ -2,9 +2,9 @@
 
 const { expect } = require('chai');
 const { Schedule, Association } = require('@openrailuk/common');
-const { ScheduleSearch } = require('../../../lib/es5/models/scheduleSearch');
+const { ScheduleSearch } = require('../../../lib/common/models/scheduleSearch');
 
-let model = require('../../../lib/es5/models/v8');
+let model = require('../../../lib/common/models/v8');
 
 const standardConfig = require('../../templates/v8/v8.json');
 

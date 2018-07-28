@@ -2,7 +2,7 @@
 const { expect } = require('chai');
 const path = require('path');
 
-const model = require('../../lib/es5/manifest');
+const model = require('../../lib/common/manifest');
 
 const standardConfig = require('../templates/manifest/manifest.json');
 

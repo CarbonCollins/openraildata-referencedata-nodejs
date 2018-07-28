@@ -1,12 +1,12 @@
 'use strict';
 const { expect } = require('chai');
 const { Location, Via } = require('@openrailuk/common');
-const { TrainOperatingCompany } = require('../../../lib/es5/models/trainOperatingCompany');
-const { LateRunningReason } = require('../../../lib/es5/models/lateRunningReason');
-const { CancellationReason } = require('../../../lib/es5/models/cancellationReason');
-const { CustomerInformationSystem } = require('../../../lib/es5/models/customerInformationSystem');
+const { TrainOperatingCompany } = require('../../../lib/common/models/trainOperatingCompany');
+const { LateRunningReason } = require('../../../lib/common/models/lateRunningReason');
+const { CancellationReason } = require('../../../lib/common/models/cancellationReason');
+const { CustomerInformationSystem } = require('../../../lib/common/models/customerInformationSystem');
 
-const model = require('../../../lib/es5/models/v3');
+const model = require('../../../lib/common/models/v3');
 
 const standardConfig = require('../../templates/v3/v3.json');
 

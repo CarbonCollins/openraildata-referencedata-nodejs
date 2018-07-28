@@ -1,7 +1,7 @@
 'use strict';
 const { expect } = require('chai');
 
-const model = require('../../lib/es5/dataController');
+const model = require('../../lib/common/dataController');
 
 module.exports = function () {
   describe('Export suite', function () {

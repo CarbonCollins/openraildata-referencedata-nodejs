@@ -10,6 +10,8 @@
 
 A package for accessing the the UK National Rails reference data FTP server as well as some helper functions to process and use the reference data
 
+# info
+This repository is hosted on [GitLab as reference-nodejs](https://gitlab.com/openrail/uk/reference-nodejs). The [GitHub repository](https://github.com/CarbonCollins/openraildata-reference-nodejs) is a downstream repository where all changes from GitLab are pushed. Please raise any issues or pull requests on the GitLab repository.
 
 ## installation
 1. install [npm](https://nodejs.org "npm homepage")

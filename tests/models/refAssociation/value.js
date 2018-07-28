@@ -2,7 +2,7 @@
 const { expect } = require('chai');
 const { Schedule } = require('@openrailuk/common');
 
-const model = require('../../../lib/es5/models/refAssociation');
+const model = require('../../../lib/common/models/refAssociation');
 
 const testModelSymbols = new Map()
   .set('main', 'main')

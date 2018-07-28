@@ -1,15 +1,15 @@
 'use strict';
 const { expect } = require('chai');
 
-const model = require('../../lib/es5/referenceData');
+const model = require('../../lib/common/referenceData');
 
-const { DataController } = require('../../lib/es5/dataController');
-const { Manifest } = require('../../lib/es5/manifest');
+const { DataController } = require('../../lib/common/dataController');
+const { Manifest } = require('../../lib/common/manifest');
 
-const { TrainOperatingCompany } = require('../../lib/es5/models/trainOperatingCompany');
-const { CustomerInformationSystem } = require('../../lib/es5/models/customerInformationSystem');
-const { LateRunningReason } = require('../../lib/es5/models/lateRunningReason');
-const { CancellationReason } = require('../../lib/es5/models/cancellationReason');
+const { TrainOperatingCompany } = require('../../lib/common/models/trainOperatingCompany');
+const { CustomerInformationSystem } = require('../../lib/common/models/customerInformationSystem');
+const { LateRunningReason } = require('../../lib/common/models/lateRunningReason');
+const { CancellationReason } = require('../../lib/common/models/cancellationReason');
 
 module.exports = function () {
   describe('Export suite', function () {

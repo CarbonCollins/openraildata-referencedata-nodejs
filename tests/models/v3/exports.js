@@ -1,7 +1,7 @@
 'use strict';
 const { expect } = require('chai');
 
-const model = require('../../../lib/es5/models/v3');
+const model = require('../../../lib/common/models/v3');
 
 module.exports = function () {
   describe('Export suite', function () {

@@ -3,7 +3,7 @@
 const { expect } = require('chai');
 const { Schedule, Location } = require('@openrailuk/common');
 
-let model = require('../../../lib/es5/models/refAssociation');
+let model = require('../../../lib/common/models/refAssociation');
 
 const testModelSymbols = new Map()
   .set('tiploc', 'tiploc');

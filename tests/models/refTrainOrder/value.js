@@ -2,7 +2,7 @@
 const { expect } = require('chai');
 const { Location } = require('@openrailuk/common');
 
-const model = require('../../../lib/es5/models/refTrainOrder');
+const model = require('../../../lib/common/models/refTrainOrder');
 
 const testModelSymbols = new Map()
   .set('tiploc', 'tiploc');

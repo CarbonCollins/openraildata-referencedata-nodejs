@@ -1,13 +1,13 @@
 'use strict';
 const { expect } = require('chai');
 const { Schedule, Association, Station } = require('@openrailuk/common');
-const { refStationMixin } = require('../../../lib/es5/models/refStation');
-const { TrainOperatingCompany } = require('../../../lib/es5/models/trainOperatingCompany');
-const { LateRunningReason } = require('../../../lib/es5/models/lateRunningReason');
-const { CancellationReason } = require('../../../lib/es5/models/cancellationReason');
-const { CustomerInformationSystem } = require('../../../lib/es5/models/customerInformationSystem');
+const { refStationMixin } = require('../../../lib/common/models/refStation');
+const { TrainOperatingCompany } = require('../../../lib/common/models/trainOperatingCompany');
+const { LateRunningReason } = require('../../../lib/common/models/lateRunningReason');
+const { CancellationReason } = require('../../../lib/common/models/cancellationReason');
+const { CustomerInformationSystem } = require('../../../lib/common/models/customerInformationSystem');
 
-const model = require('../../../lib/es5/models/v8');
+const model = require('../../../lib/common/models/v8');
 
 const MixedStation = refStationMixin(Station, new Map());
 
