@@ -87,8 +87,8 @@
   resolved "https://registry.yarnpkg.com/@openrail/eslint-config/-/eslint-config-1.2.4.tgz#3a1fed8fde6f8fe9c65ece415b3620ff06de4ba6"
 
 "@openrailuk/common@^3.3.4":
-  version "3.3.4"
-  resolved "https://registry.yarnpkg.com/@openrailuk/common/-/common-3.3.4.tgz#546560669fd68b832b8e1e2e70576b441ed6517e"
+  version "3.3.5"
+  resolved "https://registry.yarnpkg.com/@openrailuk/common/-/common-3.3.5.tgz#67bf2d02cd6b2a50d842abe2041255868827f687"
 
 JSONStream@^1.3.2:
   version "1.3.3"

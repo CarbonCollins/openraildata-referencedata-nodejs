@@ -1,5 +1,8 @@
 # Change Log for common-nodejs
 
+## [v2.0.3](https://gitlab.com/openrail/uk/referencedata-nodejs/tags/v2.0.3)
+* fixed findVias test failure by updating @openrailuk/common dependency (was not injecting Location data objct into Via class)
+
 ## [v2.0.2](https://gitlab.com/openrail/uk/referencedata-nodejs/tags/v2.0.2)
 * fixed homepage link issue
 * fixed readme docs link issue
