@@ -1,7 +1,7 @@
 'use strict';
 const { expect } = require('chai');
 
-const model = require('../../lib/es5/manifest');
+const model = require('../../lib/common/manifest');
 
 
 module.exports = function () {

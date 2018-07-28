@@ -99,6 +99,8 @@ export class V3 {
       ? refData.PportTimetableRef
       : {};
 
+    console.log(this[symbols.get('locations')]);
+
     this[symbols.get('timetableId')] = (payload.$ && payload.$.timetableId) ? payload.$.timetableId : null;
     this[symbols.get('locations')] = mapArray(payload.LocationRef, Location);
     this[symbols.get('trainOperatingCompanies')] = mapArray(payload.TocRef, TrainOperatingCompany);
@@ -244,6 +246,7 @@ export class V3 {
    * @returns {module:openraildata/referencedata.Via[]} returns a cancellation reason
    */
   findVias(...inputs) {
+    console.log(this[symbols.get('vias')], 'find');
     return this[symbols.get('vias')]
       .slice(0)
       .filter((v) => {

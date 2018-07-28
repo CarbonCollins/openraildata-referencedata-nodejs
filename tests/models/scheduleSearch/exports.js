@@ -1,7 +1,7 @@
 'use strict';
 const { expect } = require('chai');
 
-const model = require('../../../lib/es5/models/scheduleSearch');
+const model = require('../../../lib/common/models/scheduleSearch');
 
 module.exports = function () {
   describe('Export suite', function () {

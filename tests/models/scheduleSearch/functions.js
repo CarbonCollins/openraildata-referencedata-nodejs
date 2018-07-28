@@ -4,7 +4,7 @@ const { expect } = require('chai');
 const { Schedule } = require('@openrailuk/common');
 const moment = require('moment');
 
-let model = require('../../../lib/es5/models/scheduleSearch');
+let model = require('../../../lib/common/models/scheduleSearch');
 
 const standardConfig = require('../../templates/scheduleSearch/scheduleSearch.json');
 

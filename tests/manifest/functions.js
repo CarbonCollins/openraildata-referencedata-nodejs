@@ -5,7 +5,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const moment = require('moment');
 
-let model = require('../../lib/es5/manifest');
+let model = require('../../lib/common/manifest');
 
 const standardConfig = require('../templates/manifest/manifest.json');
 const altConfig = require('../templates/manifest/manifestAlt.json');

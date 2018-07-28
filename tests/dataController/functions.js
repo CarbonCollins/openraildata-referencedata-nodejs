@@ -10,14 +10,14 @@ const path = require('path');
 
 const refDataDir = path.join(__dirname, '../../reference_data');
 
-let model = require('../../lib/es5/dataController');
-const manifestModel = require('../../lib/es5/manifest');
-const { V3 } = require('../../lib/es5/models/v3');
-const { V8 } = require('../../lib/es5/models/v8');
-const { TrainOperatingCompany } = require('../../lib/es5/models/trainOperatingCompany');
-const { LateRunningReason } = require('../../lib/es5/models/lateRunningReason');
-const { CancellationReason } = require('../../lib/es5/models/cancellationReason');
-const { CustomerInformationSystem } = require('../../lib/es5/models/customerInformationSystem');
+let model = require('../../lib/common/dataController');
+const manifestModel = require('../../lib/common/manifest');
+const { V3 } = require('../../lib/common/models/v3');
+const { V8 } = require('../../lib/common/models/v8');
+const { TrainOperatingCompany } = require('../../lib/common/models/trainOperatingCompany');
+const { LateRunningReason } = require('../../lib/common/models/lateRunningReason');
+const { CancellationReason } = require('../../lib/common/models/cancellationReason');
+const { CustomerInformationSystem } = require('../../lib/common/models/customerInformationSystem');
 
 const modalV3 = require('../mocks/json/123456789_ref_v3.json');
 const modalV8 = require('../mocks/json/123456789_v8.json');
