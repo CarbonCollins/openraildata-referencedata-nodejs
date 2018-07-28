@@ -187,7 +187,7 @@ publish_npm:
     - triggers
   dependencies:
     - build_docs
-    - build_common
+    - build_commonjs
     - build_es6
   script:
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
