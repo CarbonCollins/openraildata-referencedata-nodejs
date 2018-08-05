@@ -1,5 +1,11 @@
 # Change Log for common-nodejs
 
+
+## [v2.0.4](https://gitlab.com/openrail/uk/referencedata-nodejs/tags/v2.0.4)
+* Updated fs-extra to v7 for MR !7 
+* Updated eslint-plugin-node to v7 for MR !6 
+* Updated @openrail/eslint-config to v1.3.3
+
 ## [v2.0.3](https://gitlab.com/openrail/uk/referencedata-nodejs/tags/v2.0.3)
 * fixed findVias test failure by updating @openrailuk/common dependency (was not injecting Location data objct into Via class)
 
