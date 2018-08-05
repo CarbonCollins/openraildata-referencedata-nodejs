@@ -1,6 +1,6 @@
 {
   "name": "@openrailuk/referencedata",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "displayName": "Open Rail UK Reference Data",
   "description": "A package for accessing the the UK National Rails reference data FTP server as well as some helper functions to process and use the reference data",
   "license": "MIT",
